@@ -6,10 +6,10 @@
 
 
 ## Database diagram
-# Logical model
+### Logical model
 <img src="diagrams/logical.png" width="550">
 
-# Physical
+### Physical
 <img src="diagrams/diagram.png" width="800">
 
 
