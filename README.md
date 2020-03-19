@@ -6,7 +6,7 @@
 
 
 ## Database diagram
-
+<img src="diagrams/logical.png" width="550">
 
 
 
