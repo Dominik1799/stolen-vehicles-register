@@ -10,7 +10,7 @@
 <img src="diagrams/logical.png" width="550">
 
 ### Physical
-<img src="diagrams/diagram.png" width="800">
+<img src="diagrams/physical_model.png" width="800">
 
 
 
