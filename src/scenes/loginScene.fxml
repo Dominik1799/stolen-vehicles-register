@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
@@ -40,5 +43,15 @@
             <Font size="27.0" />
          </font>
       </Text>
+      <JFXSpinner layoutX="882.0" layoutY="505.0" prefHeight="39.0" prefWidth="46.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+      </JFXSpinner>
+      <JFXSpinner layoutX="137.0" layoutY="418.0" prefHeight="39.0" prefWidth="46.0" visible="false">
+         <cursor>
+            <Cursor fx:constant="NONE" />
+         </cursor>
+      </JFXSpinner>
     </children>
 </AnchorPane>
