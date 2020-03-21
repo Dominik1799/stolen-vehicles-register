@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="1067.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginSceneController">
     <children>
-      <ImageView fitHeight="391.0" fitWidth="394.0" layoutX="337.0" layoutY="194.0" opacity="0.27" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="391.0" fitWidth="394.0" layoutX="337.0" layoutY="194.0" opacity="0.27" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="69.50665283203125" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="336.0" AnchorPane.topAnchor="194.0">
          <image>
             <Image url="@images/badge.png" />
          </image>
@@ -24,8 +24,8 @@
         <JFXComboBox layoutX="814.0" layoutY="412.0" prefHeight="25.0" prefWidth="86.0" promptText="Sex" />
         <JFXComboBox layoutX="913.0" layoutY="412.0" prefHeight="25.0" prefWidth="86.0" promptText="Rank" />
         <JFXButton layoutX="868.0" layoutY="457.0" prefHeight="31.0" prefWidth="73.0" ripplerFill="BLACK" style="-fx-background-color: #01579b;" text="Register" textFill="WHITE" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#01579b" height="128.0" stroke="BLACK" strokeType="INSIDE" width="1067.0" />
-      <Text fill="WHITE" layoutX="418.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#01579b" height="128.0" stroke="BLACK" strokeType="INSIDE" width="1067.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Text fill="WHITE" layoutX="418.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" AnchorPane.leftAnchor="418.0" AnchorPane.rightAnchor="417.64453125" AnchorPane.topAnchor="25.5703125">
          <font>
             <Font size="56.0" />
          </font>
