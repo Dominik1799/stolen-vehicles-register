@@ -18,15 +18,15 @@
             <Image url="@images/badge.png" />
          </image>
       </ImageView>
-        <JFXTextField layoutX="75.0" layoutY="281.0" prefHeight="31.0" prefWidth="170.0" promptText="First name" />
-        <JFXTextField layoutX="75.0" layoutY="325.0" prefHeight="31.0" prefWidth="170.0" promptText="Last name" />
+        <JFXTextField fx:id="FirstNameLogIn" layoutX="75.0" layoutY="281.0" prefHeight="31.0" prefWidth="194.0" promptText="First name" />
+        <JFXTextField fx:id="LastNameLogIn" layoutX="75.0" layoutY="325.0" prefHeight="31.0" prefWidth="194.0" promptText="Last name" />
         <JFXButton layoutX="124.0" layoutY="371.0" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #01579b;" text="Log in" textFill="WHITE" />
-        <JFXTextField layoutX="814.0" layoutY="272.0" prefHeight="31.0" prefWidth="181.0" promptText="First name" />
-        <JFXTextField layoutX="814.0" layoutY="325.0" prefHeight="31.0" prefWidth="181.0" promptText="Last name" />
-        <JFXTextField layoutX="814.0" layoutY="370.0" prefHeight="31.0" prefWidth="181.0" promptText="Date of birth DD.MM.YYYY" />
-        <JFXComboBox layoutX="814.0" layoutY="412.0" prefHeight="25.0" prefWidth="86.0" promptText="Sex" />
-        <JFXComboBox layoutX="913.0" layoutY="412.0" prefHeight="25.0" prefWidth="86.0" promptText="Rank" />
-        <JFXButton layoutX="868.0" layoutY="457.0" prefHeight="31.0" prefWidth="73.0" ripplerFill="BLACK" style="-fx-background-color: #01579b;" text="Register" textFill="WHITE" />
+        <JFXTextField fx:id="FirstNameReg" layoutX="801.0" layoutY="272.0" prefHeight="31.0" prefWidth="194.0" promptText="First name" />
+        <JFXTextField fx:id="LastNameReg" layoutX="801.0" layoutY="325.0" prefHeight="31.0" prefWidth="194.0" promptText="Last name" />
+        <JFXTextField fx:id="DateOfBirth" layoutX="801.0" layoutY="370.0" prefHeight="31.0" prefWidth="194.0" promptText="Date of birth YYYY.MM.DD" />
+        <JFXComboBox fx:id="sexCB" layoutX="801.0" layoutY="412.0" prefHeight="25.0" prefWidth="92.0" promptText="Sex" />
+        <JFXComboBox fx:id="rankCB" layoutX="902.0" layoutY="412.0" prefHeight="25.0" prefWidth="92.0" promptText="Rank" />
+        <JFXButton layoutX="868.0" layoutY="457.0" onAction="#onRegisterClick" prefHeight="31.0" prefWidth="73.0" ripplerFill="BLACK" style="-fx-background-color: #01579b;" text="Register" textFill="WHITE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#01579b" height="128.0" stroke="BLACK" strokeType="INSIDE" width="1067.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Text fill="WHITE" layoutX="418.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" AnchorPane.leftAnchor="418.0" AnchorPane.rightAnchor="417.64453125" AnchorPane.topAnchor="25.5703125">
          <font>
