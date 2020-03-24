@@ -40,7 +40,7 @@ group that they belong to.
  - [ ] GUI
 
 ## Authors
-Dominik Horvath
+Dominik Horváth
 Dávid Drobný
 
 
