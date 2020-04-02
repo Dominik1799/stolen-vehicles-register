@@ -3,47 +3,26 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
-import entities.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.jws.soap.SOAPBinding;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class userSceneController implements Initializable {
-    User user = new User();
     @FXML
     private AnchorPane navList,background;
     @FXML
     JFXHamburger hamburgerOpen;
     @FXML
     JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setText(String text) {
-        System.out.println(text);
-    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*
-        name.setText(user.getFirstName() + user.getLastName());
-        sex.setText(user.getSex());
-        rank.setText(user.getRank());
-        */
         prepareSlideMenuAnimation();
     }
 
@@ -68,12 +47,7 @@ public class userSceneController implements Initializable {
         });
     }
 
-    public void onLogOutClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        Parent view2 = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
-        Scene scene2 = new Scene(view2);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
-        window.show();
+    public void onLogOutClick(ActionEvent actionEvent) {
+
     }
 }
