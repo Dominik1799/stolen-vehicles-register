@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
 <?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="1067.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.loginSceneController">
@@ -14,9 +18,8 @@
             <Image url="@images/badge.png" />
          </image>
       </ImageView>
-        <JFXTextField fx:id="FirstNameLogIn" layoutX="75.0" layoutY="281.0" prefHeight="31.0" prefWidth="194.0" promptText="First name" />
-        <JFXTextField fx:id="LastNameLogIn" layoutX="75.0" layoutY="325.0" prefHeight="31.0" prefWidth="194.0" promptText="Last name" />
-        <JFXButton layoutX="124.0" layoutY="371.0" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #01579b;" text="Log in" textFill="WHITE" />
+        <JFXTextField fx:id="FirstNameLogIn" layoutX="75.0" layoutY="281.0" prefHeight="31.0" prefWidth="194.0" promptText="ID" />
+        <JFXButton layoutX="124.0" layoutY="333.0" onAction="#onLoginClick" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #01579b;" text="Log in" textFill="WHITE" />
         <JFXTextField fx:id="FirstNameReg" layoutX="801.0" layoutY="272.0" prefHeight="31.0" prefWidth="194.0" promptText="First name" />
         <JFXTextField fx:id="LastNameReg" layoutX="801.0" layoutY="325.0" prefHeight="31.0" prefWidth="194.0" promptText="Last name" />
         <JFXTextField fx:id="DateOfBirth" layoutX="801.0" layoutY="370.0" prefHeight="31.0" prefWidth="194.0" promptText="Date of birth YYYY.MM.DD" />
