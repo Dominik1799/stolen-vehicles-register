@@ -81,34 +81,25 @@ public class loginSceneController implements Initializable {
         User user = Datasource.getInstance().checkLoggingData(id);
         if (user != null) {
             //There is someone with credentials in database
-            Parent view2 = FXMLLoader.load(getClass().getResource("../scenes/userScene.fxml"));
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                Parent view2 = (Parent) FXMLLoader.load(getClass().getResource("../scenes/userScene.fxml"));
 
-            Scene scene2 = new Scene(view2);
+                //creates controller
+                userSceneController cnt = loader.getController();
+                //adds user to the controller
 
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scene2);
-            window.show();
+                //cnt.setUser(user);
 
-
-
-            /*
-            FXMLLoader loader = new FXMLLoader();
-            //loader.setLocation(getClass().getResource("../scenes/userScene.fxml"));
-            Parent view2 = loader.load(getClass().getResource("../scenes/userScene.fxml"));
-
-            Scene scene2 = new Scene(view2);
-
-            //creates controller
-            userSceneController cnt = loader.getController();
-            //adds user to the controller
-            cnt.setUser(user);
-
-
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(scene2);
-            window.show();
-
-             */
+                //cnt.setText(user.getLastName());
+                Scene scene2 = new Scene(view2);
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                window.setScene(scene2);
+                window.show();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } else {
             Dialog.getInstance().warningDialog("ID not found");
