@@ -1,5 +1,8 @@
 package datasource;
 
+import entities.User;
+
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 
 public class Datasource {
@@ -75,4 +78,33 @@ public class Datasource {
         }
         return null;
     }
+
+    public User checkLoggingData(String id) {
+        String query = "SELECT * FROM Users WHERE userid='" + id+ "';";
+        Connection connection = openConnection();
+        try {
+            Statement statement = connection.createStatement();
+            User user = new User();
+            ResultSet result = statement.executeQuery(query);
+            if(!result.isBeforeFirst()) {
+                // Noone with this credentials in database
+                return null;
+            }
+            result.next();
+
+            user.setFirstName(result.getString("firstName"));
+            user.setLastName(result.getString("lastName"));
+            user.setSex(result.getString("sex"));
+            user.setRank(result.getString("rank"));
+
+            closeConnection(connection);
+            return user;
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
