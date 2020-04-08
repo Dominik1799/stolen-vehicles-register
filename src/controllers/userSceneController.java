@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -23,27 +24,27 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class userSceneController implements Initializable {
-    User user = new User();
     @FXML
     private AnchorPane navList,background;
+    @FXML
+    private Text fullname;
     @FXML
     JFXHamburger hamburgerOpen;
     @FXML
     JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
+    User user;
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setText(String text) {
-        System.out.println(text);
+    public void setTextName() {
+        fullname.setText(user.getFirstName() + " " +  user.getLastName());
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*
-        name.setText(user.getFirstName() + user.getLastName());
-        sex.setText(user.getSex());
-        rank.setText(user.getRank());
-        */
         prepareSlideMenuAnimation();
     }
 
@@ -76,4 +77,5 @@ public class userSceneController implements Initializable {
         window.setScene(scene2);
         window.show();
     }
+
 }

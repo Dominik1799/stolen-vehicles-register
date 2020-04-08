@@ -81,26 +81,17 @@ public class loginSceneController implements Initializable {
         User user = Datasource.getInstance().checkLoggingData(id);
         if (user != null) {
             //There is someone with credentials in database
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                Parent view2 = (Parent) FXMLLoader.load(getClass().getResource("../scenes/userScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "../scenes/userScene.fxml"));
+            Parent root = (Parent) loader.load();
+            userSceneController ctrl = loader.getController();
+            ctrl.setUser(user);
+            ctrl.setTextName();
 
-                //creates controller
-                userSceneController cnt = loader.getController();
-                //adds user to the controller
-
-                //cnt.setUser(user);
-
-                //cnt.setText(user.getLastName());
-                Scene scene2 = new Scene(view2);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(scene2);
-                window.show();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            Scene scene2 = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene2);
+            window.show();
         } else {
             Dialog.getInstance().warningDialog("ID not found");
         }

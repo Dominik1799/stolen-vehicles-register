@@ -92,10 +92,14 @@ public class Datasource {
             }
             result.next();
 
+
             user.setFirstName(result.getString("firstName"));
             user.setLastName(result.getString("lastName"));
             user.setSex(result.getString("sex"));
             user.setRank(result.getString("rank"));
+
+            System.out.println(user.getLastName());
+
 
             closeConnection(connection);
             return user;
