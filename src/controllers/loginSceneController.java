@@ -1,5 +1,6 @@
 package controllers;
 
+import com.jfoenix.controls.JFXDatePicker;
 import datasource.Datasource;
 import entities.User;
 import javafx.collections.FXCollections;
@@ -29,9 +30,11 @@ public class loginSceneController implements Initializable {
     ObservableList<String> ranks = FXCollections.observableArrayList();
     ObservableList<String> sexes = FXCollections.observableArrayList();
     @FXML
-    private TextField FirstNameReg, LastNameReg, FirstNameLogIn, DateOfBirth;
+    private TextField FirstNameReg, LastNameReg, FirstNameLogIn;
     @FXML
     private ComboBox<String> sexCB, rankCB;
+    @FXML
+    private JFXDatePicker DateOfBirth;
 
     @Override
     // Initialize runs after the constructor so it has access to all the javaFX components.
@@ -55,7 +58,7 @@ public class loginSceneController implements Initializable {
     }
 
     public void onRegisterClick(ActionEvent event) {
-        String birthDate = this.DateOfBirth.getText().replace(" ", "").replace(".", "-");
+        String birthDate = this.DateOfBirth.getValue().toString();
         String firstName = this.FirstNameReg.getText();
         String lastName = this.LastNameReg.getText();
         String sex = this.sexCB.getValue();

@@ -37,19 +37,23 @@ public class Datasource {
     }
 
     public int createUser(String FirstName,String LastName,String dateOfBirth,String sex, String rank){
-        String sql = "INSERT INTO users(firstname,lastname,birthdate,sex,rank) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO users(firstname,lastname,birthdate,rank,sex) VALUES (?,?,?,?,?)";
         Connection conn = openConnection();
         if (conn == null){
             System.out.println("Something went wrong");
             return 0;
         }
         try {
+            ResultSet sexrs = conn.createStatement().executeQuery("SELECT id FROM sex WHERE sex='" + sex + "'");
+            ResultSet ranksrs = conn.createStatement().executeQuery("SELECT id FROM rank WHERE rank='" + rank + "'");
+            sexrs.next();
+            ranksrs.next();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1,FirstName);
             statement.setString(2,LastName);
             statement.setDate(3, java.sql.Date.valueOf(dateOfBirth));
-            statement.setString(4,sex);
-            statement.setString(5,rank);
+            statement.setInt(4,ranksrs.getInt("id"));
+            statement.setInt(5,sexrs.getInt("id"));
             return statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -80,7 +84,7 @@ public class Datasource {
     }
 
     public User checkLoggingData(String id) {
-        String query = "SELECT * FROM Users WHERE userid='" + id+ "';";
+        String query = "SELECT * FROM Users WHERE id='" + id+ "';";
         Connection connection = openConnection();
         try {
             Statement statement = connection.createStatement();
