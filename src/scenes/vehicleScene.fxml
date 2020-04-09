@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.userSceneController">
+<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teamSceneController">
    <children>
       <StackPane prefHeight="647.0" prefWidth="1067.0">
          <children>
@@ -20,17 +22,17 @@
                <font>
                   <Font size="18.0" />
                </font></JFXButton>
-            <JFXButton layoutY="90.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Teams" textFill="WHITE">
+            <JFXButton fx:id="onTeamsClick" layoutY="90.0" onAction="#onActionTeams" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Teams" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutY="131.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Vehicles" textFill="WHITE">
+            <JFXButton fx:id="onVehiclesClick" layoutY="131.0" onAction="#onActionVehicles" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Vehicles" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutY="172.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
+            <JFXButton fx:id="onCriminalsClick" layoutY="172.0" onAction="#onActionCriminals" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

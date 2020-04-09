@@ -70,12 +70,23 @@ public class userSceneController implements Initializable {
     }
 
     public void onLogOutClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        Parent view2 = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
-        Scene scene2 = new Scene(view2);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
-        window.show();
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
+        navList.getChildren().setAll(pane);
+    }
+
+    public void onActionTeams(ActionEvent event) throws  IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/teamsScene.fxml"));
+        navList.getChildren().setAll(pane);
+    }
+
+    public void onActionVehicles(ActionEvent event) throws  IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/vehicleScene.fxml"));
+        navList.getChildren().setAll(pane);
+    }
+
+    public void onActionCriminals(ActionEvent event) throws  IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/criminalScene.fxml"));
+        navList.getChildren().setAll(pane);
     }
 
 }

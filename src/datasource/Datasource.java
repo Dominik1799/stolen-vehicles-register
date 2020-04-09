@@ -102,9 +102,6 @@ public class Datasource {
             user.setSex(result.getString("sex"));
             user.setRank(result.getString("rank"));
 
-            System.out.println(user.getLastName());
-
-
             closeConnection(connection);
             return user;
 
