@@ -3,6 +3,7 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import entities.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -67,6 +68,32 @@ public class userSceneController implements Initializable {
                 closeNav.play();
             }
         });
+    }
+
+    public void onTeamClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/teamScene.fxml"));
+        Parent root = (Parent) loader.load();
+        teamSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.setTextName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
+
+    public void onCriminalsClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/criminalsScene.fxml"));
+        Parent root = (Parent) loader.load();
+        criminalsSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.setTextName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
     }
 
     public void onLogOutClick(ActionEvent event) throws IOException {

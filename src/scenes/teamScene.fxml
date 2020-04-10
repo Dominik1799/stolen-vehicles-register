@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teamSceneController">
+    <children>
+        <StackPane prefHeight="647.0" prefWidth="1067.0">
+            <children>
+                <AnchorPane fx:id="background" prefHeight="200.0" prefWidth="200.0">
+                    <children>
+                        <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" />
+                  <Text layoutX="173.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My team leader: " underline="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="285.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a memer of any team">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <TableView layoutX="637.0" layoutY="155.0" prefHeight="429.0" prefWidth="380.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                     </columns>
+                  </TableView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </StackPane>
+        <AnchorPane fx:id="navList" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" translateX="-174.0">
+            <children>
+                <JFXButton layoutY="49.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Home" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></JFXButton>
+                <JFXButton layoutY="90.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #001479; -jfx-disable-visual-focus: true;" text="Teams" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton layoutY="131.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Vehicles" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton layoutY="172.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton defaultButton="true" layoutY="575.0" onAction="#onLogOutClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+                <Text fx:id="fullname" fill="WHITE" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super meno ">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
