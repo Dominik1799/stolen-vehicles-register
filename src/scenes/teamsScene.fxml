@@ -11,12 +11,12 @@
          <children>
             <AnchorPane fx:id="background" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" />
+                  <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane fx:id="navList" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" translateX="-174.0">
+      <AnchorPane fx:id="navList" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" translateX="-174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXButton fx:id="onClickHome" layoutY="49.0" onAction="#onActionHome" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #001479; -jfx-disable-visual-focus: true;" text="Home" textFill="WHITE">
                <font>
@@ -37,7 +37,7 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton defaultButton="true" layoutY="575.0" onAction="#onClickLogOut" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE">
+            <JFXButton defaultButton="true" layoutY="575.0" onAction="#onClickLogOut" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="18.0" />
                </font>

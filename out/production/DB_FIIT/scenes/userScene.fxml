@@ -12,6 +12,7 @@
             <AnchorPane fx:id="background" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <JFXTextArea fx:id="userInfo" editable="false" layoutX="932.0" prefHeight="65.0" prefWidth="135.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </children>

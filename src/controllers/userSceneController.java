@@ -3,6 +3,8 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import entities.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -29,19 +31,21 @@ public class userSceneController implements Initializable {
     @FXML
     private Text fullname;
     @FXML
-    JFXHamburger hamburgerOpen;
+    private JFXHamburger hamburgerOpen;
     @FXML
-    JFXButton onClickHome, onClickTeams, onClickCriminals, onClickVehicles;
+    private JFXButton onClickHome, onClickTeams, onClickCriminals, onClickVehicles;
+    @FXML
+    private JFXTextArea userInfo;
     User user;
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setTextName() {
+    public void showInfo() {
         fullname.setText(user.getFirstName() + " " +  user.getLastName());
+        userInfo.setText("Sex: " + user.getSex() + "\n" + "Rank: " + user.getRank());
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,12 +84,12 @@ public class userSceneController implements Initializable {
     }
 
     public void onActionVehicles(ActionEvent event) throws  IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/vehicleScene.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/vehiclesScene.fxml"));
         navList.getChildren().setAll(pane);
     }
 
     public void onActionCriminals(ActionEvent event) throws  IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/criminalScene.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/criminalsScene.fxml"));
         navList.getChildren().setAll(pane);
     }
 

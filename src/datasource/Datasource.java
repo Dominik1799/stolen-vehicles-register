@@ -3,6 +3,7 @@ package datasource;
 import entities.User;
 
 import javax.jws.soap.SOAPBinding;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Datasource {
@@ -83,13 +84,39 @@ public class Datasource {
         return null;
     }
 
+    public String getRank(Connection connection, String rankIndex) {
+        try {
+            ResultSet rank = connection.createStatement().executeQuery("SELECT * FROM rank where id = " + rankIndex);
+            rank.next();
+            return rank.getString("rank");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getSex(Connection connection, String sexIndex) {
+        try {
+            ResultSet rank = connection.createStatement().executeQuery("SELECT * FROM sex where id = " + sexIndex);
+            rank.next();
+            return rank.getString("sex");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public User checkLoggingData(String id) {
         String query = "SELECT * FROM Users WHERE id='" + id+ "';";
         Connection connection = openConnection();
         try {
+            assert connection != null;
             Statement statement = connection.createStatement();
             User user = new User();
             ResultSet result = statement.executeQuery(query);
+
             if(!result.isBeforeFirst()) {
                 // Noone with this credentials in database
                 return null;
@@ -99,10 +126,10 @@ public class Datasource {
 
             user.setFirstName(result.getString("firstName"));
             user.setLastName(result.getString("lastName"));
-            user.setSex(result.getString("sex"));
-            user.setRank(result.getString("rank"));
+            user.setSex(this.getSex(connection, result.getString("sex")));
+            user.setRank(this.getRank(connection, result.getString("rank")));
 
-            closeConnection(connection);
+
             return user;
 
         }

@@ -84,12 +84,11 @@ public class loginSceneController implements Initializable {
         User user = Datasource.getInstance().checkLoggingData(id);
         if (user != null) {
             //There is someone with credentials in database
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "../scenes/userScene.fxml"));
-            Parent root = (Parent) loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/userScene.fxml"));
+            Parent root = loader.load();
             userSceneController ctrl = loader.getController();
             ctrl.setUser(user);
-            ctrl.setTextName();
+            ctrl.showInfo();
 
             Scene scene2 = new Scene(root);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
