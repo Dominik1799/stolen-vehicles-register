@@ -29,7 +29,7 @@ public class criminalsSceneController implements Initializable {
     @FXML
     JFXHamburger hamburgerOpen;
     @FXML
-    JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
+    JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick,next,back;
     User user;
     @FXML
     JFXButton listAll;
@@ -45,6 +45,7 @@ public class criminalsSceneController implements Initializable {
     @FXML private TableColumn<Criminal, String> age;
     @FXML
     JFXProgressBar progressBar;
+    int offset;
 
 
     public void setUser(User user) {
@@ -65,6 +66,7 @@ public class criminalsSceneController implements Initializable {
         group.setCellValueFactory(new PropertyValueFactory<Criminal, String>("group"));
         age.setCellValueFactory(new PropertyValueFactory<Criminal, String>("age"));
         progressBar.setVisible(false);
+        this.offset = 0;
     }
 
 
@@ -91,10 +93,9 @@ public class criminalsSceneController implements Initializable {
     public void onLogOutClick(ActionEvent actionEvent) {
 
     }
-    public void onListAllClick(ActionEvent actionEvent) throws InterruptedException {
-        ThreadCriminals threadCriminals = new ThreadCriminals(0);
-        Thread t = new Thread(threadCriminals::parseCriminals);
 
+    public void setUpTable(ThreadCriminals threadCriminals){
+        Thread t = new Thread(threadCriminals::parseCriminals);
         t.start();
         Thread watcher = new Thread(() -> {
             while (t.isAlive()){
@@ -104,7 +105,27 @@ public class criminalsSceneController implements Initializable {
             tableView.setItems(threadCriminals.getCriminals());
         });
         watcher.start();
+    }
+
+    public void onListAllClick(ActionEvent actionEvent) throws InterruptedException {
+        this.offset = 0;
+        next.setDisable(false);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        setUpTable(threadCriminals);
 
 
+    }
+    public void onNextClick(ActionEvent event){
+        back.setDisable(false);
+        this.offset = this.offset + 20;
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        setUpTable(threadCriminals);
+    }
+    public void onBackClick(ActionEvent event){
+        this.offset = this.offset - 20;
+        if (this.offset == 0)
+            back.setDisable(true);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        setUpTable(threadCriminals);
     }
 }
