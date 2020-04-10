@@ -96,6 +96,19 @@ public class Datasource {
         return null;
     }
 
+
+    public String getTeamID(Connection connection, String teamIndex) {
+        try {
+            ResultSet team = connection.createStatement().executeQuery("SELECT * FROM team_changes WHERE userid = " + teamIndex);
+            team.next();
+            return team.getString("teamid");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String getSex(Connection connection, String sexIndex) {
         try {
             ResultSet rank = connection.createStatement().executeQuery("SELECT * FROM sex where id = " + sexIndex);
@@ -128,6 +141,7 @@ public class Datasource {
             user.setLastName(result.getString("lastName"));
             user.setSex(this.getSex(connection, result.getString("sex")));
             user.setRank(this.getRank(connection, result.getString("rank")));
+            user.setTeam(this.getTeamID(connection, result.getString("id")));
 
 
             return user;

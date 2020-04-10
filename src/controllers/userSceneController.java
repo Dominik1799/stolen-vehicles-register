@@ -42,9 +42,11 @@ public class userSceneController implements Initializable {
         this.user = user;
     }
 
+    public void showName() {
+        fullname.setText(user.getFirstName() + " " + user.getLastName());
+    }
     public void showInfo() {
-        fullname.setText(user.getFirstName() + " " +  user.getLastName());
-        userInfo.setText("Sex: " + user.getSex() + "\n" + "Rank: " + user.getRank());
+        userInfo.setText("Name: " + user.getFirstName() + " " + user.getLastName() + "\n" +  "Gender: " + user.getSex() + "\n" + "Rank: " + user.getRank() + "\n" + "Team: " + user.getTeam());
     }
 
     @Override
@@ -74,29 +76,78 @@ public class userSceneController implements Initializable {
     }
 
     public void onClickLogOut(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
-        navList.getChildren().setAll(pane);
+        //AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
+        //navList.getChildren().setAll(pane);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/loginScene.fxml"));
+        Parent root = loader.load();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
     }
 
     public void onActionTeams(ActionEvent event) throws  IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/teamsScene.fxml"));
-        navList.getChildren().setAll(pane);
+        //AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/teamsScene.fxml"));
+        //navList.getChildren().setAll(pane);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/teamsScene.fxml"));
+        Parent root = loader.load();
+        userSceneController ctrl = loader.getController();
+
+        ctrl.setUser(user);
+        ctrl.showName();
+
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+
     }
 
     public void onActionVehicles(ActionEvent event) throws  IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/vehiclesScene.fxml"));
-        navList.getChildren().setAll(pane);
+        //AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/vehiclesScene.fxml"));
+        //navList.getChildren().setAll(pane);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/vehiclesScene.fxml"));
+        Parent root = loader.load();
+        userSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
     }
 
     public void onActionCriminals(ActionEvent event) throws  IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/criminalsScene.fxml"));
-        navList.getChildren().setAll(pane);
+        //AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/criminalsScene.fxml"));
+        //navList.getChildren().setAll(pane);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/criminalsScene.fxml"));
+        Parent root = loader.load();
+        userSceneController ctrl = loader.getController();
+
+        ctrl.setUser(user);
+        ctrl.showName();
+
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
     }
 
     public void onActionHome(ActionEvent event) throws  IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/userScene.fxml"));
-        navList.getChildren().setAll(pane);
-    }
+        //AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/userScene.fxml"));
+        //navList.getChildren().setAll(pane);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/userScene.fxml"));
+        Parent root = loader.load();
+        userSceneController ctrl = loader.getController();
 
+        ctrl.setUser(user);
+        ctrl.showName();
+        ctrl.showInfo();
 
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
     }
+}
