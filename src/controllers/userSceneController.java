@@ -48,7 +48,7 @@ public class userSceneController implements Initializable {
     }
 
 
-    private void prepareSlideMenuAnimation() {
+    protected void prepareSlideMenuAnimation() {
         TranslateTransition openNav=new TranslateTransition(new Duration(350), navList);
         openNav.setToX(0);
         TranslateTransition closeNav=new TranslateTransition(new Duration(350), navList);

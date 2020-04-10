@@ -29,15 +29,9 @@ import java.util.ResourceBundle;
 
 public class criminalsSceneController extends userSceneController implements Initializable {
     @FXML
-    private AnchorPane navList,background;
-    @FXML
-    JFXHamburger hamburgerOpen;
-    @FXML
     JFXButton next,back;
     @FXML
     JFXButton listAll;
-    @FXML
-    private Text fullname;
     @FXML private TableView<Criminal> tableView;
     @FXML private TableColumn<Criminal, String> fname;
     @FXML private TableColumn<Criminal, String> lname;
@@ -62,27 +56,6 @@ public class criminalsSceneController extends userSceneController implements Ini
         age.setCellValueFactory(new PropertyValueFactory<Criminal, String>("age"));
         progressBar.setVisible(false);
         this.offset = 0;
-    }
-
-
-    private void prepareSlideMenuAnimation() {
-        TranslateTransition openNav=new TranslateTransition(new Duration(350), navList);
-        openNav.setToX(0);
-        TranslateTransition closeNav=new TranslateTransition(new Duration(350), navList);
-        hamburgerOpen.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            if(navList.getTranslateX()!=0){
-                openNav.play();
-            }else{
-                closeNav.setToX(-(navList.getWidth()));
-                closeNav.play();
-            }
-        });
-        background.addEventFilter(MouseEvent.MOUSE_CLICKED,event -> {
-            if(navList.getTranslateX() == 0){
-                closeNav.setToX(-(navList.getWidth()));
-                closeNav.play();
-            }
-        });
     }
 
     public void setUpTable(ThreadCriminals threadCriminals){
