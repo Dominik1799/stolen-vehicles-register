@@ -33,8 +33,6 @@ public class userSceneController implements Initializable {
     @FXML
     private JFXHamburger hamburgerOpen;
     @FXML
-    private JFXButton onClickHome, onClickTeams, onClickCriminals, onClickVehicles;
-    @FXML
     private JFXTextArea userInfo;
     User user;
 
@@ -149,5 +147,10 @@ public class userSceneController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);
         window.show();
+    }
+
+
+    public void onActionSettings() {
+
     }
 }
