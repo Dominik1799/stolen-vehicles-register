@@ -1,6 +1,10 @@
 package controllers;
 
-public class vehicleSceneController extends userSceneController {
+import javafx.fxml.Initializable;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class vehicleSceneController extends userSceneController {
 
 }

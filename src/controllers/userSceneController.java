@@ -1,9 +1,6 @@
 package controllers;
-
-
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import com.jfoenix.controls.JFXTextArea;
 import entities.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -18,29 +15,30 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class userSceneController implements Initializable {
     @FXML
-    private AnchorPane navList,background;
+    protected AnchorPane navList,background;
     @FXML
-    private Text fullname;
+    protected Text fullname;
     @FXML
-    JFXHamburger hamburgerOpen;
+    protected JFXTextArea userInfo;
     @FXML
-    JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
-    User user;
+    protected JFXHamburger hamburgerOpen;
+    protected User user;
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setTextName() {
+    public void showName() {
         fullname.setText(user.getFirstName() + " " +  user.getLastName());
+    }
+    public void showInfo() {
+        userInfo.setText("User: "+ user.getFirstName() + " " + user.getLastName() + "\n" + "Sex: " + user.getSex() + "\n" + "Rank:" + user.getRank());
     }
 
 
@@ -76,7 +74,7 @@ public class userSceneController implements Initializable {
         Parent root = (Parent) loader.load();
         teamSceneController ctrl = loader.getController();
         ctrl.setUser(user);
-        ctrl.setTextName();
+        ctrl.showName();
         Scene scene2 = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);
@@ -89,7 +87,7 @@ public class userSceneController implements Initializable {
         Parent root = (Parent) loader.load();
         criminalsSceneController ctrl = loader.getController();
         ctrl.setUser(user);
-        ctrl.setTextName();
+        ctrl.showName();
         Scene scene2 = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);
@@ -104,5 +102,37 @@ public class userSceneController implements Initializable {
         window.setScene(scene2);
         window.show();
     }
+
+    public void onHomeClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/userScene.fxml"));
+        Parent root = (Parent) loader.load();
+        userSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+        ctrl.showInfo();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
+
+    public void onVehicleClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/vehiclesScene.fxml"));
+        Parent root = (Parent) loader.load();
+        vehicleSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
+
+    public void onActionSettings(ActionEvent event) throws IOException {
+
+    }
+
 
 }
