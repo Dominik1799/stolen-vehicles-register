@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.layout.*?>
@@ -42,7 +40,7 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <Text fill="WHITE" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super meno ">
+            <Text fx:id="fullname" fill="WHITE" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super meno ">
                <font>
                   <Font size="15.0" />
                </font>
