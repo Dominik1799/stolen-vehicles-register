@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.SplittableRandom;
+
 public class User {
     private String firstName;
     private String lastName;
     private String sex;
     private String rank;
+    private String team;
 
     public String getFirstName() {
         return firstName;
@@ -24,6 +27,14 @@ public class User {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 
     public void setFirstName(String firstName) {
