@@ -37,28 +37,23 @@
                 </AnchorPane>
             </children>
         </StackPane>
-        <AnchorPane fx:id="navList" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" translateX="-174.0">
+        <AnchorPane fx:id="navList" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" translateX="-174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <JFXButton layoutY="49.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Home" textFill="WHITE">
+                <JFXButton fx:id="onClickHome" layoutY="49.0" onAction="#onHomeClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #001479; -jfx-disable-visual-focus: true;" text="Home" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font></JFXButton>
-                <JFXButton layoutY="90.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #001479; -jfx-disable-visual-focus: true;" text="Teams" textFill="WHITE">
+                <JFXButton fx:id="onClickTeams" layoutY="90.0" onAction="#onTeamClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Teams" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </JFXButton>
-                <JFXButton layoutY="131.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Vehicles" textFill="WHITE">
+                <JFXButton fx:id="onClickVehicles" layoutY="131.0" onAction="#onVehicleClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Vehicles" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </JFXButton>
-                <JFXButton layoutY="172.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </JFXButton>
-                <JFXButton defaultButton="true" layoutY="575.0" onAction="#onLogOutClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE">
+                <JFXButton fx:id="onClickCriminals" layoutY="172.0" onAction="#onCriminalsClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
