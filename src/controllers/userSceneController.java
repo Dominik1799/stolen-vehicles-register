@@ -44,7 +44,7 @@ public class userSceneController implements Initializable {
         fullname.setText(user.getFirstName() + " " + user.getLastName());
     }
     public void showInfo() {
-        userInfo.setText("Name: " + user.getFirstName() + " " + user.getLastName() + "\n" +  "Gender: " + user.getSex() + "\n" + "Rank: " + user.getRank() + "\n" + "Team: " + user.getTeam());
+        userInfo.setText("Name: " + user.getFirstName() + " " + user.getLastName() + "\n" +  "Sex: " + user.getSex() + "\n" + "Rank: " + user.getRank() + "\n" + "Team: " + user.getTeam());
     }
 
     @Override
