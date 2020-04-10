@@ -34,7 +34,7 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutY="172.0" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
+            <JFXButton layoutY="172.0" onAction="#onCriminalsClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

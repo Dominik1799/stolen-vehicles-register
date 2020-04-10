@@ -83,6 +83,19 @@ public class userSceneController implements Initializable {
         window.show();
     }
 
+    public void setOnCriminalsClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/criminalsScene.fxml"));
+        Parent root = (Parent) loader.load();
+        teamSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.setTextName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
+
     public void onLogOutClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         Parent view2 = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
