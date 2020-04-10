@@ -3,37 +3,32 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import entities.User;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.jws.soap.SOAPBinding;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class userSceneController implements Initializable {
+public class teamSceneController implements Initializable {
     @FXML
     private AnchorPane navList,background;
-    @FXML
-    private Text fullname;
     @FXML
     JFXHamburger hamburgerOpen;
     @FXML
     JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
+    @FXML
+    private Text fullname;
     User user;
+
+    public teamSceneController() {
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -42,8 +37,6 @@ public class userSceneController implements Initializable {
     public void setTextName() {
         fullname.setText(user.getFirstName() + " " +  user.getLastName());
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         prepareSlideMenuAnimation();
@@ -70,26 +63,7 @@ public class userSceneController implements Initializable {
         });
     }
 
-    public void onTeamClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/teamScene.fxml"));
-        Parent root = (Parent) loader.load();
-        teamSceneController ctrl = loader.getController();
-        ctrl.setUser(user);
-        ctrl.setTextName();
-        Scene scene2 = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
-        window.show();
-    }
+    public void onLogOutClick(ActionEvent actionEvent) {
 
-    public void onLogOutClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        Parent view2 = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
-        Scene scene2 = new Scene(view2);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
-        window.show();
     }
-
 }
