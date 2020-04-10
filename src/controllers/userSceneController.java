@@ -31,7 +31,7 @@ public class userSceneController implements Initializable {
     @FXML
     JFXHamburger hamburgerOpen;
     @FXML
-    JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
+    JFXButton onClickHome, onClickTeams, onClickCriminals, onClickVehicles;
     User user;
 
     public void setUser(User user) {
@@ -69,7 +69,7 @@ public class userSceneController implements Initializable {
         });
     }
 
-    public void onLogOutClick(ActionEvent event) throws IOException {
+    public void onClickLogOut(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
         navList.getChildren().setAll(pane);
     }
@@ -89,4 +89,10 @@ public class userSceneController implements Initializable {
         navList.getChildren().setAll(pane);
     }
 
-}
+    public void onActionHome(ActionEvent event) throws  IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../scenes/userScene.fxml"));
+        navList.getChildren().setAll(pane);
+    }
+
+
+    }
