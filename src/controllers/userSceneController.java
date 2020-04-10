@@ -83,11 +83,11 @@ public class userSceneController implements Initializable {
         window.show();
     }
 
-    public void setOnCriminalsClick(ActionEvent event) throws IOException {
+    public void onCriminalsClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/criminalsScene.fxml"));
         Parent root = (Parent) loader.load();
-        teamSceneController ctrl = loader.getController();
+        criminalsSceneController ctrl = loader.getController();
         ctrl.setUser(user);
         ctrl.setTextName();
         Scene scene2 = new Scene(root);

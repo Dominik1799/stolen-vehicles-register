@@ -3,11 +3,18 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXProgressBar;
+import datasource.ThreadCriminals;
+import entities.Criminal;
 import entities.User;
 import javafx.animation.TranslateTransition;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -25,7 +32,20 @@ public class criminalsSceneController implements Initializable {
     JFXButton onLogOutClick,onHomeClick,onTeamsClick,onVehiclesClick,onCriminalsClick;
     User user;
     @FXML
+    JFXButton listAll;
+    @FXML
     private Text fullname;
+    @FXML private TableView<Criminal> tableView;
+    @FXML private TableColumn<Criminal, String> fname;
+    @FXML private TableColumn<Criminal, String> lname;
+    @FXML private TableColumn<Criminal, String> sex;
+    @FXML private TableColumn<Criminal, String> caseid;
+    @FXML private TableColumn<Criminal, String> nationality;
+    @FXML private TableColumn<Criminal, String> group;
+    @FXML private TableColumn<Criminal, String> age;
+    @FXML
+    JFXProgressBar progressBar;
+
 
     public void setUser(User user) {
         this.user = user;
@@ -37,6 +57,14 @@ public class criminalsSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         prepareSlideMenuAnimation();
+        fname.setCellValueFactory(new PropertyValueFactory<Criminal, String>("name"));
+        lname.setCellValueFactory(new PropertyValueFactory<Criminal, String>("surname"));
+        sex.setCellValueFactory(new PropertyValueFactory<Criminal, String>("sex"));
+        caseid.setCellValueFactory(new PropertyValueFactory<Criminal, String>("caseid"));
+        nationality.setCellValueFactory(new PropertyValueFactory<Criminal, String>("nationality"));
+        group.setCellValueFactory(new PropertyValueFactory<Criminal, String>("group"));
+        age.setCellValueFactory(new PropertyValueFactory<Criminal, String>("age"));
+        progressBar.setVisible(false);
     }
 
 
@@ -61,6 +89,22 @@ public class criminalsSceneController implements Initializable {
     }
 
     public void onLogOutClick(ActionEvent actionEvent) {
+
+    }
+    public void onListAllClick(ActionEvent actionEvent) throws InterruptedException {
+        ThreadCriminals threadCriminals = new ThreadCriminals(0);
+        Thread t = new Thread(threadCriminals::parseCriminals);
+
+        t.start();
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressBar.setVisible(true);
+            }
+            progressBar.setVisible(false);
+            tableView.setItems(threadCriminals.getCriminals());
+        });
+        watcher.start();
+
 
     }
 }

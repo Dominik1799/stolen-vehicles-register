@@ -115,4 +115,47 @@ public class Datasource {
         return null;
     }
 
+    public ResultSet getCriminalsWithOffset(int offset){
+        String querry = "SELECT * FROM criminal LIMIT 20 OFFSET " + String.valueOf(offset);
+        Connection connection = openConnection();
+        if (connection == null){
+            System.out.println("Something went wrong");
+            return null;
+        }
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(querry);
+            closeConnection(connection);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return null;
+    }
+
+    public String translateSex(int id){
+        String querry = "SELECT sex FROM sex WHERE id=" + id;
+        Connection connection = openConnection();
+        if (connection == null){
+            System.out.println("Something went wrong");
+            return null;
+        }
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(querry);
+            closeConnection(connection);
+            String result = "";
+            while (rs.next())
+                result = rs.getString("sex");
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return "";
+    }
+
 }
