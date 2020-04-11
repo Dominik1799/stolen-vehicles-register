@@ -6,8 +6,10 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class Criminal {
-    private String id, name, surname, sex, nationality, description;
-    private int caseid,group,age;
+    private String id, name, surname, sex, nationality, description, groupAmount;
+    private int caseid;
+    private String group;
+    private int age;
 
 
     public String getId() {
@@ -18,13 +20,22 @@ public class Criminal {
         this.id = id;
     }
 
-    public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, int group, LocalDate birthdate){
+    public String getGroupAmount() {
+        return groupAmount;
+    }
+
+    public void setGroupAmount(String groupAmount) {
+        this.groupAmount = groupAmount;
+    }
+
+    public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, String group, LocalDate birthdate, String groupAmount){
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.sex = sex;
         this.nationality = nationality;
         this.description = description;
+        this.groupAmount = groupAmount;
         this.caseid = caseid;
         this.group = group;
         LocalDate today = LocalDate.now();
@@ -88,11 +99,11 @@ public class Criminal {
         this.caseid = caseid;
     }
 
-    public int getGroup() {
+    public String getGroup() {
         return group;
     }
 
-    public void setGroup(int group) {
+    public void setGroup(String group) {
         this.group = group;
     }
 }
