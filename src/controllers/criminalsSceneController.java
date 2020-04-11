@@ -43,6 +43,7 @@ public class criminalsSceneController extends userSceneController implements Ini
     @FXML
     JFXProgressBar progressBar;
     int offset;
+    int step = 16;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,12 +82,12 @@ public class criminalsSceneController extends userSceneController implements Ini
     }
     public void onNextClick(ActionEvent event){
         back.setDisable(false);
-        this.offset = this.offset + 20;
+        this.offset = this.offset + step;
         ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
         setUpTable(threadCriminals);
     }
     public void onBackClick(ActionEvent event){
-        this.offset = this.offset - 20;
+        this.offset = this.offset - step;
         if (this.offset == 0)
             back.setDisable(true);
         ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);

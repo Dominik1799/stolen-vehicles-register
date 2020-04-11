@@ -1,5 +1,6 @@
 package controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import datasource.Datasource;
 import entities.User;
@@ -35,6 +36,8 @@ public class loginSceneController implements Initializable {
     private ComboBox<String> sexCB, rankCB;
     @FXML
     private JFXDatePicker DateOfBirth;
+    @FXML
+    private JFXButton register,login;
 
     @Override
     // Initialize runs after the constructor so it has access to all the javaFX components.
@@ -67,8 +70,9 @@ public class loginSceneController implements Initializable {
             Dialog.getInstance().warningDialog("All fields are required!");
             return;
         }
-        if (Datasource.getInstance().createUser(firstName, lastName, birthDate, sex, rank) == 1)
-            Dialog.getInstance().infoDialog("User created successfully!");
+        int userID = Datasource.getInstance().createUser(firstName, lastName, birthDate, sex, rank) + 1;
+        if ( userID > 0)
+            Dialog.getInstance().infoDialog("User created successfully! New user ID: " + userID);
         else
             Dialog.getInstance().errorDialog("Something went wrong. Please try again.");
     }

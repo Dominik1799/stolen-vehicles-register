@@ -39,6 +39,7 @@ public class Datasource {
 
     public int createUser(String FirstName,String LastName,String dateOfBirth,String sex, String rank){
         String sql = "INSERT INTO users(firstname,lastname,birthdate,rank,sex) VALUES (?,?,?,?,?)";
+        String getID = "SELECT max(id) FROM users";
         Connection conn = openConnection();
         if (conn == null){
             System.out.println("Something went wrong");
@@ -47,6 +48,8 @@ public class Datasource {
         try {
             ResultSet sexrs = conn.createStatement().executeQuery("SELECT id FROM sex WHERE sex='" + sex + "'");
             ResultSet ranksrs = conn.createStatement().executeQuery("SELECT id FROM rank WHERE rank='" + rank + "'");
+            ResultSet id = conn.createStatement().executeQuery("SELECT max(id) FROM users");
+            id.next();
             sexrs.next();
             ranksrs.next();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -55,7 +58,10 @@ public class Datasource {
             statement.setDate(3, java.sql.Date.valueOf(dateOfBirth));
             statement.setInt(4,ranksrs.getInt("id"));
             statement.setInt(5,sexrs.getInt("id"));
-            return statement.executeUpdate();
+            int status = statement.executeUpdate();
+            if (status == 1)
+                return id.getInt("max");
+            return 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +106,8 @@ public class Datasource {
     public String getTeamID(Connection connection, String teamIndex) {
         try {
             ResultSet team = connection.createStatement().executeQuery("SELECT * FROM team_changes WHERE userid = " + teamIndex);
-            team.next();
+            if (!team.next())
+                return "Not a member of any team";
             return team.getString("teamid");
         }
         catch (SQLException e) {
@@ -154,7 +161,7 @@ public class Datasource {
     }
 
     public ResultSet getCriminalsWithOffset(int offset){
-        String querry = "SELECT * FROM criminal LIMIT 20 OFFSET " + String.valueOf(offset);
+        String querry = "SELECT * FROM criminal LIMIT 16 OFFSET " + String.valueOf(offset);
         Connection connection = openConnection();
         if (connection == null){
             System.out.println("Something went wrong");
