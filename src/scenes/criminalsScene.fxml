@@ -11,6 +11,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.criminalsSceneController">
    <children>
       <StackPane prefHeight="647.0" prefWidth="1067.0">
@@ -28,6 +30,13 @@
                         <TableColumn fx:id="group" minWidth="5.0" prefWidth="94.0" text="Criminal group" />
                         <TableColumn fx:id="caseid" minWidth="0.0" prefWidth="98.0" text="Case ID" />
                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#dropRecord" text="Drop the record" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
                   </TableView>
                   <JFXButton fx:id="listAll" layoutX="806.0" layoutY="98.0" mnemonicParsing="false" onAction="#onListAllClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="List all" textFill="WHITE">
                      <font>

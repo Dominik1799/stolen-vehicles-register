@@ -4,6 +4,7 @@ package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
+import datasource.Datasource;
 import datasource.ThreadCriminals;
 import entities.Criminal;
 import javafx.animation.TranslateTransition;
@@ -93,4 +94,19 @@ public class criminalsSceneController extends userSceneController implements Ini
         ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
         setUpTable(threadCriminals);
     }
+
+    public void updateTable(){
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        setUpTable(threadCriminals);
+    }
+
+
+
+    public void dropRecord(){
+        Criminal criminal =  tableView.getSelectionModel().getSelectedItem();
+        System.out.println(criminal.getName());
+        Datasource.getInstance().deleteCriminal(criminal);
+        this.updateTable();
+    }
+
 }

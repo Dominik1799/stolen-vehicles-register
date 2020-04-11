@@ -1,5 +1,6 @@
 package datasource;
 
+import entities.Criminal;
 import entities.User;
 
 import javax.jws.soap.SOAPBinding;
@@ -219,6 +220,18 @@ public class Datasource {
             closeConnection(connection);
         }
         return "";
+    }
+
+
+    public void deleteCriminal(Criminal criminal) {
+        String query = String.format("DELETE FROM criminal WHERE id='%s';",criminal.getId());
+        Connection connection = openConnection();
+        try {
+            connection.createStatement().executeUpdate(query);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

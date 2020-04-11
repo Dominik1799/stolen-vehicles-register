@@ -6,12 +6,20 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class Criminal {
-    private String name, surname, sex, nationality, description;
+    private String id, name, surname, sex, nationality, description;
     private int caseid,group,age;
 
 
+    public String getId() {
+        return id;
+    }
 
-    public Criminal(String name, String surname, String sex, String nationality, String description, int caseid, int group, LocalDate birthdate){
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, int group, LocalDate birthdate){
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.sex = sex;
