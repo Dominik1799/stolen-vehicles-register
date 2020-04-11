@@ -5,6 +5,8 @@ import entities.User;
 import javax.jws.soap.SOAPBinding;
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Datasource {
     private static Datasource instance = null;
@@ -90,6 +92,21 @@ public class Datasource {
         return null;
     }
 
+    public void updateUser(User user) {
+
+        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getId() );
+        Connection connection = openConnection();
+        try {
+            assert connection != null;
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public String getRank(Connection connection, String rankIndex) {
         try {
             ResultSet rank = connection.createStatement().executeQuery("SELECT * FROM rank where id = " + rankIndex);
@@ -144,12 +161,13 @@ public class Datasource {
             result.next();
 
 
+            user.setId(result.getString("id"));
             user.setFirstName(result.getString("firstName"));
             user.setLastName(result.getString("lastName"));
             user.setSex(this.getSex(connection, result.getString("sex")));
             user.setRank(this.getRank(connection, result.getString("rank")));
             user.setTeam(this.getTeamID(connection, result.getString("id")));
-
+            user.setBirthdate(result.getDate("birthdate"));
 
             return user;
 
@@ -161,7 +179,7 @@ public class Datasource {
     }
 
     public ResultSet getCriminalsWithOffset(int offset){
-        String querry = "SELECT * FROM criminal LIMIT 16 OFFSET " + String.valueOf(offset);
+        String query = "SELECT * FROM criminal LIMIT 16 OFFSET " + String.valueOf(offset);
         Connection connection = openConnection();
         if (connection == null){
             System.out.println("Something went wrong");
@@ -169,7 +187,7 @@ public class Datasource {
         }
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(querry);
+            ResultSet rs = statement.executeQuery(query);
             closeConnection(connection);
             return rs;
         } catch (SQLException e) {
@@ -181,7 +199,7 @@ public class Datasource {
     }
 
     public String translateSex(int id){
-        String querry = "SELECT sex FROM sex WHERE id=" + id;
+        String query = "SELECT sex FROM sex WHERE id=" + id;
         Connection connection = openConnection();
         if (connection == null){
             System.out.println("Something went wrong");
@@ -189,7 +207,7 @@ public class Datasource {
         }
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(querry);
+            ResultSet rs = statement.executeQuery(query);
             closeConnection(connection);
             String result = "";
             while (rs.next())
