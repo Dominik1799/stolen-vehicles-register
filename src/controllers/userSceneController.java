@@ -38,7 +38,9 @@ public class userSceneController implements Initializable {
         fullname.setText(user.getFirstName() + " " +  user.getLastName());
     }
     public void showInfo() {
-        userInfo.setText("User: "+ user.getFirstName() + " " + user.getLastName() + "\n" + "Sex: " + user.getSex() + "\n" + "Rank:" + user.getRank() + "\n" + "Team: " + user.getTeam());
+        userInfo.setText(String.format("ID: %s\nUser: %s %s\nSex: %s\nRank:%s\nTeam: %s\nBirthday:%s",
+                user.getId(),user.getFirstName(), user.getLastName(), user.getSex(), user.getRank(), user.getTeam(), user.getBirthdate())
+        );
     }
 
 
@@ -131,6 +133,18 @@ public class userSceneController implements Initializable {
     }
 
     public void onActionSettings(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/settingsScene.fxml"));
+        Parent root = (Parent) loader.load();
+        settingsSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+        ctrl.getOptions();
+        ctrl.setPrompt();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
 
     }
 

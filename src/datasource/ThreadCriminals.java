@@ -20,6 +20,7 @@ public class ThreadCriminals {
         ResultSet rs = Datasource.getInstance().getCriminalsWithOffset(this.offset);
         try {
             while (rs.next()){
+                String id = rs.getString("id");
                 String fname = rs.getString("firstname");
                 String lname = rs.getString("lastname");
                 String description = rs.getString("description");
@@ -27,8 +28,10 @@ public class ThreadCriminals {
                 String sex = Datasource.getInstance().translateSex(rs.getInt("sex"));
                 LocalDate birthday = rs.getDate("birthdate").toLocalDate();
                 int caseid = rs.getInt("case");
-                int criminalGroup = rs.getInt("criminalgroup");
-                Criminal criminal = new Criminal(fname,lname,sex,nationality,description,caseid,criminalGroup,birthday);
+                int groupId = rs.getInt("criminalgroup");
+                String criminalGroup = Datasource.getInstance().getGroupName(groupId);
+                String groupAmount = Datasource.getInstance().getGroupAmount(groupId);
+                Criminal criminal = new Criminal(id, fname,lname,sex,nationality,description,caseid,criminalGroup,birthday, groupAmount);
                 this.criminals.add(criminal);
             }
         } catch (SQLException e){

@@ -1,6 +1,6 @@
 package entities;
 
-import java.util.SplittableRandom;
+import java.util.Date;
 
 public class User {
     private String firstName;
@@ -8,6 +8,24 @@ public class User {
     private String sex;
     private String rank;
     private String team;
+    private String id;
+    private Date birthdate;
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

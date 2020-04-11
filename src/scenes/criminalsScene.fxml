@@ -11,6 +11,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.criminalsSceneController">
    <children>
       <StackPane prefHeight="647.0" prefWidth="1067.0">
@@ -20,14 +22,22 @@
                   <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <TableView fx:id="tableView" layoutX="82.0" layoutY="155.0" prefHeight="430.0" prefWidth="903.0">
                     <columns>
-                      <TableColumn fx:id="fname" prefWidth="151.0" text="First name" />
-                      <TableColumn fx:id="lname" prefWidth="153.0" text="Last name" />
+                      <TableColumn fx:id="fname" prefWidth="120.0" text="First name" />
+                      <TableColumn fx:id="lname" prefWidth="120.0" text="Last name" />
                         <TableColumn fx:id="age" prefWidth="75.0" text="Age" />
                         <TableColumn fx:id="sex" minWidth="0.0" prefWidth="103.0" text="sex" />
-                        <TableColumn fx:id="nationality" minWidth="0.0" prefWidth="228.0" text="Nationality" />
-                        <TableColumn fx:id="group" minWidth="5.0" prefWidth="94.0" text="Criminal group" />
+                        <TableColumn fx:id="nationality" minWidth="0.0" prefWidth="150.0" text="Nationality" />
                         <TableColumn fx:id="caseid" minWidth="0.0" prefWidth="98.0" text="Case ID" />
+                       <TableColumn fx:id="group" minWidth="0.0" prefWidth="98.0" text="Criminal Group" />
+                       <TableColumn fx:id="groupAmount" minWidth="0.0" prefWidth="120.0" text="Amount of members" />
                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#dropRecord" text="Drop the record" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
                   </TableView>
                   <JFXButton fx:id="listAll" layoutX="806.0" layoutY="98.0" mnemonicParsing="false" onAction="#onListAllClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="List all" textFill="WHITE">
                      <font>

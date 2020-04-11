@@ -1,14 +1,15 @@
 package datasource;
 
+import entities.Criminal;
 import entities.User;
 
-import javax.jws.soap.SOAPBinding;
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Datasource {
     private static Datasource instance = null;
-    private Datasource(){ }
+
+    private Datasource() {
+    }
 
     public static Datasource getInstance() {
         if (instance == null)
@@ -17,7 +18,7 @@ public class Datasource {
         return instance;
     }
 
-    private Connection openConnection(){
+    private Connection openConnection() {
         try {
             String PASSWORD = "Welcome1";
             String USER_NAME = "DB_FIIT";
@@ -28,8 +29,9 @@ public class Datasource {
             return null;
         }
     }
+
     // Always use this function to close opened connections
-    private void closeConnection(Connection connection){
+    private void closeConnection(Connection connection) {
         try {
             connection.close();
         } catch (SQLException e) {
@@ -37,11 +39,11 @@ public class Datasource {
         }
     }
 
-    public int createUser(String FirstName,String LastName,String dateOfBirth,String sex, String rank){
+    public int createUser(String FirstName, String LastName, String dateOfBirth, String sex, String rank) {
         String sql = "INSERT INTO users(firstname,lastname,birthdate,rank,sex) VALUES (?,?,?,?,?)";
         String getID = "SELECT max(id) FROM users";
         Connection conn = openConnection();
-        if (conn == null){
+        if (conn == null) {
             System.out.println("Something went wrong");
             return 0;
         }
@@ -53,11 +55,11 @@ public class Datasource {
             sexrs.next();
             ranksrs.next();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1,FirstName);
-            statement.setString(2,LastName);
+            statement.setString(1, FirstName);
+            statement.setString(2, LastName);
             statement.setDate(3, java.sql.Date.valueOf(dateOfBirth));
-            statement.setInt(4,ranksrs.getInt("id"));
-            statement.setInt(5,sexrs.getInt("id"));
+            statement.setInt(4, ranksrs.getInt("id"));
+            statement.setInt(5, sexrs.getInt("id"));
             int status = statement.executeUpdate();
             if (status == 1)
                 return id.getInt("max");
@@ -70,10 +72,11 @@ public class Datasource {
         }
         return 0;
     }
+
     // function that can be used to get values from enums. Simply pass table name and it will return all rows.
-    public ResultSet selectAllFrom(String tableName){
+    public ResultSet selectAllFrom(String tableName) {
         Connection conn = openConnection();
-        if (conn == null){
+        if (conn == null) {
             System.out.println("Something went wrong");
             return null;
         }
@@ -90,13 +93,26 @@ public class Datasource {
         return null;
     }
 
+    public void updateUser(User user) {
+
+        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getId());
+        Connection connection = openConnection();
+        try {
+            assert connection != null;
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public String getRank(Connection connection, String rankIndex) {
         try {
             ResultSet rank = connection.createStatement().executeQuery("SELECT * FROM rank where id = " + rankIndex);
             rank.next();
             return rank.getString("rank");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -109,8 +125,7 @@ public class Datasource {
             if (!team.next())
                 return "Not a member of any team";
             return team.getString("teamid");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -121,15 +136,15 @@ public class Datasource {
             ResultSet rank = connection.createStatement().executeQuery("SELECT * FROM sex where id = " + sexIndex);
             rank.next();
             return rank.getString("sex");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
     public User checkLoggingData(String id) {
-        String query = "SELECT * FROM Users WHERE id='" + id+ "';";
+        String query = "SELECT * FROM Users WHERE id='" + id + "';";
+
         Connection connection = openConnection();
         try {
             assert connection != null;
@@ -137,39 +152,39 @@ public class Datasource {
             User user = new User();
             ResultSet result = statement.executeQuery(query);
 
-            if(!result.isBeforeFirst()) {
+            if (!result.isBeforeFirst()) {
                 // Noone with this credentials in database
                 return null;
             }
             result.next();
 
 
+            user.setId(result.getString("id"));
             user.setFirstName(result.getString("firstName"));
             user.setLastName(result.getString("lastName"));
             user.setSex(this.getSex(connection, result.getString("sex")));
             user.setRank(this.getRank(connection, result.getString("rank")));
             user.setTeam(this.getTeamID(connection, result.getString("id")));
-
+            user.setBirthdate(result.getDate("birthdate"));
 
             return user;
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public ResultSet getCriminalsWithOffset(int offset){
-        String querry = "SELECT * FROM criminal LIMIT 16 OFFSET " + String.valueOf(offset);
+    public ResultSet getCriminalsWithOffset(int offset) {
+        String query = "SELECT * FROM criminal LIMIT 16 OFFSET " + String.valueOf(offset);
         Connection connection = openConnection();
-        if (connection == null){
+        if (connection == null) {
             System.out.println("Something went wrong");
             return null;
         }
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(querry);
+            ResultSet rs = statement.executeQuery(query);
             closeConnection(connection);
             return rs;
         } catch (SQLException e) {
@@ -180,16 +195,16 @@ public class Datasource {
         return null;
     }
 
-    public String translateSex(int id){
-        String querry = "SELECT sex FROM sex WHERE id=" + id;
+    public String translateSex(int id) {
+        String query = "SELECT sex FROM sex WHERE id=" + id;
         Connection connection = openConnection();
-        if (connection == null){
+        if (connection == null) {
             System.out.println("Something went wrong");
             return null;
         }
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(querry);
+            ResultSet rs = statement.executeQuery(query);
             closeConnection(connection);
             String result = "";
             while (rs.next())
@@ -203,4 +218,48 @@ public class Datasource {
         return "";
     }
 
+
+    public void deleteCriminal(Criminal criminal) {
+        String query = String.format("DELETE FROM criminal WHERE id='%s';", criminal.getId());
+        Connection connection = openConnection();
+        try {
+            connection.createStatement().executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getGroupName(Integer id) throws SQLException {
+        String query = String.format("SELECT groupname FROM criminalgroup WHERE id=%s;", id);
+        Connection connection = openConnection();
+        try {
+            ResultSet result = connection.createStatement().executeQuery(query);
+            result.next();
+            closeConnection(connection);
+            return result.getString("groupname");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getGroupAmount(Integer id) {
+        //literally the same god damn method as previous but with different query
+        // what a fuckin joke
+        String query = String.format("SELECT criminal.criminalgroup, COUNT(*) " +
+                "FROM criminal " +
+                "WHERE criminal.criminalgroup=%s " +
+                "GROUP BY criminal.criminalgroup;", id);
+
+        Connection connection = openConnection();
+        try {
+            ResultSet result = connection.createStatement().executeQuery(query);
+            result.next();
+            closeConnection(connection);
+            return result.getString("count");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

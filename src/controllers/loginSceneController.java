@@ -36,8 +36,6 @@ public class loginSceneController implements Initializable {
     private ComboBox<String> sexCB, rankCB;
     @FXML
     private JFXDatePicker DateOfBirth;
-    @FXML
-    private JFXButton register,login;
 
     @Override
     // Initialize runs after the constructor so it has access to all the javaFX components.
