@@ -243,23 +243,33 @@ public class Datasource {
         }
     }
 
-    public String getGroupAmount(Integer id) {
-        //literally the same god damn method as previous but with different query
-        // what a fuckin joke
-        String query = String.format("SELECT criminal.criminalgroup, COUNT(*) " +
-                "FROM criminal " +
-                "WHERE criminal.criminalgroup=%s " +
-                "GROUP BY criminal.criminalgroup;", id);
 
+    public String getGroupAmount(Integer id) {
+        int memberAmount = 0;
+        String checkIfEmpty = "SELECT member_amount FROM criminalgroup WHERE id=" + id;
+        String countMembers = "SELECT count(*) FROM criminal WHERE criminalgroup=" + id;
+        String updateCriminalGroup = "UPDATE criminalgroup SET member_amount=$$ WHERE id=" + id;
         Connection connection = openConnection();
+        if (connection == null)
+            return "";
         try {
-            ResultSet result = connection.createStatement().executeQuery(query);
-            result.next();
-            closeConnection(connection);
-            return result.getString("count");
-        } catch (SQLException e) {
+            ResultSet rs = connection.createStatement().executeQuery(checkIfEmpty);
+            rs.next();
+            memberAmount = rs.getInt("member_amount");
+            if (memberAmount == 0){
+                ResultSet rsMemberAmount = connection.createStatement().executeQuery(countMembers);
+                rsMemberAmount.next();
+                memberAmount = rsMemberAmount.getInt("count");
+                connection.createStatement().execute(updateCriminalGroup.replace("$$",String.valueOf(memberAmount)));
+                connection.close();
+                return String.valueOf(memberAmount);
+            }
+            return String.valueOf(memberAmount);
+
+        } catch (SQLException e){
             e.printStackTrace();
-            return null;
         }
+        this.closeConnection(connection);
+        return "";
     }
 }
