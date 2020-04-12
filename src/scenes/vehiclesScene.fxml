@@ -19,8 +19,24 @@
             <AnchorPane fx:id="background" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <ListView fx:id="listTopVehicles" layoutX="94.0" layoutY="65.0" prefHeight="466.0" prefWidth="845.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="65.0">
-                  </ListView>
+                  <TableView fx:id="tableView" layoutX="82.0" layoutY="155.0" prefHeight="430.0" prefWidth="903.0">
+                     <columns>
+                        <TableColumn fx:id="id" prefWidth="120.0" text="ID" />
+                        <TableColumn fx:id="count" prefWidth="120.0" text="Stolen" />
+                        <TableColumn fx:id="modelYear" prefWidth="75.0" text="Model Year" />
+                        <TableColumn fx:id="brand" minWidth="0.0" prefWidth="103.0" text="Brand" />
+                        <TableColumn fx:id="model" minWidth="0.0" prefWidth="150.0" text="Model" />
+                        <TableColumn fx:id="vin" minWidth="0.0" prefWidth="98.0" text="VIN" />
+                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Show details" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <JFXProgressBar fx:id="progressBar" layoutX="434.0" layoutY="598.0" prefWidth="197.0" />
                   <Label layoutX="80.0" layoutY="33.0" text="Top most stoled vehicles" />
                </children>
             </AnchorPane>
