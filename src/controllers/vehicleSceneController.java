@@ -1,16 +1,22 @@
 package controllers;
 import com.jfoenix.controls.JFXProgressBar;
-import datasource.Datasource;
-import datasource.ThreadCriminals;
 import datasource.ThreadVehicles;
 import entities.Criminal;
 import entities.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -47,5 +53,29 @@ public class vehicleSceneController extends userSceneController {
         watcher.start();
     }
 
+    public void onVehiclesClick(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/vehiclesScene.fxml"));
+        Parent root = (Parent) loader.load();
+        vehicleSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
 
+    public void onOwnersClick(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/ownersScene.fxml"));
+        Parent root = (Parent) loader.load();
+        ownerSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
 }

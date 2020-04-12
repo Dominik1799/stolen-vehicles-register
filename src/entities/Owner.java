@@ -1,28 +1,30 @@
 package entities;
 
 public class Owner {
-    private String firstName, lastName;
+    private String firstname, lastname;
+    private int count;
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public Owner(String firstName, String lastName, int count) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Owner(String firstname, String lastname, int count) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.count = count;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public int getCount() {
@@ -33,7 +35,9 @@ public class Owner {
         this.count = count;
     }
 
-    private int count;
+    public Owner() {
+
+    }
 
 
 }

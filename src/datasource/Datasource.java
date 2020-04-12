@@ -277,11 +277,23 @@ public class Datasource {
     }
 
     public ResultSet getTopCars() {
-        String query = "SELECT id, count, owner, brand, model, modelyear, vin FROM (SELECT vehicleid, COUNT(*) FROM vehicle_history GROUP BY vehicleid ORDER BY COUNT DESC LIMIT 16) AS topvehicles INNER JOIN vehicles ON vehicles.id = topvehicles.vehicleid";
+        String query = "SELECT id, count, owner, brand, model, modelyear, vin FROM (SELECT vehicleid, COUNT(*) FROM vehicle_history GROUP BY vehicleid ORDER BY COUNT DESC LIMIT 16) AS topvehicles INNER JOIN vehicles ON vehicles.id = topvehicles.vehicleid;";
         Connection connection = openConnection();
         try {
             ResultSet result = connection.createStatement().executeQuery(query);
-            result.next();
+            closeConnection(connection);
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getTopOwners() {
+        String query = "SELECT firstname,lastname,count FROM owners INNER JOIN (SELECT owner,count(*) FROM vehicles GROUP BY owner) table2 ON table2.owner=id;";
+        Connection connection = openConnection(); // :(
+        try {
+            ResultSet result = connection.createStatement().executeQuery(query);
             closeConnection(connection);
             return result;
         } catch (SQLException e) {
