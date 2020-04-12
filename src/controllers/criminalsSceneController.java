@@ -4,6 +4,7 @@ package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
+import datasource.Datasource;
 import datasource.ThreadCriminals;
 import entities.Criminal;
 import javafx.animation.TranslateTransition;
@@ -40,6 +41,8 @@ public class criminalsSceneController extends userSceneController implements Ini
     @FXML private TableColumn<Criminal, String> nationality;
     @FXML private TableColumn<Criminal, String> group;
     @FXML private TableColumn<Criminal, String> age;
+    @FXML private TableColumn<Criminal, String> groupAmount;
+
     @FXML
     JFXProgressBar progressBar;
     int offset;
@@ -55,6 +58,7 @@ public class criminalsSceneController extends userSceneController implements Ini
         nationality.setCellValueFactory(new PropertyValueFactory<Criminal, String>("nationality"));
         group.setCellValueFactory(new PropertyValueFactory<Criminal, String>("group"));
         age.setCellValueFactory(new PropertyValueFactory<Criminal, String>("age"));
+        groupAmount.setCellValueFactory(new PropertyValueFactory<Criminal, String>("groupAmount"));
         progressBar.setVisible(false);
         this.offset = 0;
     }
@@ -93,4 +97,18 @@ public class criminalsSceneController extends userSceneController implements Ini
         ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
         setUpTable(threadCriminals);
     }
+
+    public void updateTable(){
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        setUpTable(threadCriminals);
+    }
+
+
+
+    public void dropRecord(){
+        Criminal criminal =  tableView.getSelectionModel().getSelectedItem();
+        Datasource.getInstance().deleteCriminal(criminal);
+        this.updateTable();
+    }
+
 }
