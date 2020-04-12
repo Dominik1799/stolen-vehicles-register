@@ -26,7 +26,7 @@
         <JFXTextField fx:id="LastNameReg" layoutX="801.0" layoutY="325.0" prefHeight="31.0" prefWidth="194.0" promptText="Last name" />
         <JFXComboBox fx:id="sexCB" layoutX="801.0" layoutY="412.0" prefHeight="25.0" prefWidth="92.0" promptText="Sex" />
         <JFXComboBox fx:id="rankCB" layoutX="902.0" layoutY="412.0" prefHeight="25.0" prefWidth="92.0" promptText="Rank" />
-        <JFXButton fx:id="register" layoutX="868.0" layoutY="457.0" onAction="#onRegisterClick" prefHeight="31.0" prefWidth="73.0" ripplerFill="BLACK" style="-fx-background-color: #01579b;" text="Register" textFill="WHITE" />
+        <JFXButton layoutX="868.0" layoutY="457.0" onAction="#onRegisterClick" prefHeight="31.0" prefWidth="73.0" ripplerFill="BLACK" style="-fx-background-color: #01579b;" text="Register" textFill="WHITE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#01579b" height="128.0" stroke="BLACK" strokeType="INSIDE" width="1067.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Text fill="WHITE" layoutX="418.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" AnchorPane.leftAnchor="418.0" AnchorPane.rightAnchor="417.64453125" AnchorPane.topAnchor="25.5703125">
          <font>
