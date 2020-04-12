@@ -1,11 +1,7 @@
 package controllers;
 
-import com.jfoenix.controls.JFXProgressBar;
-import datasource.Datasource;
-import entities.Criminal;
+import datasource.ThreadOwners;
 import entities.Owner;
-import entities.Owner;
-import entities.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,10 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.xml.transform.Result;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ownerSceneController extends vehicleSceneController{
@@ -32,25 +25,20 @@ public class ownerSceneController extends vehicleSceneController{
         firstname.setCellValueFactory(new PropertyValueFactory<Owner, String>("firstname"));
         lastname.setCellValueFactory(new PropertyValueFactory<Owner, String>("lastname"));
         count.setCellValueFactory(new PropertyValueFactory<Owner, Integer>("count"));
-        this.setUpTable();
+        this.setUpTable(new ThreadOwners());
     }
 
-    public void setUpTable(){
-        ResultSet rs = Datasource.getInstance().getTopOwners();
-        try {
-            progressBar.setVisible(true);
-            while (rs.next()){
-                Owner owner = new Owner();
-                owner.setFirstname(rs.getString("firstname"));
-                owner.setLastname(rs.getString("lastname"));
-                owner.setCount(rs.getInt("count"));
-                this.owners.add(owner);
+    public void setUpTable(ThreadOwners threadOwners){
+        Thread t = new Thread(threadOwners::parseVehicles);
+        t.start();
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressBar.setVisible(true);
             }
-            tableView.setItems(this.owners);
             progressBar.setVisible(false);
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
+            tableView.setItems(threadOwners.getVehicles());
+        });
+        watcher.start();
     }
 
 
