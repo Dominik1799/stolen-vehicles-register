@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <?import javafx.scene.effect.Shadow?>
-<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.vehicleSceneController">
+<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ownerSceneController">
    <children>
       <StackPane prefHeight="647.0" prefWidth="1067.0">
          <children>
@@ -15,12 +15,9 @@
                   <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <TableView fx:id="tableView" layoutX="82.0" layoutY="155.0" prefHeight="430.0" prefWidth="903.0">
                      <columns>
-                        <TableColumn fx:id="id" prefWidth="120.0" text="ID" />
-                        <TableColumn fx:id="count" prefWidth="120.0" text="Stolen" />
-                        <TableColumn fx:id="modelYear" prefWidth="75.0" text="Model Year" />
-                        <TableColumn fx:id="brand" minWidth="0.0" prefWidth="103.0" text="Brand" />
-                        <TableColumn fx:id="model" minWidth="0.0" prefWidth="150.0" text="Model" />
-                        <TableColumn fx:id="vin" minWidth="0.0" prefWidth="98.0" text="VIN" />
+                        <TableColumn fx:id="firstname" prefWidth="120.0" text="Fistname" />
+                        <TableColumn fx:id="lastname" prefWidth="120.0" text="Lastname" />
+                        <TableColumn fx:id="count" prefWidth="75.0" text="Count" />
                      </columns>
                      <contextMenu>
                         <ContextMenu>
@@ -30,7 +27,7 @@
                         </ContextMenu>
                      </contextMenu>
                   </TableView>
-                  <JFXButton fx:id="vehicle" layoutX="806.0" layoutY="98.0" mnemonicParsing="false" onAction="#onVehiclesClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Top vehicles" textFill="WHITE">
+                  <JFXButton layoutX="806.0" layoutY="98.0" mnemonicParsing="false" onAction="#onVehiclesClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Top vehicles" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -38,7 +35,7 @@
                         <Shadow />
                      </effect>
                   </JFXButton>
-                  <JFXButton fx:id="owners" layoutX="920.0" layoutY="98.0" mnemonicParsing="false" onAction="#onOwnersClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Top owners" textFill="WHITE">
+                  <JFXButton layoutX="920.0" layoutY="98.0" mnemonicParsing="false" onAction="#onOwnersClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Top owners" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>

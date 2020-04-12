@@ -43,13 +43,18 @@ public class Criminal {
         this.sex = sex;
         this.nationality = nationality;
         this.description = description;
-        this.groupAmount = groupAmount;
         this.caseid = caseid;
         this.group = group;
         LocalDate today = LocalDate.now();
         Period p = Period.between(birthdate,today);
         this.age = p.getYears();
         this.groupID = groupID;
+        if(this.groupID == 0) {
+            this.groupAmount = "1";
+        }
+        else{
+            this.groupAmount = groupAmount;
+        }
     }
 
     public int getAge() {

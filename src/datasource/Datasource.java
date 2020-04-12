@@ -3,6 +3,7 @@ package datasource;
 import entities.Criminal;
 import entities.User;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 
 public class Datasource {
@@ -231,7 +232,7 @@ public class Datasource {
         }
     }
 
-    public String getGroupName(Integer id) throws SQLException {
+    public String getGroupName(Integer id)  {
         String query = String.format("SELECT groupname FROM criminalgroup WHERE id=%s;", id);
         Connection connection = openConnection();
         try {
@@ -274,4 +275,34 @@ public class Datasource {
         this.closeConnection(connection);
         return "";
     }
+
+    public ResultSet getTopCars() {
+        String query = "SELECT id, count, owner, brand, model, modelyear, vin FROM (SELECT vehicleid, COUNT(*) FROM vehicle_history GROUP BY vehicleid ORDER BY COUNT DESC LIMIT 16) AS topvehicles INNER JOIN vehicles ON vehicles.id = topvehicles.vehicleid;";
+        Connection connection = openConnection();
+        try {
+            ResultSet result = connection.createStatement().executeQuery(query);
+            closeConnection(connection);
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet getTopOwners() {
+        String query = "SELECT firstname,lastname,count FROM owners INNER JOIN (SELECT owner,count(*) FROM vehicles GROUP BY owner) table2 ON table2.owner=id;";
+        Connection connection = openConnection(); // :(
+        try {
+            ResultSet result = connection.createStatement().executeQuery(query);
+            closeConnection(connection);
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+
 }
