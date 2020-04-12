@@ -221,9 +221,11 @@ public class Datasource {
 
     public void deleteCriminal(Criminal criminal) {
         String query = String.format("DELETE FROM criminal WHERE id='%s';", criminal.getId());
+        String updateMemberAmount = "UPDATE criminalgroup SET member_amount=$$ WHERE id=" + criminal.getGroupID();
         Connection connection = openConnection();
         try {
             connection.createStatement().executeUpdate(query);
+            connection.createStatement().execute(updateMemberAmount.replace("$$",String.valueOf(Integer.parseInt(criminal.getGroupAmount())- 1)));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,7 @@ public class Criminal {
     private String id, name, surname, sex, nationality, description, groupAmount;
     private int caseid;
     private String group;
-    private int age;
+    private int age,groupID;
 
 
     public String getId() {
@@ -28,7 +28,15 @@ public class Criminal {
         this.groupAmount = groupAmount;
     }
 
-    public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, String group, LocalDate birthdate, String groupAmount){
+    public int getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
+    }
+
+    public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, String group, LocalDate birthdate, String groupAmount, int groupID){
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -41,6 +49,7 @@ public class Criminal {
         LocalDate today = LocalDate.now();
         Period p = Period.between(birthdate,today);
         this.age = p.getYears();
+        this.groupID = groupID;
     }
 
     public int getAge() {

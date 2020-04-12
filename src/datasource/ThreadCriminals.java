@@ -31,7 +31,7 @@ public class ThreadCriminals {
                 int groupId = rs.getInt("criminalgroup");
                 String criminalGroup = Datasource.getInstance().getGroupName(groupId);
                 String groupAmount = Datasource.getInstance().getGroupAmount(groupId);
-                Criminal criminal = new Criminal(id, fname,lname,sex,nationality,description,caseid,criminalGroup,birthday, groupAmount);
+                Criminal criminal = new Criminal(id, fname,lname,sex,nationality,description,caseid,criminalGroup,birthday, groupAmount,groupId);
                 this.criminals.add(criminal);
             }
         } catch (SQLException e){
