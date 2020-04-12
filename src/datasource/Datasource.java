@@ -176,7 +176,7 @@ public class Datasource {
     }
 
     public ResultSet getCriminalsWithOffset(int offset) {
-        String query = "SELECT * FROM criminal LIMIT 16 OFFSET " + String.valueOf(offset);
+        String query = "SELECT * FROM criminal ORDER BY id LIMIT 16 OFFSET " + String.valueOf(offset);
         Connection connection = openConnection();
         if (connection == null) {
             System.out.println("Something went wrong");
