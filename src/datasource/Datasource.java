@@ -290,7 +290,7 @@ public class Datasource {
     }
 
     public ResultSet getTopOwners() {
-        String query = "SELECT firstname,lastname,count FROM owners INNER JOIN (SELECT owner,count(*) FROM vehicles GROUP BY owner) table2 ON table2.owner=id;";
+        String query = "SELECT firstname,lastname,vehicleCount FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) table2 on table2.owner=id where vehicleCount > 1 ORDER BY vehicleCount desc";
         Connection connection = openConnection(); // :(
         try {
             ResultSet result = connection.createStatement().executeQuery(query);

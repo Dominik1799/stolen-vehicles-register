@@ -43,7 +43,7 @@ public class ownerSceneController extends vehicleSceneController{
                 Owner owner = new Owner();
                 owner.setFirstname(rs.getString("firstname"));
                 owner.setLastname(rs.getString("lastname"));
-                owner.setCount(rs.getInt("count"));
+                owner.setCount(rs.getInt("vehicleCount"));
                 this.owners.add(owner);
             }
             tableView.setItems(this.owners);
