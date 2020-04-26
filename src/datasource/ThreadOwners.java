@@ -17,7 +17,7 @@ public class ThreadOwners {
                     Owner owner = new Owner();
                     owner.setFirstname(rs.getString("firstname"));
                     owner.setLastname(rs.getString("lastname"));
-                    owner.setCount(rs.getInt("count"));
+                    owner.setCount(rs.getInt("vehiclecount"));
                     this.owners.add(owner);
                 }
             }
