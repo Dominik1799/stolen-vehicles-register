@@ -1,11 +1,7 @@
 package datasource;
-
-import com.jfoenix.controls.JFXProgressBar;
 import entities.Criminal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;

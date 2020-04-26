@@ -1,4 +1,5 @@
 package controllers;
+
 import com.jfoenix.controls.JFXProgressBar;
 import datasource.ThreadVehicles;
 import entities.Criminal;
@@ -14,8 +15,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
