@@ -111,10 +111,18 @@ public class criminalsSceneController extends userSceneController implements Ini
         this.updateTable();
     }
 
-    public void showDetail(){
+    public void showDetail(ActionEvent event) throws IOException {
         Criminal criminal =  tableView.getSelectionModel().getSelectedItem();
-        Datasource.getInstance().deleteCriminal(criminal);
-        this.updateTable();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/criminalDetailScene.fxml"));
+        Parent root = (Parent) loader.load();
+        criminalDetailController ctrl = loader.getController();
+        ctrl.setCriminal(criminal);
+        ctrl.setDetails();
+        Stage stage = new Stage();
+        stage.setTitle("Detail : " + criminal.getName() + " " + criminal.getSurname());
+        stage.setScene(new Scene(root, 695, 455));
+        stage.show();
     }
 
 }

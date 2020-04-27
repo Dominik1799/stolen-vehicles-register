@@ -34,7 +34,7 @@
                      <contextMenu>
                         <ContextMenu>
                            <items>
-                              <MenuItem fx:id="showDetail" mnemonicParsing="false" text="Detail" />
+                              <MenuItem mnemonicParsing="false" onAction="#showDetail" text="Detail" />
                               <MenuItem mnemonicParsing="false" onAction="#dropRecord" text="Drop the record" />
                            </items>
                         </ContextMenu>
