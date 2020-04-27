@@ -111,4 +111,10 @@ public class criminalsSceneController extends userSceneController implements Ini
         this.updateTable();
     }
 
+    public void showDetail(){
+        Criminal criminal =  tableView.getSelectionModel().getSelectedItem();
+        Datasource.getInstance().deleteCriminal(criminal);
+        this.updateTable();
+    }
+
 }

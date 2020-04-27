@@ -132,6 +132,20 @@ public class userSceneController implements Initializable {
         window.show();
     }
 
+    public void onCasesClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/casesScene.fxml"));
+        Parent root = (Parent) loader.load();
+        casesSceneController ctrl = loader.getController();
+        ctrl.setUser(user);
+        ctrl.showName();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
+        window.show();
+    }
+
+
     public void onActionSettings(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/settingsScene.fxml"));

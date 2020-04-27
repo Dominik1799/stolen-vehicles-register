@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.userSceneController">
+<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.userSceneController">
    <children>
       <StackPane prefHeight="647.0" prefWidth="1067.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -50,12 +54,17 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton  fx:id="onClickLogOut" defaultButton="true" layoutY="575.0" onAction="#onLogOutClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="onClickCriminals1" layoutY="213.0" onAction="#onCasesClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Cases" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <Text fx:id="fullname" fill="WHITE" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super meno ">
+            <JFXButton fx:id="onClickLogOut" defaultButton="true" layoutY="575.0" onAction="#onLogOutClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text fx:id="fullname" fill="WHITE" layoutX="45.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super meno ">
                <font>
                   <Font size="15.0" />
                </font>
