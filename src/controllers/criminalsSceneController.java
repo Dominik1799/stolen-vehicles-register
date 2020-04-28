@@ -17,10 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -48,6 +45,7 @@ public class criminalsSceneController extends userSceneController implements Ini
     @FXML private TableColumn<Criminal, String> group;
     @FXML private TableColumn<Criminal, String> age;
     @FXML private TableColumn<Criminal, String> groupAmount;
+
 
     @FXML
     JFXProgressBar progressBar;
