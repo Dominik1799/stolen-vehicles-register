@@ -16,6 +16,9 @@ public class Case {
     @Column(name = "criminalgroup")
     private int criminalGroup;
 
+    private String description;
+    private int status;
+
 
     public int getCriminalGroup() {
         return criminalGroup;

@@ -10,28 +10,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.logging.Level;
 
 
-public class CasesDatasource {
-    private static CasesDatasource instance = null;
-    private static SessionFactory factory;
-
-
-    public static CasesDatasource getInstance() {
-        if (instance == null)
-            instance = new CasesDatasource();
-        return instance;
-    }
-
-    public CasesDatasource() {
-    }
-
-    public void createConnection() {
-        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF); //disable logs
-        try {
-            this.factory = (SessionFactory) new Configuration().configure().addAnnotatedClass(Case.class).buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create sessionFactory object." + ex);
-        }
-    }
+public class CasesDatasource extends ManageDatasource{
 
     public Case getCases() {
         this.createConnection();

@@ -1,4 +1,4 @@
 package ORM;
 
-public class TeamsDatasource {
+public class TeamsDatasource  extends ManageDatasource {
 }
