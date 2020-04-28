@@ -47,6 +47,7 @@ public class criminalsSceneController extends userSceneController implements Ini
     JFXProgressBar progressBar;
     int offset;
     int step = 16;
+    String[] conditions;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

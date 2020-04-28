@@ -8,12 +8,14 @@ import java.time.LocalDate;
 
 public class ThreadCriminals {
     private int offset = 0;
+    private String[] args;
     ObservableList<Criminal> criminals = FXCollections.observableArrayList();
-    public ThreadCriminals(int offset){
+    public ThreadCriminals(int offset,String ... args){
         this.offset = offset;
+        this.args = args;
     }
     public void parseCriminals(){
-        ResultSet rs = Datasource.getInstance().getCriminalsWithOffset(this.offset);
+        ResultSet rs = Datasource.getInstance().getCriminalsWithOffset(this.offset,this.args);
         try {
             while (rs.next()){
                 String id = rs.getString("id");
