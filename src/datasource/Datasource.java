@@ -176,8 +176,8 @@ public class Datasource {
         return null;
     }
 
-    public ResultSet getCriminalsWithOffset(int offset) {
-        String query = "SELECT * FROM criminal ORDER BY id LIMIT 16 OFFSET " + String.valueOf(offset);
+    public ResultSet getCriminalsWithOffset(int offset,String ... args) {
+        String query = buildQueryForCrimminals(args) + " ORDER BY id LIMIT 16 OFFSET " + String.valueOf(offset);
         Connection connection = openConnection();
         if (connection == null) {
             System.out.println("Something went wrong");
@@ -196,8 +196,31 @@ public class Datasource {
         return null;
     }
 
-    public String translateSex(int id) {
+    private String buildQueryForCrimminals(String ... args){
+        String[] conditions = {" WHERE firstname='?'"," WHERE lastname='?'"," WHERE nationality='?'"," WHERE sex=?"," WHERE criminalgroup=?"};
+        boolean isAlreadyConditioned = false;
+        StringBuilder finalQuery = new StringBuilder("SELECT * FROM criminal");
+        if (args.length == 0){
+            return finalQuery.toString();
+        }
+        for (int i = 0; i<args.length;i++){
+            if (args[i].equals(""))
+                continue;
+            if (isAlreadyConditioned){
+                finalQuery.append(" AND");
+                conditions[i] = conditions[i].replace(" WHERE","");
+            }
+            isAlreadyConditioned = true;
+            finalQuery.append(conditions[i].replace("?",args[i]));
+        }
+        return finalQuery.toString();
+    }
+
+
+    public String translateSex(int id,String sex) {
         String query = "SELECT sex FROM sex WHERE id=" + id;
+        if (!sex.equals(""))
+            query = "SELECT id FROM sex WHERE sex='?'".replace("?",sex);
         Connection connection = openConnection();
         if (connection == null) {
             System.out.println("Something went wrong");
@@ -209,8 +232,10 @@ public class Datasource {
             closeConnection(connection);
             String result = "";
             while (rs.next())
-                result = rs.getString("sex");
-            return result;
+                if (!sex.equals(""))
+                    return String.valueOf(rs.getInt("id"));
+                else
+                    return rs.getString("sex");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -301,6 +326,7 @@ public class Datasource {
             return null;
         }
     }
+
 
 
 

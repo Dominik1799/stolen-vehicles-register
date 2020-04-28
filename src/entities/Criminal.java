@@ -6,7 +6,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class Criminal {
-    private String id, name, surname, sex, nationality, description, groupAmount;
+    private String id, name, surname, sex, nationality, description, groupAmount,birthday;
     private int caseid;
     private String group;
     private int age,groupID;
@@ -45,6 +45,7 @@ public class Criminal {
         this.description = description;
         this.caseid = caseid;
         this.group = group;
+        this.birthday = birthdate.toString();
         LocalDate today = LocalDate.now();
         Period p = Period.between(birthdate,today);
         this.age = p.getYears();
@@ -55,6 +56,14 @@ public class Criminal {
         else{
             this.groupAmount = groupAmount;
         }
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public int getAge() {
