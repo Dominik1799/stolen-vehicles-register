@@ -1,9 +1,17 @@
 package controllers;
 
+import com.jfoenix.controls.JFXProgressBar;
+import datasource.Datasource;
+import datasource.ThreadCriminals;
 import entities.Criminal;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -12,17 +20,32 @@ import java.util.ResourceBundle;
 public class criminalDetailController implements Initializable {
     private Criminal criminal;
     @FXML
-    private Text name,sex,dateofbirth,nationality,description,age,group;
+    private Text name, sexText,dateofbirth,nationality,description,age,group;
     @FXML
     private Tab associates;
+    @FXML private TableView<Criminal> tablePartners;
+    @FXML private TableColumn<Criminal, String> fname;
+    @FXML private TableColumn<Criminal, String> lname;
+    @FXML private TableColumn<Criminal, String> sex;
+    @FXML private TableColumn<Criminal, String> caseid;
+    @FXML
+    JFXProgressBar progressBar;
+    @FXML
+    private Button next,back;
+    int offset;
+    int step = 16;
+    String[] filter;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        fname.setCellValueFactory(new PropertyValueFactory<Criminal, String>("name"));
+        lname.setCellValueFactory(new PropertyValueFactory<Criminal, String>("surname"));
+        sex.setCellValueFactory(new PropertyValueFactory<Criminal, String>("sex"));
+        caseid.setCellValueFactory(new PropertyValueFactory<Criminal, String>("caseid"));
     }
 
     public void setDetails(){
         this.name.setText(criminal.getName() + " " + criminal.getSurname());
-        this.sex.setText(criminal.getSex());
+        this.sexText.setText(criminal.getSex());
         this.dateofbirth.setText(criminal.getBirthday());
         this.age.setText(String.valueOf(criminal.getAge()));
         this.description.setText(criminal.getDescription());
@@ -38,14 +61,51 @@ public class criminalDetailController implements Initializable {
 
     }
 
+    public void setUpTable(ThreadCriminals threadCriminals){
+        Thread t = new Thread(threadCriminals::parseCriminals);
+        t.start();
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressBar.setVisible(true);
+            }
+            progressBar.setVisible(false);
+            if (!(threadCriminals.getCriminals().size() <= 1))
+                tablePartners.setItems(threadCriminals.getCriminals());
+            if (threadCriminals.getCriminals().size() < this.step)
+                this.next.setDisable(true);
+        });
+        watcher.start();
+    }
+
     public void setCriminal(Criminal criminal) {
         this.criminal = criminal;
 
     }
 
-    private void setAssociates(){
+    public void setAssociates(){
+        this.offset = 0;
+        this.filter = new String[]{"","","","", String.valueOf(this.criminal.getGroupID())};
+        next.setDisable(false);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
+        setUpTable(threadCriminals);
+
 
     }
+    public void onNextClick(ActionEvent event){
+        back.setDisable(false);
+        this.offset = this.offset + step;
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
+        setUpTable(threadCriminals);
+    }
+    public void onBackClick(ActionEvent event){
+        this.offset = this.offset - step;
+        if (this.offset == 0)
+            back.setDisable(true);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
+        setUpTable(threadCriminals);
+    }
+
+
 
 
 }

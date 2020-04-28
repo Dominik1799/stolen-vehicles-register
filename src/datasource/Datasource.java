@@ -197,7 +197,7 @@ public class Datasource {
     }
 
     private String buildQueryForCrimminals(String ... args){
-        String[] conditions = {" WHERE firstname='?'"," WHERE lastname='?'"," WHERE nationality='?'"," WHERE sex=?"," WHERE criminal group=?"};
+        String[] conditions = {" WHERE firstname='?'"," WHERE lastname='?'"," WHERE nationality='?'"," WHERE sex=?"," WHERE criminalgroup=?"};
         boolean isAlreadyConditioned = false;
         StringBuilder finalQuery = new StringBuilder("SELECT * FROM criminal");
         if (args.length == 0){
