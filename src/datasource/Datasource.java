@@ -217,8 +217,10 @@ public class Datasource {
     }
 
 
-    public String translateSex(int id) {
+    public String translateSex(int id,String sex) {
         String query = "SELECT sex FROM sex WHERE id=" + id;
+        if (!sex.equals(""))
+            query = "SELECT id FROM sex WHERE sex='?'".replace("?",sex);
         Connection connection = openConnection();
         if (connection == null) {
             System.out.println("Something went wrong");
@@ -230,8 +232,10 @@ public class Datasource {
             closeConnection(connection);
             String result = "";
             while (rs.next())
-                result = rs.getString("sex");
-            return result;
+                if (!sex.equals(""))
+                    return String.valueOf(rs.getInt("id"));
+                else
+                    return rs.getString("sex");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

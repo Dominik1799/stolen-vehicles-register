@@ -23,7 +23,7 @@ public class ThreadCriminals {
                 String lname = rs.getString("lastname");
                 String description = rs.getString("description");
                 String nationality = rs.getString("nationality");
-                String sex = Datasource.getInstance().translateSex(rs.getInt("sex"));
+                String sex = Datasource.getInstance().translateSex(rs.getInt("sex"),"");
                 LocalDate birthday = rs.getDate("birthdate").toLocalDate();
                 int caseid = rs.getInt("case");
                 int groupId = rs.getInt("criminalgroup");

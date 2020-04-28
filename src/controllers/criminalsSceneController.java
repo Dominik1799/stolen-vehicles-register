@@ -8,6 +8,8 @@ import datasource.Datasource;
 import datasource.ThreadCriminals;
 import entities.Criminal;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +17,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +30,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class criminalsSceneController extends userSceneController implements Initializable {
@@ -45,9 +51,14 @@ public class criminalsSceneController extends userSceneController implements Ini
 
     @FXML
     JFXProgressBar progressBar;
+    @FXML
+    TextField fnameFilter,lnameFilter,nationalityFilter;
+    @FXML
+    ComboBox<String> sexFilter;
+    ObservableList<String> sexes = FXCollections.observableArrayList();
     int offset;
     int step = 16;
-    String[] conditions;
+    String filter[];
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,6 +72,14 @@ public class criminalsSceneController extends userSceneController implements Ini
         age.setCellValueFactory(new PropertyValueFactory<Criminal, String>("age"));
         groupAmount.setCellValueFactory(new PropertyValueFactory<Criminal, String>("groupAmount"));
         progressBar.setVisible(false);
+        ResultSet sexes = Datasource.getInstance().selectAllFrom("sex");
+        try {
+            while (sexes.next())
+                this.sexes.add(sexes.getString("sex"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        this.sexFilter.setItems(this.sexes);
         this.offset = 0;
     }
 
@@ -79,8 +98,14 @@ public class criminalsSceneController extends userSceneController implements Ini
 
     public void onListAllClick(ActionEvent actionEvent) throws InterruptedException {
         this.offset = 0;
+        String tempSex = sexFilter.getValue();
+        if (tempSex==null)
+            tempSex="";
+        else
+            tempSex = Datasource.getInstance().translateSex(0,tempSex);
+        this.filter = new String[]{fnameFilter.getText(),lnameFilter.getText(),nationalityFilter.getText(),tempSex};
         next.setDisable(false);
-        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
         setUpTable(threadCriminals);
 
 
@@ -88,14 +113,14 @@ public class criminalsSceneController extends userSceneController implements Ini
     public void onNextClick(ActionEvent event){
         back.setDisable(false);
         this.offset = this.offset + step;
-        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
         setUpTable(threadCriminals);
     }
     public void onBackClick(ActionEvent event){
         this.offset = this.offset - step;
         if (this.offset == 0)
             back.setDisable(true);
-        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset);
+        ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
         setUpTable(threadCriminals);
     }
 
