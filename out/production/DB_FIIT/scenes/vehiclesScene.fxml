@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.vehicleSceneController">
+   <children>
+      <StackPane prefHeight="647.0" prefWidth="1067.0">
+         <children>
+            <AnchorPane fx:id="background" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TableView fx:id="tableView" layoutX="82.0" layoutY="155.0" prefHeight="430.0" prefWidth="903.0">
+                     <columns>
+                        <TableColumn fx:id="id" prefWidth="120.0" text="ID" />
+                        <TableColumn fx:id="count" prefWidth="120.0" text="Stolen" />
+                        <TableColumn fx:id="modelYear" prefWidth="75.0" text="Model Year" />
+                        <TableColumn fx:id="brand" minWidth="0.0" prefWidth="103.0" text="Brand" />
+                        <TableColumn fx:id="model" minWidth="0.0" prefWidth="150.0" text="Model" />
+                        <TableColumn fx:id="vin" minWidth="0.0" prefWidth="98.0" text="VIN" />
+                     </columns>
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Show details" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+                  <JFXButton fx:id="vehicle" layoutX="806.0" layoutY="98.0" mnemonicParsing="false" onAction="#onVehiclesClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Top vehicles" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <effect>
+                        <Shadow />
+                     </effect>
+                  </JFXButton>
+                  <JFXButton fx:id="owners" layoutX="920.0" layoutY="98.0" mnemonicParsing="false" onAction="#onOwnersClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Top owners" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <effect>
+                        <Shadow />
+                     </effect>
+                  </JFXButton>
+                  <JFXProgressBar fx:id="progressBar" layoutX="434.0" layoutY="598.0" prefWidth="197.0" />
+                  <Label layoutX="80.0" layoutY="33.0" text="Top most stoled vehicles" />
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="navList" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" translateX="-174.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="onClickHome" layoutY="49.0" onAction="#onHomeClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Home" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="onClickTeams" layoutY="90.0" onAction="#onTeamClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Teams" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="onClickVehicles" layoutY="131.0" onAction="#onVehicleClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #001479; -jfx-disable-visual-focus: true;" text="Vehicles" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="onClickCriminals" layoutY="172.0" onAction="#onCriminalsClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Criminals" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="onClickCriminals1" layoutY="213.0" onAction="#onCasesClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1; -jfx-disable-visual-focus: true;" text="Cases" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="onClickLogOut" defaultButton="true" layoutY="575.0" onAction="#onLogOutClick" prefHeight="41.0" prefWidth="174.0" style="-fx-background-color: #4C5AA1;" text="Logout" textFill="WHITE" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text fx:id="fullname" fill="WHITE" layoutX="45.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Super meno ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
