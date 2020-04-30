@@ -9,10 +9,18 @@
   <session-factory>
 
 
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <property name="connection.url">jdbc:postgresql://postgresql.websupport.sk:5432/DB_FIIT</property>
+    <property name="connection.username">DB_FIIT</property>
+    <property name="connection.password">Welcome1</property>
 
-<property name="connection.url">jdbc:postgresql://postgresql.websupport.sk:5432/DB_FIIT</property>
-<property name="connection.username">DB_FIIT</property>
-<property name="connection.password">Welcome1</property>
+
+
+    <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+
+    <mapping class="entities.Case" />
+    <mapping class="entities.User" />
+
 
 
         <!-- DB schema will be updated if needed -->
