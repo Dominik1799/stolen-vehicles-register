@@ -34,11 +34,5 @@ public class Team {
         this.memberamount = memberamount;
     }
 
-    public int getLeader() {
-        return leader;
-    }
 
-    public void setLeader(int leader) {
-        this.leader = leader;
-    }
 }
