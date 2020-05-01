@@ -7,10 +7,10 @@ This application will allow working on a vehicle theft criminal cases.
 
 ## Database diagram
 ### Logical model
-<img src="diagrams/logical.png" width="550">
+<img src="diagrams/logical.PNG" width="550">
 
 ### Physical
-<img src="diagrams/physical_model.png" width="800">
+<img src="diagrams/physical.PNG" width="800">
 
 ## Tables explained
 **USER** - Holds all of the information about users of this application.
