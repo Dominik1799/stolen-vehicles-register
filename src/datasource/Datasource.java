@@ -275,7 +275,7 @@ public class Datasource {
     public void addUserToTeam(User user, Team team){
         String updateTeam = "UPDATE team SET memberamount=memberamount+1 WHERE id=?";
         String updateRelation = "UPDATE team_changes SET status=3 WHERE userid=? AND teamid=?";
-        String associateUserAndTeam = "INSERT INTO team_changes(userid,teamid,status) VALUES (?,?,?)";
+        String associateUserAndTeam = "INSERT INTO team_changes(id,userid,teamid,status) VALUES (nextval('team_changes_sequence'),?,?,?)";
         Connection connection = openConnection();
         if (connection == null)
             return;

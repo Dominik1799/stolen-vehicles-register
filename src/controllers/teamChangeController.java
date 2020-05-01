@@ -81,15 +81,11 @@ public class teamChangeController implements Initializable {
     private void addUserToTeam(ThreadTeams threadTeams){
         Thread t = new Thread(threadTeams::addUserToTeam);
         t.start();
-        Thread watcher = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (t.isAlive()){
-                    progressbar.setVisible(true);
-                }
-                progressbar.setVisible(false);
-                Dialog.getInstance().infoDialog("You have been added to this team.");
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressbar.setVisible(true);
             }
+            progressbar.setVisible(false);
         });
         watcher.start();
     }
