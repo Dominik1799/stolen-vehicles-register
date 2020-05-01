@@ -1,9 +1,9 @@
 package ORM;
 
 import entities.Team;
-import entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 
@@ -30,9 +30,6 @@ public class TeamsDatasource  extends ManageDatasource {
         tx.commit();
         session.close();
         return team;
-    }
-
-    private TeamsDatasource() {
     }
 
 }
