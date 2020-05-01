@@ -1,10 +1,11 @@
 package entities;
 
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.FilterJoinTable;
-import org.hibernate.annotations.Where;
+import javafx.collections.ObservableList;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collection;
 
 @Entity
@@ -30,8 +31,9 @@ public class Team {
             name = "validMember",
             condition = "status=1"
     )
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<User> members;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "case_history",
             joinColumns = {@JoinColumn(name = "teamid")},

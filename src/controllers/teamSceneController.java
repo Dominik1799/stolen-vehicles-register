@@ -3,6 +3,8 @@ package controllers;
 import ORM.TeamsDatasource;
 import datasource.ThreadVehicles;
 import entities.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -24,6 +26,7 @@ public class teamSceneController extends userSceneController {
     @FXML private TableColumn<User,String> lastName;
     @FXML private TableColumn<Case, Integer> caseid;
     @FXML private TableColumn<Case, Integer> status;
+    @FXML private TableColumn<Case, Integer> severity;
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -32,13 +35,16 @@ public class teamSceneController extends userSceneController {
         lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
         caseid.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
         status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("status"));
-        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
+        severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
     }
 
     public void prepareTables(String teamID){
         if (teamID.equals("Not a member of any team"))
             return;
-        else
-            this.team = TeamsDatasource.getInstance().getCurrentUserTeam(Integer.parseInt(teamID));
+        this.team = TeamsDatasource.getInstance().getCurrentUserTeam(Integer.parseInt(teamID));
+        ObservableList<User> members = FXCollections.observableArrayList(this.team.getMembers());
+        ObservableList<Case> activeCases = FXCollections.observableArrayList(this.team.getActiveCases());
+        this.membersTable.setItems(members);
+        this.casesTable.setItems(activeCases);
     }
 }

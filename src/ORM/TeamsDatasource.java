@@ -28,7 +28,6 @@ public class TeamsDatasource  extends ManageDatasource {
         session.enableFilter("validMember");
         session.enableFilter("activeCase");
         Team team = session.get(Team.class,currentUserTeamId);
-//        team.getMembers();
         tx.commit();
         session.close();
         return team;
