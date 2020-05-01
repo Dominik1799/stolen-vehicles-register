@@ -15,6 +15,8 @@ public class ThreadTeams {
     int teamID;
     public int pageNum;
     Team team;
+    public Team teamToUser;
+    public User userToTeam;
     public String[] args;
     ObservableList<User> members = FXCollections.observableArrayList();
     ObservableList<Case> activeCases = FXCollections.observableArrayList();
@@ -30,6 +32,10 @@ public class ThreadTeams {
 
     public Team getTeam() {
         return team;
+    }
+
+    public void addUserToTeam(){
+        Datasource.getInstance().addUserToTeam(this.userToTeam,this.teamToUser);
     }
 
 

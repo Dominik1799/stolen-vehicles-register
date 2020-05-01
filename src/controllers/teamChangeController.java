@@ -6,11 +6,9 @@ import entities.Team;
 import entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import utilities.Dialog;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,6 +71,27 @@ public class teamChangeController implements Initializable {
 
     public void onJoinClick(){
         Team team = tableview.getSelectionModel().getSelectedItem();
+        ThreadTeams threadTeams = new ThreadTeams();
+        threadTeams.teamToUser = team;
+        threadTeams.userToTeam = user;
+        addUserToTeam(threadTeams);
+
+    }
+
+    private void addUserToTeam(ThreadTeams threadTeams){
+        Thread t = new Thread(threadTeams::addUserToTeam);
+        t.start();
+        Thread watcher = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (t.isAlive()){
+                    progressbar.setVisible(true);
+                }
+                progressbar.setVisible(false);
+                Dialog.getInstance().infoDialog("You have been added to this team.");
+            }
+        });
+        watcher.start();
     }
 
     public void onNextClick(){
