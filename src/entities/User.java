@@ -1,13 +1,21 @@
 package entities;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "users")
 public class User {
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
+    @Transient
     private String sex;
+    @Transient
     private String rank;
+    @Transient
     private String team;
+    @Id
     private int id;
     private Date birthdate;
 

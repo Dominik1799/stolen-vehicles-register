@@ -5,7 +5,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="DB_FIIT" />
+          <factory-entry name="DB_FIIT" value="3850d638-e6d9-4e3b-9e59-2e624c33e6f8" />
           <factory-entry name="Entities" />
         </datasource-mapping>
         <naming-strategy-map />
