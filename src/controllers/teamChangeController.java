@@ -4,10 +4,12 @@ import com.jfoenix.controls.JFXProgressBar;
 import datasource.ThreadTeams;
 import entities.Team;
 import entities.User;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import utilities.Dialog;
 
 import java.net.URL;
@@ -18,6 +20,7 @@ public class teamChangeController implements Initializable {
     User user;
     int pageNum = 0;
     String[] filter;
+    teamSceneController teamSceneController;
 
     @FXML
     private TableView<Team> tableview;
@@ -43,6 +46,10 @@ public class teamChangeController implements Initializable {
         members.setCellValueFactory(new PropertyValueFactory<Team, Integer>("memberamount"));
         activecases.setCellValueFactory(new PropertyValueFactory<Team, Integer>("activeCasesCount"));
 
+    }
+
+    public void setTeamSceneController(controllers.teamSceneController teamSceneController) {
+        this.teamSceneController = teamSceneController;
     }
 
     public void setUser(User user){
@@ -86,6 +93,10 @@ public class teamChangeController implements Initializable {
                 progressbar.setVisible(true);
             }
             progressbar.setVisible(false);
+            Stage stage = (Stage) joinButton.getScene().getWindow();
+            this.teamSceneController.user.setTeam(String.valueOf(threadTeams.teamToUser.getId()));
+            this.teamSceneController.prepareTables(String.valueOf(threadTeams.teamToUser.getId()));
+            Platform.runLater(stage::close);
         });
         watcher.start();
     }
