@@ -32,7 +32,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="42.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colleagues:">
+                  <Text fx:id="colleagues" layoutX="42.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colleagues:">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -60,7 +60,7 @@
                         <TableColumn fx:id="severity" prefWidth="82.0" text="Severity" />
                     </columns>
                   </TableView>
-                  <Text layoutX="401.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on:">
+                  <Text fx:id="workingon" layoutX="401.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on:">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -72,7 +72,8 @@
                      </font>
                   </Text>
                   <Text fx:id="description" layoutX="713.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="324.13671875" />
-                  <JFXButton layoutX="101.0" layoutY="157.0" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #01579b;" text="Leave team" textFill="WHITE" />
+                  <JFXButton fx:id="leave" layoutX="101.0" layoutY="157.0" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #01579b;" text="Leave team" textFill="WHITE" />
+                  <JFXButton fx:id="join" layoutX="195.0" layoutY="157.0" onAction="#onJoinTeamClick" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #01579b;" text="Join team" textFill="WHITE" />
                     </children>
                 </AnchorPane>
             </children>

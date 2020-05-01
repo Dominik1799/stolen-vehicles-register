@@ -9,12 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 public class ThreadTeams {
     int teamID;
+    public int pageNum;
     Team team;
     ObservableList<User> members = FXCollections.observableArrayList();
     ObservableList<Case> activeCases = FXCollections.observableArrayList();
+
+    ObservableList<Team> teams = FXCollections.observableArrayList();
+
+
     public void getTeamData(){
         this.team = TeamsDatasource.getInstance().getCurrentUserTeam(this.teamID);
         this.members = FXCollections.observableArrayList(team.getMembers());
@@ -23,6 +29,16 @@ public class ThreadTeams {
 
     public Team getTeam() {
         return team;
+    }
+
+
+    public void getOnePageOfTeams(){
+        List<Team> teams = TeamsDatasource.getInstance().getAllTeams(pageNum);
+        this.teams = FXCollections.observableArrayList(teams);
+    }
+
+    public ObservableList<Team> getTeams() {
+        return teams;
     }
 
     public void setTeamID(String teamID){

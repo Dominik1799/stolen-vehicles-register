@@ -4,6 +4,8 @@ import entities.Team;
 import entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 import java.util.List;
 
 
@@ -20,7 +22,6 @@ public class TeamsDatasource  extends ManageDatasource {
     }
 
     public Team getCurrentUserTeam(int currentUserTeamId){
-        List results;
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = null;
@@ -31,6 +32,20 @@ public class TeamsDatasource  extends ManageDatasource {
         tx.commit();
         session.close();
         return team;
+    }
+
+    public List<Team> getAllTeams(int pageNum){
+        this.createConnection();
+        Session session = factory.openSession();
+        Transaction tx = null;
+        tx = session.beginTransaction();
+        Query query = session.createQuery("from Team where ca.size<5");
+        query.setFirstResult(pageNum);
+        query.setMaxResults(16);
+        List<Team> teams = (List<Team>) query.list();
+        tx.commit();
+        session.close();
+        return teams;
     }
 
 

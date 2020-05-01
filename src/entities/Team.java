@@ -86,5 +86,15 @@ public class Team {
         this.memberamount = memberamount;
     }
 
+    public String getLeaderName(){
+        return this.leader.getFirstName();
+    }
+
+    public String getLeaderSurname(){
+        return this.leader.getLastName();
+    }
+    public int getActiveCasesCount(){
+        return this.activeCases.size();
+    }
 
 }
