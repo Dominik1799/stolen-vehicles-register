@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -46,12 +47,25 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <TableView layoutX="42.0" layoutY="247.0" prefHeight="283.0" prefWidth="233.0">
+                  <TableView fx:id="membersTable" layoutX="42.0" layoutY="247.0" prefHeight="283.0" prefWidth="233.0">
                     <columns>
-                      <TableColumn prefWidth="117.0" text="Name" />
-                      <TableColumn prefWidth="115.0" text="Surname" />
+                      <TableColumn fx:id="firstName" prefWidth="117.0" text="Name" />
+                      <TableColumn fx:id="lastName" prefWidth="115.0" text="Surname" />
                     </columns>
                   </TableView>
+                  <TableView fx:id="casesTable" layoutX="401.0" layoutY="247.0" prefHeight="283.0" prefWidth="233.0">
+                    <columns>
+                      <TableColumn fx:id="caseid" prefWidth="75.0" text="Case ID" />
+                      <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="severity" prefWidth="82.0" text="Severity" />
+                    </columns>
+                  </TableView>
+                  <Text layoutX="401.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <JFXProgressBar fx:id="progressbar" layoutX="385.0" layoutY="585.0" prefHeight="0.0" prefWidth="297.0" visible="false" />
                     </children>
                 </AnchorPane>
             </children>
