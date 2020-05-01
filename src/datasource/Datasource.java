@@ -96,7 +96,7 @@ public class Datasource {
 
     public void updateUser(User user) {
 
-        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getId());
+        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), String.valueOf(user.getId()));
         Connection connection = openConnection();
         try {
             assert connection != null;
@@ -160,7 +160,7 @@ public class Datasource {
             result.next();
 
 
-            user.setId(result.getString("id"));
+            user.setId(result.getInt("id"));
             user.setFirstName(result.getString("firstName"));
             user.setLastName(result.getString("lastName"));
             user.setSex(this.getSex(connection, result.getString("sex")));

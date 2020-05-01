@@ -56,6 +56,7 @@ public class criminalsSceneController extends userSceneController implements Ini
     ObservableList<String> sexes = FXCollections.observableArrayList();
     int offset;
     int step = 16;
+    int pokus = 0;
     String filter[];
 
     @Override
@@ -105,6 +106,8 @@ public class criminalsSceneController extends userSceneController implements Ini
         next.setDisable(false);
         ThreadCriminals threadCriminals = new ThreadCriminals(this.offset,this.filter);
         setUpTable(threadCriminals);
+        if (this.pokus > 0)
+            System.out.println(pokus);
 
 
     }
@@ -143,6 +146,7 @@ public class criminalsSceneController extends userSceneController implements Ini
         criminalDetailController ctrl = loader.getController();
         ctrl.setCriminal(criminal);
         ctrl.setDetails();
+        ctrl.setASIdb(this);
         Stage stage = new Stage();
         stage.setTitle("Detail : " + criminal.getName() + " " + criminal.getSurname());
         stage.setScene(new Scene(root, 695, 455));
