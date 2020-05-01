@@ -20,12 +20,18 @@ public class ownerSceneController extends vehicleSceneController{
 
     public void initialize(URL url, ResourceBundle rb) {
         prepareSlideMenuAnimation();
-
-
         firstname.setCellValueFactory(new PropertyValueFactory<Owner, String>("firstname"));
         lastname.setCellValueFactory(new PropertyValueFactory<Owner, String>("lastname"));
         count.setCellValueFactory(new PropertyValueFactory<Owner, Integer>("count"));
-        this.setUpTable(new ThreadOwners());
+        progressBar.setVisible(false);
+    }
+
+    public void listTables() {
+        String tempName = "", tempAmount = "16";
+        if(!this.nameFilter.getText().isEmpty()) tempName = this.nameFilter.getText();
+        if (!this.amountFilter.getText().isEmpty()) tempAmount = this.amountFilter.getText();
+        System.out.println(tempAmount + tempName);
+        this.setUpTable(new ThreadOwners(tempName, tempAmount));
     }
 
     public void setUpTable(ThreadOwners threadOwners){
@@ -40,7 +46,5 @@ public class ownerSceneController extends vehicleSceneController{
         });
         watcher.start();
     }
-
-
 
 }

@@ -1,16 +1,23 @@
 package datasource;
 import entities.Owner;
-import entities.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ThreadOwners {
     ObservableList<Owner> owners = FXCollections.observableArrayList();
+    String name;
+    String amount;
+
+    public ThreadOwners(String name, String amount) {
+        this.name = name;
+        this.amount = amount;
+    }
 
     public void parseVehicles() {
-        ResultSet rs = Datasource.getInstance().getTopOwners();
+        ResultSet rs = Datasource.getInstance().getTopOwners(this.name, this.amount);
         try {
             while (rs.next()){
                 while (rs.next()){

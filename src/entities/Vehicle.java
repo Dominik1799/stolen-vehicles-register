@@ -2,17 +2,26 @@ package entities;
 
 public class Vehicle {
     private int id,count, modelYear;
-    private String brand, model, vin;
+    private String brand, model, vin, ownerName;
     //private Owner owner; TODO add owner as an extra info of vehicle
 
 
-    public Vehicle(int id, int count, int modelYear, String brand, String model, String vin) {
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public Vehicle(int id, int count, int modelYear, String brand, String model, String vin, String ownerName) {
         this.id = id;
         this.count = count;
         this.modelYear = modelYear;
         this.brand = brand;
         this.model = model;
         this.vin = vin;
+        this.ownerName = ownerName;
     }
 
     public Vehicle() {
