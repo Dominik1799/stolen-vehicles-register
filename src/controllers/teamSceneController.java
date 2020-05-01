@@ -97,11 +97,11 @@ public class teamSceneController extends userSceneController {
         Parent root = (Parent) loader.load();
         teamChangeController ctrl = loader.getController();
         ctrl.setUser(this.user);
-        ctrl.setupTable();
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 886, 526));
         stage.setTitle("Choose a new team");
         stage.show();
     }
+
 
 }

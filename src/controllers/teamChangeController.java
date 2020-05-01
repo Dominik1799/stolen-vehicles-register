@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -16,7 +17,8 @@ import java.util.ResourceBundle;
 public class teamChangeController implements Initializable {
     private static final int PAGE_SIZE = 16;
     User user;
-    int pageNum = 1;
+    int pageNum = 0;
+    String[] filter;
 
     @FXML
     private TableView<Team> tableview;
@@ -28,6 +30,9 @@ public class teamChangeController implements Initializable {
 
     @FXML
     JFXProgressBar progressbar;
+
+    @FXML
+    TextField membersFrom,membersTo,casesFrom,casesTo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,6 +50,7 @@ public class teamChangeController implements Initializable {
     public void setupTable(){
         ThreadTeams threadTeams = new ThreadTeams();
         threadTeams.pageNum = this.pageNum;
+        threadTeams.args = this.filter;
         fetchData(threadTeams);
     }
 
@@ -71,6 +77,16 @@ public class teamChangeController implements Initializable {
         if (this.pageNum - PAGE_SIZE < 1)
             return;
         this.pageNum = this.pageNum - PAGE_SIZE;
+        setupTable();
+    }
+
+    private void parseFilter(){
+        this.filter = new String[]{membersFrom.getText(),membersTo.getText(),casesFrom.getText(),casesTo.getText()};
+    }
+
+    public void onShowClick(){
+        this.pageNum = 0;
+        parseFilter();
         setupTable();
     }
 }

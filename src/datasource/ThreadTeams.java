@@ -15,6 +15,7 @@ public class ThreadTeams {
     int teamID;
     public int pageNum;
     Team team;
+    public String[] args;
     ObservableList<User> members = FXCollections.observableArrayList();
     ObservableList<Case> activeCases = FXCollections.observableArrayList();
 
@@ -33,7 +34,7 @@ public class ThreadTeams {
 
 
     public void getOnePageOfTeams(){
-        List<Team> teams = TeamsDatasource.getInstance().getAllTeams(pageNum);
+        List<Team> teams = TeamsDatasource.getInstance().getAllTeams(pageNum,args);
         this.teams = FXCollections.observableArrayList(teams);
     }
 
