@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="526.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teamChangeController">
    <children>
-      <TableView fx:id="tableview" layoutX="265.0" layoutY="75.0" prefHeight="377.0" prefWidth="512.0">
+      <TableView fx:id="tableview" layoutX="265.0" layoutY="75.0" onMouseClicked="#enableButton" prefHeight="377.0" prefWidth="512.0">
         <columns>
           <TableColumn fx:id="teamid" prefWidth="107.0" text="Team ID" />
           <TableColumn fx:id="leadername" prefWidth="118.0" text="Leader name" />
@@ -46,5 +46,10 @@
       </Text>
       <Text layoutX="84.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active cases" />
       <JFXButton layoutX="91.0" layoutY="294.0" onAction="#onShowClick" prefHeight="31.0" prefWidth="51.0" style="-fx-background-color: #01579b;" text="Show" textFill="WHITE" />
+      <JFXButton fx:id="joinButton" disable="true" layoutX="76.0" layoutY="404.0" onAction="#onJoinClick" prefHeight="48.0" prefWidth="89.0" style="-fx-background-color: #01579b;" text="Join team" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

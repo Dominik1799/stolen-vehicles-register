@@ -1,6 +1,7 @@
 package datasource;
 
 import entities.Criminal;
+import entities.Team;
 import entities.User;
 
 import javax.xml.transform.Result;
@@ -268,6 +269,39 @@ public class Datasource {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void addUserToTeam(User user, Team team){
+        String updateTeam = "UPDATE team SET memberamount=memberamount+1 WHERE id=?";
+        String updateRelation = "UPDATE team_changes SET status=3 WHERE userid=? AND teamid=?";
+        String associateUserAndTeam = "INSERT INTO team_changes(userid,teamid,status) VALUES (?,?,?)";
+        Connection connection = openConnection();
+        if (connection == null)
+            return;
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement updateTeamPS = connection.prepareStatement(updateTeam);
+            PreparedStatement updateRelationPS = connection.prepareStatement(updateRelation);
+            PreparedStatement associateUserAndTeamPS = connection.prepareStatement(associateUserAndTeam);
+
+            updateTeamPS.setInt(1,team.getId());
+            updateTeamPS.executeUpdate();
+
+            updateRelationPS.setInt(1,user.getId());
+            updateRelationPS.setInt(2,team.getId());
+            updateRelationPS.executeUpdate();
+
+            associateUserAndTeamPS.setInt(1,user.getId());
+            associateUserAndTeamPS.setInt(2,team.getId());
+            associateUserAndTeamPS.setInt(3,1);
+            associateUserAndTeamPS.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeConnection(connection);
         }
     }
 

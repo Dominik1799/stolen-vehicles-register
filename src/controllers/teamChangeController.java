@@ -6,6 +6,7 @@ import entities.Team;
 import entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,6 +31,8 @@ public class teamChangeController implements Initializable {
 
     @FXML
     JFXProgressBar progressbar;
+    @FXML
+    Button joinButton;
 
     @FXML
     TextField membersFrom,membersTo,casesFrom,casesTo;
@@ -68,7 +71,12 @@ public class teamChangeController implements Initializable {
 
     }
 
+    public void onJoinClick(){
+        Team team = tableview.getSelectionModel().getSelectedItem();
+    }
+
     public void onNextClick(){
+        joinButton.setDisable(true);
         this.pageNum = this.pageNum + PAGE_SIZE;
         setupTable();
     }
@@ -76,6 +84,7 @@ public class teamChangeController implements Initializable {
     public void onBackClick(){
         if (this.pageNum - PAGE_SIZE < 1)
             return;
+        joinButton.setDisable(true);
         this.pageNum = this.pageNum - PAGE_SIZE;
         setupTable();
     }
@@ -85,8 +94,13 @@ public class teamChangeController implements Initializable {
     }
 
     public void onShowClick(){
+        joinButton.setDisable(true);
         this.pageNum = 0;
         parseFilter();
         setupTable();
+    }
+
+    public void enableButton(){
+        joinButton.setDisable(false);
     }
 }
