@@ -15,8 +15,10 @@ public class User {
     private String rank;
     @Transient
     private String team;
+
     @Id
     private int id;
+    @Column
     private Date birthdate;
 
     public Date getBirthdate() {

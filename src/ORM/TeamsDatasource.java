@@ -1,16 +1,13 @@
 package ORM;
 
+import entities.Team;
+import entities.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-
 import java.util.List;
 
 
 public class TeamsDatasource  extends ManageDatasource {
-    private final String TEAMS_SELECT = "SELECT t.id, u.firstname, u.lastname " +
-                                        "FROM team t INNER JOIN users u ON " +
-                                        "t.leaderid = u.id";
     protected static TeamsDatasource instance = null;
 
     public static TeamsDatasource getInstance() {
@@ -28,8 +25,9 @@ public class TeamsDatasource  extends ManageDatasource {
         Session session = factory.openSession();
         Transaction tx = null;
         tx = session.beginTransaction();
-        Query query = session.createQuery(TEAMS_SELECT);
-        results = query.list();
+        session.enableFilter("validMember");
+        Team team = session.get(Team.class,2);
+        team.getMembers();
         tx.commit();
         session.close();
     }
