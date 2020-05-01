@@ -1,25 +1,21 @@
 package controllers;
 
-import ORM.TeamsDatasource;
-import datasource.ThreadVehicles;
+import com.jfoenix.controls.JFXProgressBar;
+import datasource.ThreadTeams;
 import entities.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
-import javax.jws.soap.SOAPBinding;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class teamSceneController extends userSceneController {
     private Team team;
     @FXML
-    private Text teamID, teamLeader;
+    private Text teamID, teamLeader,description,descriptionPrompt;
     @FXML private TableView<User> membersTable;
     @FXML private TableView<Case> casesTable;
     @FXML private TableColumn<User, String> firstName;
@@ -27,6 +23,8 @@ public class teamSceneController extends userSceneController {
     @FXML private TableColumn<Case, Integer> caseid;
     @FXML private TableColumn<Case, Integer> status;
     @FXML private TableColumn<Case, Integer> severity;
+    @FXML
+    JFXProgressBar progressBarTeams;
 
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -39,12 +37,37 @@ public class teamSceneController extends userSceneController {
     }
 
     public void prepareTables(String teamID){
-        if (teamID.equals("Not a member of any team"))
+        if (teamID.equals("Not a member of any team")){
+            this.teamID.setText("Not a member of any team");
             return;
-        this.team = TeamsDatasource.getInstance().getCurrentUserTeam(Integer.parseInt(teamID));
-        ObservableList<User> members = FXCollections.observableArrayList(this.team.getMembers());
-        ObservableList<Case> activeCases = FXCollections.observableArrayList(this.team.getActiveCases());
-        this.membersTable.setItems(members);
-        this.casesTable.setItems(activeCases);
+        }
+
+        ThreadTeams threadTeams = new ThreadTeams();
+        threadTeams.setTeamID(this.user.getTeam());
+        fetchData(threadTeams);
+        this.teamID.setText(teamID);
+
+    }
+
+    private void fetchData(ThreadTeams threadTeams){
+        Thread t = new Thread(threadTeams::getTeamData);
+        t.start();
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressBarTeams.setVisible(true);
+            }
+            progressBarTeams.setVisible(false);
+            membersTable.setItems(threadTeams.getMembers());
+            casesTable.setItems(threadTeams.getActiveCases());
+            this.team = threadTeams.getTeam();
+            this.teamLeader.setText(this.team.getLeader().getFirstName() + " " + this.team.getLeader().getLastName());
+        });
+        watcher.start();
+    }
+
+    public void onMouseClick(){
+        Case selectedCase = this.casesTable.getSelectionModel().getSelectedItem();
+        this.descriptionPrompt.setVisible(true);
+        this.description.setText(selectedCase.getDescription());
     }
 }
