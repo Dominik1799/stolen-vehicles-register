@@ -15,10 +15,34 @@ public class Case {
 
     @Column(name = "criminalgroup")
     private int criminalGroup;
-
     private String description;
     private int status;
+    private int severity;
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(int severity) {
+        this.severity = severity;
+    }
 
     public int getCriminalGroup() {
         return criminalGroup;

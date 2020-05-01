@@ -19,17 +19,17 @@ public class TeamsDatasource  extends ManageDatasource {
 
     }
 
-    public void getTeams(){
+    public Team getCurrentUserTeam(int currentUserTeamId){
         List results;
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = null;
         tx = session.beginTransaction();
         session.enableFilter("validMember");
-        Team team = session.get(Team.class,2);
-        team.getMembers();
+        Team team = session.get(Team.class,currentUserTeamId);
         tx.commit();
         session.close();
+        return team;
     }
 
 
