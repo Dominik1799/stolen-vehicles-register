@@ -38,6 +38,7 @@ public class criminalDetailController implements Initializable {
     @FXML
     ContextMenu myMenuBar;
 
+    criminalsSceneController criminalsSceneController;
     int offset;
     int step = 16;
     String[] filter;
@@ -86,6 +87,11 @@ public class criminalDetailController implements Initializable {
     public void setCriminal(Criminal criminal) {
         this.criminal = criminal;
 
+    }
+
+    public void setASIdb(criminalsSceneController controller){
+        this.criminalsSceneController = controller;
+        this.criminalsSceneController.pokus = 15;
     }
 
     public void setAssociates(){

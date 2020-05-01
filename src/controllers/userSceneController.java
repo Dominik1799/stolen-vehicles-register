@@ -39,7 +39,7 @@ public class userSceneController implements Initializable {
     }
     public void showInfo() {
         userInfo.setText(String.format("ID: %s\nUser: %s %s\nSex: %s\nRank:%s\nTeam: %s\nBirthday:%s",
-                user.getId(),user.getFirstName(), user.getLastName(), user.getSex(), user.getRank(), user.getTeam(), user.getBirthdate())
+                String.valueOf(user.getId()),user.getFirstName(), user.getLastName(), user.getSex(), user.getRank(), user.getTeam(), user.getBirthdate())
         );
     }
 

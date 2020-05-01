@@ -1,14 +1,24 @@
 package entities;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "users")
 public class User {
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
+    @Transient
     private String sex;
+    @Transient
     private String rank;
+    @Transient
     private String team;
-    private String id;
+
+    @Id
+    private int id;
+    @Column
     private Date birthdate;
 
     public Date getBirthdate() {
@@ -19,11 +29,11 @@ public class User {
         this.birthdate = birthdate;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

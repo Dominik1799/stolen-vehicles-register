@@ -13,7 +13,7 @@ public abstract class ManageDatasource {
     public void createConnection() {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF); //disable logs
         try {
-            this.factory = (SessionFactory) new Configuration().configure().addAnnotatedClass(Case.class).buildSessionFactory();
+            factory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Failed to create sessionFactory object." + ex);
         }

@@ -7,13 +7,9 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="1daa33e6-14e1-417d-bf80-01404caee88c">
+    <data-source source="LOCAL" name="DB_FIIT" uuid="3850d638-e6d9-4e3b-9e59-2e624c33e6f8">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-C:/Users/david/IdeaProjects/project-horvath_drobny/src/hibernate.cfg.xml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://postgresql.websupport.sk:5432/DB_FIIT</jdbc-url>
     </data-source>

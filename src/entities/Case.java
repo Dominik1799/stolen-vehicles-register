@@ -8,17 +8,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name= "cases")
 public class Case {
+
     @Id
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "criminalgroup")
-    private Integer criminalGroup;
-    @Column(name = "description")
+    private int criminalGroup;
     private String description;
-    @Column(name = "status")
-    private Integer status;
-    @Column(name = "severity")
-    private  Integer severity;
+    private int status;
+    private int severity;
+
 
     public String getDescription() {
         return description;
@@ -28,7 +28,7 @@ public class Case {
         this.description = description;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -36,7 +36,7 @@ public class Case {
         this.status = status;
     }
 
-    public Integer getSeverity() {
+    public int getSeverity() {
         return severity;
     }
 
@@ -44,7 +44,7 @@ public class Case {
         this.severity = severity;
     }
 
-    public Integer getCriminalGroup() {
+    public int getCriminalGroup() {
         return criminalGroup;
     }
 
