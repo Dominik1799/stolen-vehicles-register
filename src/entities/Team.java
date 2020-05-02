@@ -1,15 +1,17 @@
 package entities;
 
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.FilterJoinTable;
-import org.hibernate.annotations.Where;
+import javafx.collections.ObservableList;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Collection;
 
 @Entity
 @Table(name= "team")
 @FilterDef(name = "validMember")
+@FilterDef(name = "activeCase")
 public class Team {
     @Id
     @Column(name = "id")
@@ -29,8 +31,28 @@ public class Team {
             name = "validMember",
             condition = "status=1"
     )
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<User> members;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "case_history",
+            joinColumns = {@JoinColumn(name = "teamid")},
+            inverseJoinColumns = {@JoinColumn(name = "caseid")}
+    )
+    @FilterJoinTable(
+            name = "activeCase",
+            condition = "active=true"
+    )
+    private Collection<Case> activeCases;
 
+
+    public Collection<Case> getActiveCases() {
+        return activeCases;
+    }
+
+    public void setActiveCases(Collection<Case> activeCases) {
+        this.activeCases = activeCases;
+    }
 
     public User getLeader() {
         return leader;
@@ -64,5 +86,15 @@ public class Team {
         this.memberamount = memberamount;
     }
 
+    public String getLeaderName(){
+        return this.leader.getFirstName();
+    }
+
+    public String getLeaderSurname(){
+        return this.leader.getLastName();
+    }
+    public int getActiveCasesCount(){
+        return this.activeCases.size();
+    }
 
 }
