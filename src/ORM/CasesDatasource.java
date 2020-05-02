@@ -32,7 +32,7 @@ public class CasesDatasource extends ManageDatasource{
                 tx = session.beginTransaction();
                 //do something
 
-                cases = (List<Case>) session.get(Case.class, 1);
+                cases =(List<Case>) session.get(Case.class, 1);
 
                 tx.commit();
             } catch (HibernateException e) {
