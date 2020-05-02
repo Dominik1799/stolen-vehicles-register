@@ -21,7 +21,7 @@
          </image>
       </ImageView>
         <JFXTextField fx:id="FirstNameLogIn" layoutX="75.0" layoutY="281.0" prefHeight="31.0" prefWidth="194.0" promptText="ID" />
-        <JFXButton layoutX="124.0" layoutY="333.0" onAction="#onLoginClick" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #01579b;" text="Log in" textFill="WHITE" />
+        <JFXButton defaultButton="true" layoutX="124.0" layoutY="333.0" onAction="#onLoginClick" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #01579b;" text="Log in" textFill="WHITE" />
         <JFXTextField fx:id="FirstNameReg" layoutX="801.0" layoutY="272.0" prefHeight="31.0" prefWidth="194.0" promptText="First name" />
         <JFXTextField fx:id="LastNameReg" layoutX="801.0" layoutY="325.0" prefHeight="31.0" prefWidth="194.0" promptText="Last name" />
         <JFXComboBox fx:id="sexCB" layoutX="801.0" layoutY="412.0" prefHeight="25.0" prefWidth="92.0" promptText="Sex" />
