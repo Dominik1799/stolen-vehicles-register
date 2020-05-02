@@ -1,27 +1,61 @@
 package controllers;
 
+import ORM.CasesDatasource;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
+import datasource.Datasource;
+import entities.Case;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import utilities.Dialog;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class casesSceneController extends userSceneController implements Initializable {
-    @FXML
-    protected JFXHamburger hamburgerOpen1;
-
+    @FXML JFXHamburger hamburgerOpen1;
+    @FXML TabPane tabPane;
+    @FXML Tab searchTab;
+    @FXML JFXComboBox<String> createStatus, statusBox;
+    @FXML TextField createCriminal, createSeverity;
+    @FXML TextArea createDescription;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         //CasesDatasource.getInstance().getCases();
+
+
+        prepareStatuses();
         prepareSlideMenuAnimation();
     }
+
+    private void prepareStatuses() {
+        //creates list of statuses in the combobox
+        ObservableList<String> statuses = FXCollections.observableArrayList();
+        ResultSet casestatus = Datasource.getInstance().selectAllFrom("case_status");
+        try {
+            while (casestatus.next())
+                statuses.add(casestatus.getString("status"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        this.createStatus.setItems(statuses);
+        this.statusBox.setItems(statuses);
+    }
+
 
     protected void prepareSlideMenuAnimation() {
         TranslateTransition openNav=new TranslateTransition(new Duration(350), navList);
@@ -52,6 +86,37 @@ public class casesSceneController extends userSceneController implements Initial
         });
     }
 
+    private void createCase() {
+        Case kejs = new Case();
+        kejs.setStatus(this.createStatus.getValue());
+        kejs.setDescription(this.createDescription.getText());
+        kejs.setSeverity(this.createSeverity.getText());
+
+        //Find criminal group id based on the name of criminal
+        if(this.createCriminal.getText().equals("N/A"))
+            kejs.setCriminalGroup("0"); //group unknown
+        else {
+            String something = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText());
+            if(something != null)
+                kejs.setCriminalGroup(something); //This works only if criminal exists so don't try funny things
+            return;
+        }
+
+        CasesDatasource.getInstance().saveTable(kejs);
+    }
+
+
+    public void onCreateClick(ActionEvent event) {
+        if(createDescription.getText().isEmpty() || createCriminal.getText().isEmpty()
+                || createSeverity.getText().isEmpty() || createStatus.getValue().isEmpty()) {
+            Dialog.getInstance().warningDialog("All fields must be entered!");
+        }
+        else {
+            this.createCase();
+            tabPane.getSelectionModel().select(this.searchTab);
+            Dialog.getInstance().infoDialog("Case successfully created");
+        }
+    }
 
 
     public void showDetail(ActionEvent event) {
@@ -63,5 +128,4 @@ public class casesSceneController extends userSceneController implements Initial
     public void onSearchClick(ActionEvent event) {
 
     }
-
 }

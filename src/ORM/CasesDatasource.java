@@ -1,12 +1,12 @@
 package ORM;
-
 import entities.Case;
-import org.hibernate.HibernateException;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+import utilities.Dialog;
 
 import java.util.List;
-
 
 public class CasesDatasource extends ManageDatasource{
     protected static CasesDatasource instance = null;
@@ -20,28 +20,42 @@ public class CasesDatasource extends ManageDatasource{
         return instance;
     }
 
-    //TODO: function should return list of cases, not only one...
-    public List<Case> getCases() {
+    public void saveTable(Case kejs) {
         this.createConnection();
-        List<Case> cases;
-        try (Session session = factory.openSession()) {
-            Transaction tx = null;
-            cases = null;
+        Session session = factory.openSession();
+        Transaction tx = null;
+        tx = session.beginTransaction();
 
-            try {
-                tx = session.beginTransaction();
-                //do something
+        System.out.println(kejs.getDescription());
+        System.out.println(kejs.getCriminalGroup());
 
-                cases =(List<Case>) session.get(Case.class, 1);
-
-                tx.commit();
-            } catch (HibernateException e) {
-                if (tx != null) tx.rollback();
-                e.printStackTrace();
-            } finally {
-                session.close();
-            }
-        }
-        return cases;
+        session.save(kejs);
+        tx.commit();
     }
+
+    public String getCriminalGroup(String criminalName) {
+        // finds the criminal based on his name and returns id of his criminalgroup as string
+        String hql = "SELECT Criminal .groupID" +
+                "FROM Criminal AS C " +
+                "WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%:name%%')"; //should have more restrictions to avoid collisions of names but whatever
+        Session session = factory.openSession();
+        Query query = session.createQuery(hql);
+        query.setParameter("name", criminalName);
+        List<Integer> results = query.list();
+        if(results.isEmpty()) {
+            Dialog.getInstance().errorDialog("No criminal with that name was found");
+            return null;
+        }
+        return results.get(0).toString();
+    }
+
+    public List<Case> getCases() {
+        return null;
+    }
+
+
+
+
+
+
 }

@@ -7,14 +7,17 @@ import javax.persistence.*;
 public class Case {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "criminalgroup")
-    private int criminalGroup;
+    private String criminalGroup;
+    @Column(name = "description")
     private String description;
-    private int status;
-    private int severity;
+    @Column(name = "status")
+    private String status;
+    @Column(name = "severity")
+    private String severity;
 
 
 
@@ -26,35 +29,35 @@ public class Case {
         this.description = description;
     }
 
-    public int getStatus() {
+    public String  getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public int getSeverity() {
+    public String getSeverity() {
         return severity;
     }
 
-    public void setSeverity(int severity) {
+    public void setSeverity(String severity) {
         this.severity = severity;
     }
 
-    public int getCriminalGroup() {
+    public String getCriminalGroup() {
         return criminalGroup;
     }
 
-    public void setCriminalGroup(int criminalGroup) {
+    public void setCriminalGroup(String criminalGroup) {
         this.criminalGroup = criminalGroup;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -1,16 +1,31 @@
 package entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 
+@Entity
+@Table(name = "criminal")
 public class Criminal {
-    private String id, name, surname, sex, nationality, description, groupAmount,birthday;
+    @Id
+    @Column(name = "id")
+    private String id;
+
+    @Column(name = "firstname")
+    private String name;
+    @Column(name = "lastname")
+    private String surname;
+    private String sex;
+    private String nationality;
+    private String description;
+    private String groupAmount;
+    private String birthday;
     private int caseid;
     private String group;
     private int age,groupID;
-
 
     public String getId() {
         return id;
@@ -62,18 +77,6 @@ public class Criminal {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getName() {
         return name;
     }
@@ -88,6 +91,18 @@ public class Criminal {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getSex() {
