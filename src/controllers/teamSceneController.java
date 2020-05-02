@@ -105,6 +105,10 @@ public class teamSceneController extends userSceneController {
     }
 
     public void onLeaveTeamClick(){
+        if (this.team.getLeader().getId() == this.user.getId()){
+            System.out.println("pindur");
+            return;
+        }
         ThreadTeams threadTeams = new ThreadTeams();
         threadTeams.userToTeam = this.user;
         threadTeams.teamToUser = this.team;
