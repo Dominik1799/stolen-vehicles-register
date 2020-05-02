@@ -367,7 +367,6 @@ public class Datasource {
                         "owner = owners.id " +
                         "WHERE UPPER(concat(owners.firstname, ' ', owners.lastname)) LIKE UPPER('%%%s%%');", amount, name);
 
-
         Connection connection = openConnection();
         try {
             ResultSet result = connection.createStatement().executeQuery(query);
@@ -383,9 +382,9 @@ public class Datasource {
         //String query = "SELECT firstname,lastname,vehicleCount FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) table2 on table2.owner=id where vehicleCount > 1 ORDER BY vehicleCount desc";
 
 
-        String query = String.format("SELECT firstname,lastname,vehicleCount " +
+        String query = String.format("SELECT id, firstname,lastname,vehicleCount " +
                 "FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) " +
-                "table2 on table2.owner=id WHERE UPPER(concat(owners.firstname, ' ', owners.lastname)) LIKE UPPER('%%%s%%')" +
+                "table2 on table2.owner=id WHERE UPPER(concat(owners.firstname, ' ', owners.lastname)) LIKE UPPER('%%%s%%') " +
                 "AND vehicleCount > 1 " +
                 "ORDER BY vehicleCount desc LIMIT %s;", name, amount);
 

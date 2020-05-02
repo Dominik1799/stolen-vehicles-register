@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class ownerSceneController extends vehicleSceneController{
     ObservableList<Owner> owners = FXCollections.observableArrayList();
     @FXML private TableView<Owner> tableView;
-    @FXML private TableColumn<Owner, Integer> count;
+    @FXML private TableColumn<Owner, Integer> count, id;
     @FXML private TableColumn<Owner, String> firstname, lastname;
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -23,6 +23,7 @@ public class ownerSceneController extends vehicleSceneController{
         firstname.setCellValueFactory(new PropertyValueFactory<Owner, String>("firstname"));
         lastname.setCellValueFactory(new PropertyValueFactory<Owner, String>("lastname"));
         count.setCellValueFactory(new PropertyValueFactory<Owner, Integer>("count"));
+        id.setCellValueFactory(new PropertyValueFactory<Owner, Integer>("id"));
         progressBar.setVisible(false);
     }
 
@@ -30,7 +31,6 @@ public class ownerSceneController extends vehicleSceneController{
         String tempName = "", tempAmount = "16";
         if(!this.nameFilter.getText().isEmpty()) tempName = this.nameFilter.getText();
         if (!this.amountFilter.getText().isEmpty()) tempAmount = this.amountFilter.getText();
-        System.out.println(tempAmount + tempName);
         this.setUpTable(new ThreadOwners(tempName, tempAmount));
     }
 

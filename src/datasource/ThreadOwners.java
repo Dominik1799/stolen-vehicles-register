@@ -20,13 +20,12 @@ public class ThreadOwners {
         ResultSet rs = Datasource.getInstance().getTopOwners(this.name, this.amount);
         try {
             while (rs.next()){
-                while (rs.next()){
-                    Owner owner = new Owner();
-                    owner.setFirstname(rs.getString("firstname"));
-                    owner.setLastname(rs.getString("lastname"));
-                    owner.setCount(rs.getInt("vehiclecount"));
-                    this.owners.add(owner);
-                }
+                Owner owner = new Owner();
+                owner.setId(rs.getInt("id"));
+                owner.setFirstname(rs.getString("firstname"));
+                owner.setLastname(rs.getString("lastname"));
+                owner.setCount(rs.getInt("vehiclecount"));
+                this.owners.add(owner);
             }
         } catch (SQLException e){
             e.printStackTrace();
