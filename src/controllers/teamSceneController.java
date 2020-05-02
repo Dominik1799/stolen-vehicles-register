@@ -65,12 +65,12 @@ public class teamSceneController extends userSceneController {
         this.teamLeader.setText("Loading...");
         ThreadTeams threadTeams = new ThreadTeams();
         threadTeams.setTeamID(this.user.getTeam());
-        fetchData(threadTeams);
+        fetchDataAboutCurrentTeam(threadTeams);
         this.teamID.setText(teamID);
 
     }
 
-    private void fetchData(ThreadTeams threadTeams){
+    private void fetchDataAboutCurrentTeam(ThreadTeams threadTeams){
         Thread t = new Thread(threadTeams::getTeamData);
         t.start();
         Thread watcher = new Thread(() -> {
@@ -102,6 +102,27 @@ public class teamSceneController extends userSceneController {
         stage.setScene(new Scene(root, 886, 526));
         stage.setTitle("Choose a new team");
         stage.show();
+    }
+
+    public void onLeaveTeamClick(){
+        ThreadTeams threadTeams = new ThreadTeams();
+        threadTeams.userToTeam = this.user;
+        threadTeams.teamToUser = this.team;
+        removeUserFromTeam(threadTeams);
+    }
+
+    private void removeUserFromTeam(ThreadTeams threadTeams){
+        Thread t = new Thread(threadTeams::removeUserFromTeam);
+        t.start();
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressBarTeams.setVisible(true);
+            }
+            progressBarTeams.setVisible(false);
+            this.user.setTeam("Not a member of any team");
+            this.prepareTables(this.user.getTeam());
+        });
+        watcher.start();
     }
 
 

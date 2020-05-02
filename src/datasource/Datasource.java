@@ -123,7 +123,7 @@ public class Datasource {
 
     public String getTeamID(Connection connection, String teamIndex) {
         try {
-            ResultSet team = connection.createStatement().executeQuery("SELECT * FROM team_changes WHERE userid = " + teamIndex);
+            ResultSet team = connection.createStatement().executeQuery("SELECT * FROM team_changes WHERE userid = " + teamIndex + " AND status=1");
             if (!team.next())
                 return "Not a member of any team";
             return team.getString("teamid");
@@ -274,7 +274,6 @@ public class Datasource {
 
     public void addUserToTeam(User user, Team team){
         String updateTeam = "UPDATE team SET memberamount=memberamount+1 WHERE id=?";
-        String updateRelation = "UPDATE team_changes SET status=3 WHERE userid=? AND teamid=?";
         String associateUserAndTeam = "INSERT INTO team_changes(id,userid,teamid,status) VALUES (nextval('team_changes_sequence'),?,?,?)";
         Connection connection = openConnection();
         if (connection == null)
@@ -282,8 +281,34 @@ public class Datasource {
         try {
             connection.setAutoCommit(false);
             PreparedStatement updateTeamPS = connection.prepareStatement(updateTeam);
-            PreparedStatement updateRelationPS = connection.prepareStatement(updateRelation);
             PreparedStatement associateUserAndTeamPS = connection.prepareStatement(associateUserAndTeam);
+
+            updateTeamPS.setInt(1,team.getId());
+            updateTeamPS.executeUpdate();
+
+            associateUserAndTeamPS.setInt(1,user.getId());
+            associateUserAndTeamPS.setInt(2,team.getId());
+            associateUserAndTeamPS.setInt(3,1);
+            associateUserAndTeamPS.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+    public void removeUserFromTeam(User user, Team team){
+        String updateTeam = "UPDATE team SET memberamount=memberamount-1 WHERE id=?";
+        String updateRelation = "UPDATE team_changes SET status=3 WHERE userid=? AND teamid=?";
+        Connection connection = openConnection();
+        if (connection == null)
+            return;
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement updateTeamPS = connection.prepareStatement(updateTeam);
+            PreparedStatement updateRelationPS = connection.prepareStatement(updateRelation);
 
             updateTeamPS.setInt(1,team.getId());
             updateTeamPS.executeUpdate();
@@ -291,11 +316,6 @@ public class Datasource {
             updateRelationPS.setInt(1,user.getId());
             updateRelationPS.setInt(2,team.getId());
             updateRelationPS.executeUpdate();
-
-            associateUserAndTeamPS.setInt(1,user.getId());
-            associateUserAndTeamPS.setInt(2,team.getId());
-            associateUserAndTeamPS.setInt(3,1);
-            associateUserAndTeamPS.executeUpdate();
 
             connection.commit();
         } catch (SQLException throwables) {

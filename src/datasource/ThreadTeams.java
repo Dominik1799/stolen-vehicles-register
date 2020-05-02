@@ -38,6 +38,10 @@ public class ThreadTeams {
         Datasource.getInstance().addUserToTeam(this.userToTeam,this.teamToUser);
     }
 
+    public void removeUserFromTeam(){
+        Datasource.getInstance().removeUserFromTeam(this.userToTeam,this.teamToUser);
+    }
+
 
     public void getOnePageOfTeams(){
         List<Team> teams = TeamsDatasource.getInstance().getAllTeams(pageNum,args);
