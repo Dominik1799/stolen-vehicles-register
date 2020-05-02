@@ -77,6 +77,7 @@ public class userSceneController implements Initializable {
         teamSceneController ctrl = loader.getController();
         ctrl.setUser(user);
         ctrl.showName();
+        ctrl.prepareTables(user.getTeam());
         Scene scene2 = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);

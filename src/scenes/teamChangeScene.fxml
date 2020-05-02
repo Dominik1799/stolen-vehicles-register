@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="526.0" prefWidth="886.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teamChangeController">
+   <children>
+      <TableView fx:id="tableview" layoutX="265.0" layoutY="75.0" onMouseClicked="#enableButton" prefHeight="377.0" prefWidth="512.0">
+        <columns>
+          <TableColumn fx:id="teamid" prefWidth="107.0" text="Team ID" />
+          <TableColumn fx:id="leadername" prefWidth="118.0" text="Leader name" />
+            <TableColumn fx:id="leadersurname" prefWidth="108.0" text="Leader surname" />
+            <TableColumn fx:id="members" prefWidth="78.0" text="Members" />
+            <TableColumn fx:id="activecases" prefWidth="98.0" text="Active cases" />
+        </columns>
+      </TableView>
+      <JFXProgressBar fx:id="progressbar" layoutX="318.0" layoutY="474.0" prefHeight="4.0" prefWidth="246.0" visible="false" />
+      <JFXButton layoutX="788.0" layoutY="171.0" onAction="#onNextClick" prefHeight="31.0" prefWidth="51.0" style="-fx-background-color: #01579b;" text="Next" textFill="WHITE" />
+      <JFXButton layoutX="788.0" layoutY="233.0" onAction="#onBackClick" prefHeight="31.0" prefWidth="51.0" style="-fx-background-color: #01579b;" text="Back" textFill="WHITE" />
+      <Text layoutX="89.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="membersFrom" layoutX="22.0" layoutY="146.0" prefHeight="25.0" prefWidth="69.0" promptText="from" />
+      <Text layoutX="72.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="member amount" />
+      <JFXTextField fx:id="membersTo" layoutX="144.0" layoutY="146.0" prefHeight="25.0" prefWidth="69.0" promptText="to" />
+      <Text layoutX="109.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="13.396484375">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="casesFrom" layoutX="20.0" layoutY="227.0" prefHeight="25.0" prefWidth="69.0" promptText="from" />
+      <JFXTextField fx:id="casesTo" layoutX="142.0" layoutY="227.0" prefHeight="25.0" prefWidth="69.0" promptText="to" />
+      <Text layoutX="107.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" wrappingWidth="13.396484375">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="84.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active cases" />
+      <JFXButton layoutX="91.0" layoutY="294.0" onAction="#onShowClick" prefHeight="31.0" prefWidth="51.0" style="-fx-background-color: #01579b;" text="Show" textFill="WHITE" />
+      <JFXButton fx:id="joinButton" disable="true" layoutX="76.0" layoutY="404.0" onAction="#onJoinClick" prefHeight="48.0" prefWidth="89.0" style="-fx-background-color: #01579b;" text="Join team" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
