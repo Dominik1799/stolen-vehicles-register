@@ -31,6 +31,7 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML JFXComboBox<String> createStatus, statusBox;
     @FXML TextField createCriminal, createSeverity;
     @FXML TextArea createDescription;
+    ObservableList<String> statuses = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -44,7 +45,6 @@ public class casesSceneController extends userSceneController implements Initial
 
     private void prepareStatuses() {
         //creates list of statuses in the combobox
-        ObservableList<String> statuses = FXCollections.observableArrayList();
         ResultSet casestatus = Datasource.getInstance().selectAllFrom("case_status");
         try {
             while (casestatus.next())
@@ -88,17 +88,17 @@ public class casesSceneController extends userSceneController implements Initial
 
     private void createCase() {
         Case kejs = new Case();
-        kejs.setStatus(this.createStatus.getValue());
+        kejs.setStatus(this.statuses.indexOf(this.createStatus.getValue()));
         kejs.setDescription(this.createDescription.getText());
-        kejs.setSeverity(this.createSeverity.getText());
+        kejs.setSeverity(Integer.parseInt(this.createSeverity.getText()));
 
         //Find criminal group id based on the name of criminal
         if(this.createCriminal.getText().equals("N/A"))
-            kejs.setCriminalGroup("0"); //group unknown
+            kejs.setCriminalGroup(0); //group unknown
         else {
             String something = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText());
             if(something != null)
-                kejs.setCriminalGroup(something); //This works only if criminal exists so don't try funny things
+                kejs.setCriminalGroup(Integer.parseInt(something)); //This works only if criminal exists so don't try funny things
             return;
         }
 

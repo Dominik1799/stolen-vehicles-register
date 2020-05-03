@@ -11,13 +11,13 @@ public class Case {
     private Integer id;
 
     @Column(name = "criminalgroup")
-    private String criminalGroup;
+    private int criminalGroup;
     @Column(name = "description")
     private String description;
     @Column(name = "status")
-    private String status;
+    private int status;
     @Column(name = "severity")
-    private String severity;
+    private int severity;
 
 
 
@@ -29,27 +29,27 @@ public class Case {
         this.description = description;
     }
 
-    public String  getStatus() {
+    public int  getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getSeverity() {
+    public int getSeverity() {
         return severity;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(int severity) {
         this.severity = severity;
     }
 
-    public String getCriminalGroup() {
+    public int getCriminalGroup() {
         return criminalGroup;
     }
 
-    public void setCriminalGroup(String criminalGroup) {
+    public void setCriminalGroup(int criminalGroup) {
         this.criminalGroup = criminalGroup;
     }
 
