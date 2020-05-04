@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import utilities.Dialog;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,13 +29,12 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML JFXComboBox<String> createStatus, statusBox;
     @FXML TextField createCriminal, createSeverity;
     @FXML TextArea createDescription;
-
+    @FXML private JProgressBar progressbar;
     @FXML private TableColumn<Case, String> caseID;
     @FXML private TableColumn<Case, String> criminalGroup;
     @FXML private TableColumn<Case, String> status;
     @FXML private TableColumn<Case, String> severity;
     //@FXML private TableColumn<Case, String> memberAmount;
-
     ObservableList<String> statuses = FXCollections.observableArrayList();
 
     @Override
@@ -102,17 +102,18 @@ public class casesSceneController extends userSceneController implements Initial
         if(this.createCriminal.getText().equals("N/A"))
             kejs.setCriminalGroup(0); //group unknown
         else {
-            int something = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText());
-            if(something == 0)
+
+            int index = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText()); //find the criminal
+            if(index == 0) //no criminal found
                 return false;
-            kejs.setCriminalGroup(something); //This works only if criminal exists so don't try funny things
+            kejs.setCriminalGroup(index);
         }
         CasesDatasource.getInstance().saveTable(kejs);
         return true;
     }
 
 
-    public void onCreateClick(ActionEvent event) {
+    public void onCreateClick(ActionEvent event) throws InterruptedException {
         if(createDescription.getText().isEmpty() || createCriminal.getText().isEmpty()
                 || createSeverity.getText().isEmpty() || createStatus.getValue().isEmpty()) {
             Dialog.getInstance().warningDialog("All fields must be entered!");

@@ -49,8 +49,15 @@ public class CasesDatasource extends ManageDatasource{
         return results.get(0);
     }
 
-    public List<Case> getCases() {
-        return null;
+    public List<Case> getCases(int limit) {
+        this.createConnection();
+        Session session = factory.openSession();
+
+        String hql = "SELECT C FROM Case C LIMIT :limit";
+        Query query = session.createQuery(hql);
+        query.setParameter(":limit", limit);
+        List<Case> cases = query.list();
+        return cases;
     }
 
 
