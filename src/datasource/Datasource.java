@@ -380,9 +380,6 @@ public class Datasource {
     }
 
     public ResultSet getTopOwners(String name, String amount) {
-        //String query = "SELECT firstname,lastname,vehicleCount FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) table2 on table2.owner=id where vehicleCount > 1 ORDER BY vehicleCount desc";
-
-
         String query = String.format("SELECT id, firstname,lastname,vehicleCount " +
                 "FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) " +
                 "table2 on table2.owner=id WHERE UPPER(concat(owners.firstname, ' ', owners.lastname)) LIKE UPPER('%%%s%%') " +
