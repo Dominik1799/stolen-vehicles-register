@@ -96,7 +96,7 @@ public class Datasource {
 
     public void updateUser(User user) {
 
-        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), String.valueOf(user.getId()));
+        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getId());
         Connection connection = openConnection();
         try {
             assert connection != null;
@@ -177,7 +177,7 @@ public class Datasource {
     }
 
     public ResultSet getCriminalsWithOffset(int offset,String ... args) {
-        String query = buildQueryForCrimminals(args) + " ORDER BY id LIMIT 16 OFFSET " + String.valueOf(offset);
+        String query = buildQueryForCrimminals(args) + " ORDER BY id LIMIT 16 OFFSET " + offset;
         Connection connection = openConnection();
         if (connection == null) {
             System.out.println("Something went wrong");
@@ -360,12 +360,13 @@ public class Datasource {
                         "FROM (SELECT vehicleid, COUNT(*) " +
                         "FROM vehicle_history " +
                         "GROUP BY vehicleid " +
-                        "ORDER BY COUNT DESC LIMIT %s) AS topvehicles " +
+                        "ORDER BY COUNT DESC) AS topvehicles " +
                         "INNER JOIN vehicles ON " +
                         "vehicles.id = topvehicles.vehicleid " +
                         "inner join owners on " +
                         "owner = owners.id " +
-                        "WHERE UPPER(concat(owners.firstname, ' ', owners.lastname)) LIKE UPPER('%%%s%%');", amount, name);
+                        "WHERE UPPER(vehicles.model) LIKE UPPER('%%%s%%') OR UPPER(vehicles.brand) LIKE UPPER('%%%s%%')" +
+                        "LIMIT %s", name, name, amount);
 
         Connection connection = openConnection();
         try {

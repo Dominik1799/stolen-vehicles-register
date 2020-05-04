@@ -57,7 +57,7 @@ public class criminalsSceneController extends userSceneController implements Ini
     int offset;
     int step = 16;
     int pokus = 0;
-    String filter[];
+    String[] filter;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -142,7 +142,7 @@ public class criminalsSceneController extends userSceneController implements Ini
         Criminal criminal =  tableView.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/criminalDetailScene.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         criminalDetailController ctrl = loader.getController();
         ctrl.setCriminal(criminal);
         ctrl.setDetails();

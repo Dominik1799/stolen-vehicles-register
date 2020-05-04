@@ -120,7 +120,7 @@ public class criminalDetailController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/criminalDetailScene.fxml"));
         Criminal criminal =  tablePartners.getSelectionModel().getSelectedItem();
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         criminalDetailController ctrl = loader.getController();
         ctrl.setCriminal(criminal);
         ctrl.setDetails();

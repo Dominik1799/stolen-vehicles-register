@@ -94,7 +94,7 @@ public class teamSceneController extends userSceneController {
     public void onJoinTeamClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/teamChangeScene.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         teamChangeController ctrl = loader.getController();
         ctrl.setUser(this.user);
         ctrl.setTeamSceneController(this);

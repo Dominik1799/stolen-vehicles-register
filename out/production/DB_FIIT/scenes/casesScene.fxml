@@ -29,7 +29,7 @@
                         <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <JFXHamburger fx:id="hamburgerOpen1" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <JFXButton fx:id="search1" layoutX="859.0" layoutY="518.0" mnemonicParsing="false" onAction="#onCreateClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Create" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="100.0">
+                              <JFXButton fx:id="create" layoutX="859.0" layoutY="518.0" mnemonicParsing="false" onAction="#onCreateClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Create" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.rightAnchor="100.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

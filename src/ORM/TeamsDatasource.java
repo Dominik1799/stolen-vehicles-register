@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TeamsDatasource  extends ManageDatasource {
     protected static TeamsDatasource instance = null;
-    private String SELECT_TEAMS_QUERRY = "from Team";
+    private final String SELECT_TEAMS_QUERRY = "from Team";
 
     public static TeamsDatasource getInstance() {
         if (instance == null)
