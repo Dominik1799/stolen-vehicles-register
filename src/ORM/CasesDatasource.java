@@ -1,9 +1,8 @@
 package ORM;
 import entities.Case;
-import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+import org.hibernate.query.Query;
 import utilities.Dialog;
 
 import java.util.List;
@@ -25,28 +24,29 @@ public class CasesDatasource extends ManageDatasource{
         Session session = factory.openSession();
         Transaction tx = null;
         tx = session.beginTransaction();
-
-        System.out.println(kejs.getDescription());
-        System.out.println(kejs.getCriminalGroup());
-
         session.save(kejs);
         tx.commit();
     }
 
-    public String getCriminalGroup(String criminalName) {
-        // finds the criminal based on his name and returns id of his criminalgroup as string
-        String hql = "SELECT Criminal .groupID" +
-                "FROM Criminal AS C " +
-                "WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%:name%%')"; //should have more restrictions to avoid collisions of names but whatever
+
+    public int getCriminalGroup(String criminalName) {
+        // finds the criminal based on his name and returns id of his criminalgroup as integer
+        this.createConnection();
         Session session = factory.openSession();
+
+
+        String hql = String.format("SELECT C.groupID FROM Criminal AS C WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%%s%%')", criminalName);
+        //should have more restrictions to avoid collisions of names but whatever
+        System.out.println(hql);
         Query query = session.createQuery(hql);
-        query.setParameter("name", criminalName);
+        //query.setParameter("name", criminalName);
         List<Integer> results = query.list();
         if(results.isEmpty()) {
             Dialog.getInstance().errorDialog("No criminal with that name was found");
-            return null;
+            return 0;
         }
-        return results.get(0).toString();
+        System.out.println(results.get(0).toString());
+        return results.get(0);
     }
 
     public List<Case> getCases() {

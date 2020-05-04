@@ -11,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import utilities.Dialog;
@@ -31,13 +28,22 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML JFXComboBox<String> createStatus, statusBox;
     @FXML TextField createCriminal, createSeverity;
     @FXML TextArea createDescription;
+
+    @FXML private TableColumn<Case, String> caseID;
+    @FXML private TableColumn<Case, String> criminalGroup;
+    @FXML private TableColumn<Case, String> status;
+    @FXML private TableColumn<Case, String> severity;
+    //@FXML private TableColumn<Case, String> memberAmount;
+
     ObservableList<String> statuses = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         //CasesDatasource.getInstance().getCases();
-
+        //caseID.setCellValueFactory(new PropertyValueFactory<Case, String>("id"));
+        //criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroup"));
+        //sex.setCellValueFactory(new PropertyValueFactory<Criminal, String>("sex"));
 
         prepareStatuses();
         prepareSlideMenuAnimation();
@@ -86,7 +92,7 @@ public class casesSceneController extends userSceneController implements Initial
         });
     }
 
-    private void createCase() {
+    private boolean createCase() {
         Case kejs = new Case();
         kejs.setStatus(this.statuses.indexOf(this.createStatus.getValue()));
         kejs.setDescription(this.createDescription.getText());
@@ -96,13 +102,13 @@ public class casesSceneController extends userSceneController implements Initial
         if(this.createCriminal.getText().equals("N/A"))
             kejs.setCriminalGroup(0); //group unknown
         else {
-            String something = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText());
-            if(something != null)
-                kejs.setCriminalGroup(Integer.parseInt(something)); //This works only if criminal exists so don't try funny things
-            return;
+            int something = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText());
+            if(something == 0)
+                return false;
+            kejs.setCriminalGroup(something); //This works only if criminal exists so don't try funny things
         }
-
         CasesDatasource.getInstance().saveTable(kejs);
+        return true;
     }
 
 
@@ -112,9 +118,10 @@ public class casesSceneController extends userSceneController implements Initial
             Dialog.getInstance().warningDialog("All fields must be entered!");
         }
         else {
-            this.createCase();
-            tabPane.getSelectionModel().select(this.searchTab);
-            Dialog.getInstance().infoDialog("Case successfully created");
+            if(this.createCase()) {
+                Dialog.getInstance().infoDialog("Case successfully created");
+                tabPane.getSelectionModel().select(this.searchTab);
+            }
         }
     }
 

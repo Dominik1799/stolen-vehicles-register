@@ -6,9 +6,11 @@
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
           <factory-entry name="DB_FIIT" value="3850d638-e6d9-4e3b-9e59-2e624c33e6f8" />
-          <factory-entry name="Entities" />
+          <factory-entry name="Entities" value="4c618f4a-9c8b-4233-a5d4-2d23665093ed" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="Entities" />
+        </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/recources/META-INF/persistance" />
       </configuration>
     </facet>

@@ -21,11 +21,13 @@
     <mapping class="entities.Case" />
     <mapping class="entities.User" />
     <mapping class="entities.Team" />
+    <mapping class="entities.Criminal" />
 
 
 
 
-        <!-- DB schema will be updated if needed -->
+
+    <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

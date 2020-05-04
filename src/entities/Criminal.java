@@ -1,9 +1,6 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -11,13 +8,16 @@ import java.time.Period;
 @Table(name = "criminal")
 public class Criminal {
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "firstname")
     private String name;
     @Column(name = "lastname")
     private String surname;
+
+    @Column(name = "criminalGroup")
+    private int groupID;
     private String sex;
     private String nationality;
     private String description;
@@ -25,7 +25,7 @@ public class Criminal {
     private String birthday;
     private int caseid;
     private String group;
-    private int age,groupID;
+    private int age;
 
     public String getId() {
         return id;
@@ -49,6 +49,9 @@ public class Criminal {
 
     public void setGroupID(int groupID) {
         this.groupID = groupID;
+    }
+
+    public Criminal() {
     }
 
     public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, String group, LocalDate birthdate, String groupAmount, int groupID){
