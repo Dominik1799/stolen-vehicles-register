@@ -9,6 +9,7 @@
           <factory-entry name="Entities" value="4c618f4a-9c8b-4233-a5d4-2d23665093ed" />
         </datasource-mapping>
         <naming-strategy-map>
+          <unit-entry name="DB_FIIT" />
           <unit-entry name="Entities" />
         </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/recources/META-INF/persistance" />

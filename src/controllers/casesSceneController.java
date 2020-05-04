@@ -33,7 +33,7 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML JFXHamburger hamburgerOpen1;
     @FXML TabPane tabPane;
     @FXML Tab searchTab;
-    @FXML JFXComboBox<String> createStatus, statusBox, searchStatus;
+    @FXML JFXComboBox<String> createStatus, searchStatus;
     @FXML TextField createCriminal, createSeverity, searchCriminalGroup, searchKeywords, searchSeverity;
     @FXML TextArea createDescription;
     @FXML private JFXProgressBar progressBar;
@@ -67,7 +67,7 @@ public class casesSceneController extends userSceneController implements Initial
             throwables.printStackTrace();
         }
         this.createStatus.setItems(statuses);
-        this.statusBox.setItems(statuses);
+        this.searchStatus.setItems(statuses);
     }
 
     public void setUpTable(ThreadCases threadCases){

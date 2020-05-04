@@ -70,15 +70,15 @@ public class CasesDatasource extends ManageDatasource{
     public List<Case> getCases(Case kejs) {
         String hql;
         if(kejs != null) {
-            hql = "SELECT C from Case C";
+            hql = "SELECT C from Case C ";
         }
         else {
-            hql = "SELECT C FROM Case C";
+            hql = "SELECT C FROM Case C WHERE C.id < 16";
         }
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery(hql);
+        Query<Case> query = session.createQuery(hql);
         query.setMaxResults(this.defaultLimit);
         List<Case> cases = (List<Case>) query.list();
         tx.commit();

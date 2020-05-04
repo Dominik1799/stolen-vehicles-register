@@ -16,7 +16,7 @@ public class Criminal {
     @Column(name = "lastname")
     private String surname;
 
-    @Column(name = "criminalGroup")
+    @Column(name = "criminalgroup")
     private int groupID;
     private String sex;
     private String nationality;
