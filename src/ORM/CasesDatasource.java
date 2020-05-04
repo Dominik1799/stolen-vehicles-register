@@ -22,7 +22,7 @@ public class CasesDatasource extends ManageDatasource{
     public void saveTable(Case kejs) {
         this.createConnection();
         Session session = factory.openSession();
-        Transaction tx = null;
+        Transaction tx;
         tx = session.beginTransaction();
         session.save(kejs);
         tx.commit();
@@ -34,29 +34,26 @@ public class CasesDatasource extends ManageDatasource{
         this.createConnection();
         Session session = factory.openSession();
 
-
         String hql = String.format("SELECT C.groupID FROM Criminal AS C WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%%s%%')", criminalName);
         //should have more restrictions to avoid collisions of names but whatever
-        System.out.println(hql);
-        Query query = session.createQuery(hql);
+        Query query;
+        query = session.createQuery(hql);
         //query.setParameter("name", criminalName);
         List<Integer> results = query.list();
         if(results.isEmpty()) {
             Dialog.getInstance().errorDialog("No criminal with that name was found");
             return 0;
         }
-        System.out.println(results.get(0).toString());
         return results.get(0);
     }
 
-    public List<Case> getCases(int limit) {
+    public List<?> getCases(int limit) {
         this.createConnection();
         Session session = factory.openSession();
-
-        String hql = "SELECT C FROM Case C LIMIT :limit";
-        Query query = session.createQuery(hql);
-        query.setParameter(":limit", limit);
-        List<Case> cases = query.list();
+        Query query = session.createQuery("SELECT C FROM Case C");
+        query.setMaxResults(16);
+        List<Case> cases = (List<Case>) query.list();
+        session.close();
         return cases;
     }
 

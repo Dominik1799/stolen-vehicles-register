@@ -113,7 +113,7 @@ public class casesSceneController extends userSceneController implements Initial
     }
 
 
-    public void onCreateClick(ActionEvent event) throws InterruptedException {
+    public void onCreateClick(ActionEvent event) {
         if(createDescription.getText().isEmpty() || createCriminal.getText().isEmpty()
                 || createSeverity.getText().isEmpty() || createStatus.getValue().isEmpty()) {
             Dialog.getInstance().warningDialog("All fields must be entered!");
@@ -125,6 +125,7 @@ public class casesSceneController extends userSceneController implements Initial
             }
         }
     }
+
 
 
     public void showDetail(ActionEvent event) {
