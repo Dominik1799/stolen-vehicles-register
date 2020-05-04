@@ -4,11 +4,14 @@ import entities.Case;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class ThreadCases {
     ObservableList<Case> cases = FXCollections.observableArrayList();
     private int groupId = 0;
     private int limit = 16;
     private String name;
+
     public int getGroupId() {
         return groupId;
     }
@@ -39,12 +42,18 @@ public class ThreadCases {
     public ThreadCases(String name) {
         this.name = name;
     }
+
     public void parseCases(){
-        this.cases = (ObservableList<Case>) CasesDatasource.getInstance().getCases(this.limit);
+        List<Case> cases = CasesDatasource.getInstance().getCases(this.limit);
+        this.cases = FXCollections.observableArrayList(cases);
+    }
+
+    public void creatingCases() {
+        this.groupId = CasesDatasource.getInstance().getCriminalGroup(this.name);
     }
 
 
-    public ObservableList<Case> getCases(){
+    public List<Case> getCases(){
         return this.cases;
     }
 }

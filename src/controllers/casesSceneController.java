@@ -3,7 +3,9 @@ package controllers;
 import ORM.CasesDatasource;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXProgressBar;
 import datasource.Datasource;
+import datasource.ThreadCases;
 import entities.Case;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -12,11 +14,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import utilities.Dialog;
 
-import javax.swing.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,22 +31,23 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML JFXComboBox<String> createStatus, statusBox;
     @FXML TextField createCriminal, createSeverity;
     @FXML TextArea createDescription;
-    @FXML private JProgressBar progressbar;
-    @FXML private TableColumn<Case, String> caseID;
+    @FXML private JFXProgressBar progressBar;
+    @FXML private TableView tableView;
     @FXML private TableColumn<Case, String> criminalGroup;
-    @FXML private TableColumn<Case, String> status;
-    @FXML private TableColumn<Case, String> severity;
-    //@FXML private TableColumn<Case, String> memberAmount;
+    @FXML private TableColumn<Case, Integer> caseID;
+    @FXML private TableColumn<Case, Integer> status;
+    @FXML private TableColumn<Case, Integer> severity;
+    @FXML private TableColumn<Case, Integer> memberAmount;
     ObservableList<String> statuses = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        //CasesDatasource.getInstance().getCases();
-        //caseID.setCellValueFactory(new PropertyValueFactory<Case, String>("id"));
-        //criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroup"));
-        //sex.setCellValueFactory(new PropertyValueFactory<Criminal, String>("sex"));
-
+        caseID.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
+        criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroup"));
+        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("status"));
+        severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
+        memberAmount.setCellValueFactory(new PropertyValueFactory<Case, Integer>("memeberAmount"));
         prepareStatuses();
         prepareSlideMenuAnimation();
     }
@@ -62,6 +65,18 @@ public class casesSceneController extends userSceneController implements Initial
         this.statusBox.setItems(statuses);
     }
 
+    public void setUpTable(ThreadCases threadCases){
+        Thread t = new Thread(threadCases::parseCases);
+        t.start();
+        Thread watcher = new Thread(() -> {
+            while (t.isAlive()){
+                progressBar.setVisible(true);
+            }
+            progressBar.setVisible(false);
+            tableView.setItems((ObservableList) threadCases.getCases());
+        });
+        watcher.start();
+    }
 
     protected void prepareSlideMenuAnimation() {
         TranslateTransition openNav=new TranslateTransition(new Duration(350), navList);
@@ -135,6 +150,7 @@ public class casesSceneController extends userSceneController implements Initial
     }
 
     public void onSearchClick(ActionEvent event) {
-
+        ThreadCases threadCases = new ThreadCases();
+        setUpTable(threadCases);
     }
 }

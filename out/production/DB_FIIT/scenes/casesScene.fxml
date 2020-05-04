@@ -64,11 +64,11 @@
                                     <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <TableView fx:id="tableView" layoutX="82.0" layoutY="155.0" prefHeight="430.0" prefWidth="903.0">
                                         <columns>
-                                            <TableColumn fx:id="fname" prefWidth="69.0" text="Case ID" />
-                                            <TableColumn fx:id="lname" prefWidth="171.0" text="Criminal Group" />
-                                            <TableColumn fx:id="age" prefWidth="75.0" text="Status" />
-                                            <TableColumn fx:id="sex" minWidth="0.0" prefWidth="103.0" text="Severity" />
-                                            <TableColumn fx:id="groupAmount" minWidth="0.0" prefWidth="138.0" text="Amount of members" />
+                                            <TableColumn fx:id="criminalGroup" prefWidth="69.0" text="Case ID" />
+                                            <TableColumn fx:id="caseID" prefWidth="171.0" text="Criminal Group" />
+                                            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                                            <TableColumn fx:id="memberAmount" minWidth="0.0" prefWidth="103.0" text="Severity" />
+                                            <TableColumn fx:id="severity" minWidth="0.0" prefWidth="138.0" text="Amount of members" />
                                         </columns>
                                         <contextMenu>
                                             <ContextMenu>

@@ -47,12 +47,14 @@ public class CasesDatasource extends ManageDatasource{
         return results.get(0);
     }
 
-    public List<?> getCases(int limit) {
+    public List<Case> getCases(int limit) {
         this.createConnection();
         Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
         Query query = session.createQuery("SELECT C FROM Case C");
         query.setMaxResults(16);
         List<Case> cases = (List<Case>) query.list();
+        tx.commit();
         session.close();
         return cases;
     }
