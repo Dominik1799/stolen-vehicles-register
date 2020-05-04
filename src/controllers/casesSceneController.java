@@ -12,13 +12,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.Dialog;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,14 +119,15 @@ public class casesSceneController extends userSceneController implements Initial
         kejs.setSeverity(Integer.parseInt(this.createSeverity.getText()));
 
         //Find criminal group id based on the name of criminal
-        if(this.createCriminal.getText().equals("N/A"))
-            kejs.setCriminalGroup(0); //group unknown
-        else {
+        if(this.createCriminal.getText().equals("N/A")) {
+            kejs.getCriminalGroup().setId(0); //group unknown
+        }
 
-            int index = CasesDatasource.getInstance().getCriminalGroup(this.createCriminal.getText()); //find the criminal
+        else {
+            int index = CasesDatasource.getInstance().getCriminalGroupId(this.createCriminal.getText()); //find the criminal
             if(index == 0) //no criminal found
                 return false;
-            kejs.setCriminalGroup(index);
+            kejs.getCriminalGroup().setId(index);
         }
         CasesDatasource.getInstance().saveTable(kejs);
         return true;
@@ -143,7 +149,16 @@ public class casesSceneController extends userSceneController implements Initial
 
 
 
-    public void showDetail(ActionEvent event) {
+    public void showDetail(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "../scenes/casesDetailScene.fxml"));
+        Parent root = loader.load();
+        casesSceneController ctrl = loader.getController();
+        ctrl.setUser(this.user);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root, 886, 526));
+        stage.setTitle("Choose a new team");
+        stage.show();
     }
 
     public void dropRecord(ActionEvent event) {

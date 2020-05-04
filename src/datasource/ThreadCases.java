@@ -49,7 +49,7 @@ public class ThreadCases {
     }
 
     public void creatingCases() {
-        this.groupId = CasesDatasource.getInstance().getCriminalGroup(this.name);
+        this.groupId = CasesDatasource.getInstance().getCriminalGroupId(this.name);
     }
 
 

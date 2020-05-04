@@ -10,16 +10,40 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "criminalgroup")
-    private int criminalGroup;
+    @OneToOne
+    @JoinColumn(name = "criminalgroup")
+    private CriminalGroup criminalGroup;
+
     @Column(name = "description")
     private String description;
     @Column(name = "status")
     private int status;
+
     @Column(name = "severity")
     private int severity;
 
 
+    public Case() {
+    }
+    public Case(String name) {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public CriminalGroup getCriminalGroup() {
+        return criminalGroup;
+    }
+
+    public void setCriminalGroup(CriminalGroup criminalGroup) {
+        this.criminalGroup = criminalGroup;
+    }
 
     public String getDescription() {
         return description;
@@ -29,7 +53,7 @@ public class Case {
         this.description = description;
     }
 
-    public int  getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -45,20 +69,6 @@ public class Case {
         this.severity = severity;
     }
 
-    public int getCriminalGroup() {
-        return criminalGroup;
-    }
 
-    public void setCriminalGroup(int criminalGroup) {
-        this.criminalGroup = criminalGroup;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
 }

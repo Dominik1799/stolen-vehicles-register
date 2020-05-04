@@ -22,6 +22,7 @@
     <mapping class="entities.User" />
     <mapping class="entities.Team" />
     <mapping class="entities.Criminal" />
+    <mapping class="entities.CriminalGroup" />
 
 
 
