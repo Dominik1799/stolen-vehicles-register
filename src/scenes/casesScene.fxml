@@ -87,8 +87,8 @@
                                         </effect>
                                     </JFXButton>
                                     <JFXProgressBar fx:id="progressBar" layoutX="434.0" layoutY="598.0" prefWidth="197.0" visible="false" />
-                                    <JFXTextField fx:id="fnameFilter" layoutX="82.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
-                                    <JFXTextField fx:id="lnameFilter" layoutX="251.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
+                                    <JFXTextField fx:id="searchCriminalGroup" layoutX="82.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
+                                    <JFXTextField fx:id="searchKeywords" layoutX="251.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
                                     <Text layoutX="82.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Criminal Group:">
                                         <font>
                                             <Font size="14.0" />
@@ -109,8 +109,8 @@
                                             <Font size="14.0" />
                                         </font>
                                     </Text>
-                              <JFXComboBox fx:id="statusBox" layoutX="434.0" layoutY="106.0" prefHeight="25.0" prefWidth="135.0" promptText="&lt;ANY&gt;" />
-                              <JFXTextField fx:id="lnameFilter1" layoutX="618.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
+                              <JFXComboBox fx:id="searchStatus" layoutX="434.0" layoutY="106.0" prefHeight="25.0" prefWidth="135.0" promptText="&lt;ANY&gt;" />
+                              <JFXTextField fx:id="searchSeverity" layoutX="618.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
                                 </children>
                             </AnchorPane>
                         </children>

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CasesDatasource extends ManageDatasource{
     protected static CasesDatasource instance = null;
+    protected int defaultLimit = 16;
 
     private CasesDatasource() {
     }
@@ -66,17 +67,25 @@ public class CasesDatasource extends ManageDatasource{
         return results.get(0);
     }
 
-    public List<Case> getCases(int limit) {
+    public List<Case> getCases(Case kejs) {
+        String hql;
+        if(kejs != null) {
+            hql = "SELECT C from Case C";
+        }
+        else {
+            hql = "SELECT C FROM Case C";
+        }
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("SELECT C FROM Case C");
-        query.setMaxResults(16);
+        Query query = session.createQuery(hql);
+        query.setMaxResults(this.defaultLimit);
         List<Case> cases = (List<Case>) query.list();
         tx.commit();
         session.close();
         return cases;
     }
+
 
 
 

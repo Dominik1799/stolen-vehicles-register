@@ -33,8 +33,8 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML JFXHamburger hamburgerOpen1;
     @FXML TabPane tabPane;
     @FXML Tab searchTab;
-    @FXML JFXComboBox<String> createStatus, statusBox;
-    @FXML TextField createCriminal, createSeverity;
+    @FXML JFXComboBox<String> createStatus, statusBox, searchStatus;
+    @FXML TextField createCriminal, createSeverity, searchCriminalGroup, searchKeywords, searchSeverity;
     @FXML TextArea createDescription;
     @FXML private JFXProgressBar progressBar;
     @FXML private TableView tableView;
@@ -112,7 +112,8 @@ public class casesSceneController extends userSceneController implements Initial
         });
     }
 
-    private boolean createCase() {
+
+    private Case createCase() {
         Case kejs = new Case();
         kejs.setStatus(this.statuses.indexOf(this.createStatus.getValue()));
         kejs.setDescription(this.createDescription.getText());
@@ -122,15 +123,13 @@ public class casesSceneController extends userSceneController implements Initial
         if(this.createCriminal.getText().equals("N/A")) {
             kejs.getCriminalGroup().setId(0); //group unknown
         }
-
         else {
             int index = CasesDatasource.getInstance().getCriminalGroupId(this.createCriminal.getText()); //find the criminal
             if(index == 0) //no criminal found
-                return false;
+                return null;
             kejs.getCriminalGroup().setId(index);
         }
-        CasesDatasource.getInstance().saveTable(kejs);
-        return true;
+        return kejs;
     }
 
 
@@ -140,7 +139,9 @@ public class casesSceneController extends userSceneController implements Initial
             Dialog.getInstance().warningDialog("All fields must be entered!");
         }
         else {
-            if(this.createCase()) {
+            Case kejs = this.createCase();
+            if(kejs != null) {
+                CasesDatasource.getInstance().saveTable(kejs);
                 Dialog.getInstance().infoDialog("Case successfully created");
                 tabPane.getSelectionModel().select(this.searchTab);
             }
@@ -161,8 +162,6 @@ public class casesSceneController extends userSceneController implements Initial
         stage.show();
     }
 
-    public void dropRecord(ActionEvent event) {
-    }
 
     public void onSearchClick(ActionEvent event) {
         ThreadCases threadCases = new ThreadCases();
