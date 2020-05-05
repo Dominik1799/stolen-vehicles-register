@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Case {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne
@@ -69,6 +68,13 @@ public class Case {
         this.severity = severity;
     }
 
+
+    public String getLeaderName() {
+        return this.getCriminalGroup().getLeader().getName() + " " + this.criminalGroup.getLeader().getSurname();
+    }
+    public String getCriminalGroupName() {
+        return this.criminalGroup.getGroupName();
+    }
 
 
 }

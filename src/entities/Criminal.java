@@ -8,7 +8,6 @@ import java.time.Period;
 @Table(name = "criminal")
 public class Criminal {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "firstname")
@@ -16,15 +15,23 @@ public class Criminal {
     @Column(name = "lastname")
     private String surname;
 
-    @Column(name = "criminalgroup")
+    @Transient
     private int groupID;
+    @Transient
     private String sex;
+    @Transient
     private String nationality;
+    @Transient
     private String description;
+    @Transient
     private String groupAmount;
+    @Column(name = "birthdate")
     private String birthday;
+    @Transient
     private int caseid;
+    @Transient
     private String group;
+    @Transient
     private int age;
 
     public String getId() {

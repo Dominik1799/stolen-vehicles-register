@@ -29,27 +29,6 @@ public class CasesDatasource extends ManageDatasource{
         tx.commit();
     }
 
-    public int getGroupName(int id) {
-        // finds the criminal based on his name and returns id of his criminalgroup as integer
-        this.createConnection();
-        Session session = factory.openSession();
-
-        String hql = "SELECT c FROM  Case C";
-        //should have more restrictions to avoid collisions of names but whatever
-        Query query;
-        query = session.createQuery(hql);
-        //query.setParameter("name", criminalName);
-        List<Integer> results = query.list();
-        if(results.isEmpty()) {
-            Dialog.getInstance().errorDialog("No criminal with that name was found");
-            return 0;
-        }
-        return results.get(0);
-    }
-
-
-
-
     public int getCriminalGroupId(String criminalName) {
         // finds the criminal based on his name and returns id of his criminalgroup as integer
         this.createConnection();
@@ -70,7 +49,7 @@ public class CasesDatasource extends ManageDatasource{
     public List<Case> getCases(Case kejs) {
         String hql;
         if(kejs != null) {
-            hql = "SELECT C from Case C ";
+            hql = "SELECT C from Case C WHERE  C.id < 30";
         }
         else {
             hql = "SELECT C FROM Case C WHERE C.id < 16";
@@ -85,11 +64,5 @@ public class CasesDatasource extends ManageDatasource{
         session.close();
         return cases;
     }
-
-
-
-
-
-
 
 }

@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class caseDetailController implements Initializable {
+public class casesDetailController extends userSceneController implements Initializable {
     private Case kejs;
     @FXML
     private Text caseId, status, severity, nameofgroup, leader, description;

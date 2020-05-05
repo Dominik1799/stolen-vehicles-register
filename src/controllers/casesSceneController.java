@@ -37,8 +37,8 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML TextField createCriminal, createSeverity, searchCriminalGroup, searchKeywords, searchSeverity;
     @FXML TextArea createDescription;
     @FXML private JFXProgressBar progressBar;
-    @FXML private TableView tableView;
-    @FXML private TableColumn<Case, String> criminalGroup;
+    @FXML private TableView<Case> tableView;
+    @FXML private TableColumn<Case, String > criminalGroup;
     @FXML private TableColumn<Case, Integer> caseID;
     @FXML private TableColumn<Case, Integer> status;
     @FXML private TableColumn<Case, Integer> severity;
@@ -49,7 +49,7 @@ public class casesSceneController extends userSceneController implements Initial
     public void initialize(URL url, ResourceBundle rb) {
 
         caseID.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
-        criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroup"));
+        criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroupName"));
         status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("status"));
         severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
         memberAmount.setCellValueFactory(new PropertyValueFactory<Case, Integer>("memeberAmount"));
@@ -153,15 +153,16 @@ public class casesSceneController extends userSceneController implements Initial
     public void showDetail(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/casesDetailScene.fxml"));
+        Case aCase =  tableView.getSelectionModel().getSelectedItem();
         Parent root = loader.load();
-        casesSceneController ctrl = loader.getController();
-        ctrl.setUser(this.user);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root, 886, 526));
-        stage.setTitle("Choose a new team");
-        stage.show();
+        casesDetailController ctrl = loader.getController();
+        ctrl.setDetails();
+        Scene scene2 = new Scene(root);
+        Stage window = (Stage) tableView.getScene().getWindow();
+        window.setTitle("Case of:" + aCase.getCriminalGroup().getGroupName());
+        window.setScene(scene2);
+        window.show();
     }
-
 
     public void onSearchClick(ActionEvent event) {
         ThreadCases threadCases = new ThreadCases();
