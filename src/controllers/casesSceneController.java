@@ -42,7 +42,6 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML private TableColumn<Case, Integer> caseID;
     @FXML private TableColumn<Case, Integer> status;
     @FXML private TableColumn<Case, Integer> severity;
-    @FXML private TableColumn<Case, Integer> memberAmount;
     ObservableList<String> statuses = FXCollections.observableArrayList();
 
     @Override
@@ -52,7 +51,6 @@ public class casesSceneController extends userSceneController implements Initial
         criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroupName"));
         status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("status"));
         severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
-        memberAmount.setCellValueFactory(new PropertyValueFactory<Case, Integer>("memeberAmount"));
         prepareStatuses();
         prepareSlideMenuAnimation();
     }
