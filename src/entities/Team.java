@@ -1,11 +1,11 @@
 package entities;
 
-import javafx.collections.ObservableList;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterJoinTable;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Collection;
 
 @Entity

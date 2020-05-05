@@ -124,10 +124,12 @@ public class casesSceneController extends userSceneController implements Initial
             kejs.getCriminalGroup().setId(0); //group unknown
         }
         else {
-            int index = CasesDatasource.getInstance().getCriminalGroupId(this.createCriminal.getText()); //find the criminal
+            Integer index = CasesDatasource.getInstance().getCriminalGroupId(this.createCriminal.getText()); //find the criminal
             if(index == 0) //no criminal found
                 return null;
-            kejs.getCriminalGroup().setId(index);
+            if(kejs.getCriminalGroup() != null) {
+                kejs.getCriminalGroup().setId(index);
+            }
         }
         return kejs;
     }
@@ -156,6 +158,7 @@ public class casesSceneController extends userSceneController implements Initial
         Case aCase =  tableView.getSelectionModel().getSelectedItem();
         Parent root = loader.load();
         casesDetailController ctrl = loader.getController();
+        ctrl.setaCase(aCase);
         ctrl.setDetails();
         Scene scene2 = new Scene(root);
         Stage window = (Stage) tableView.getScene().getWindow();
@@ -165,7 +168,9 @@ public class casesSceneController extends userSceneController implements Initial
     }
 
     public void onSearchClick(ActionEvent event) {
-        ThreadCases threadCases = new ThreadCases();
+        String[] filter = new String[]{searchCriminalGroup.getText(), searchKeywords.getText(),
+                    searchStatus.getValue(), searchSeverity.getText()};
+        ThreadCases threadCases = new ThreadCases(filter);
         setUpTable(threadCases);
     }
 }

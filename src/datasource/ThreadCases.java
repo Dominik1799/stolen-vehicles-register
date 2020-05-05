@@ -8,18 +8,15 @@ import java.util.List;
 
 public class ThreadCases {
     ObservableList<Case> cases = FXCollections.observableArrayList();
-    Case kejs;
+    String[] args;
 
-    public ThreadCases() {
-    }
-
-    public ThreadCases(Case kejs) {
-        this.kejs = kejs;
+    public ThreadCases(String[] args) {
+        this.args = args;
     }
 
 
     public void parseCases(){
-        List<Case> cases = CasesDatasource.getInstance().getCases(this.kejs);
+        List<Case> cases = CasesDatasource.getInstance().getCases(this.args);
         this.cases = FXCollections.observableArrayList(cases);
     }
 

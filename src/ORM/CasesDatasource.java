@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CasesDatasource extends ManageDatasource{
     protected static CasesDatasource instance = null;
-    protected int defaultLimit = 16;
+    protected int defaultLimit = 20;
 
     private CasesDatasource() {
     }
@@ -29,40 +29,53 @@ public class CasesDatasource extends ManageDatasource{
         tx.commit();
     }
 
-    public int getCriminalGroupId(String criminalName) {
+    public Integer getCriminalGroupId(String criminalName) {
         // finds the criminal based on his name and returns id of his criminalgroup as integer
         this.createConnection();
         Session session = factory.openSession();
 
-        String hql = String.format("SELECT C.groupID FROM Criminal AS C WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%%s%%')", criminalName);
+        String hql = String.format("SELECT C.id FROM Criminal C WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%%s%%')", criminalName);
         //should have more restrictions to avoid collisions of names but whatever
         Query query = session.createQuery(hql);
-        //query.setParameter("name", criminalName);
-        List<Integer> results = query.list();
+        List<String> results = query.list();
         if(results.isEmpty()) {
             Dialog.getInstance().errorDialog("No criminal with that name was found");
             return 0;
         }
-        return results.get(0);
+        return Integer.valueOf(results.get(0));
     }
 
-    public List<Case> getCases(Case kejs) {
+    public List<Case> getCases(String ... args) {
         String hql;
-        if(kejs != null) {
-            hql = "SELECT C from Case C WHERE  C.id < 30";
-        }
-        else {
-            hql = "SELECT C FROM Case C WHERE C.id < 16";
-        }
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        Query<Case> query = session.createQuery(hql);
-        query.setMaxResults(this.defaultLimit);
+        Query query;
+        query = session.createQuery(this.buildQuery(args));
         List<Case> cases = (List<Case>) query.list();
         tx.commit();
         session.close();
         return cases;
     }
+
+    private String buildQuery(String ... args){
+        String[] conditions = {" WHERE upper(C.criminalGroup.groupName) LIKE upper('%?%')", " WHERE C.severity=?", " WHERE C.status=?", " WHERE UPPER(C.description) LIKE UPPER('%?%')"};
+        boolean isAlreadyConditioned = false;
+        StringBuilder finalQuery = new StringBuilder("FROM Case C");
+        for (int i=0;i<args.length;i++){
+            if (args[i] != null)
+                continue;
+            if (isAlreadyConditioned){
+                finalQuery.append(" and");
+                conditions[i] = conditions[i].replace(" WHERE","");
+            }
+            isAlreadyConditioned = true;
+            System.out.println(finalQuery.toString() + " " +  i);
+            finalQuery.append(conditions[i].replace("?",args[i]));
+        }
+        System.out.println(finalQuery);
+        return finalQuery.toString() + " order by id";
+    }
+
 
 }

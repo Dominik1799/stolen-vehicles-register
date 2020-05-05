@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Case {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne

@@ -11,27 +11,34 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class casesDetailController extends userSceneController implements Initializable {
-    private Case kejs;
+    Case aCase;
     @FXML
     private Text caseId, status, severity, nameofgroup, leader, description;
     @FXML
     JFXProgressBar progressBar;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setDetails();
+    }
+
+    public Case getaCase() {
+        return aCase;
+    }
+
+    public void setaCase(Case aCase) {
+        this.aCase = aCase;
     }
 
     public void setDetails(){
-        this.caseId.setText(String.valueOf(kejs.getId()));
-        this.status.setText(String.valueOf(kejs.getStatus()));
-        this.severity.setText(String.valueOf(kejs.getSeverity()));
-        this.description.setText(kejs.getDescription());
-        if (kejs.getCriminalGroup().getId()== 0){
+        this.caseId.setText(String.valueOf(this.aCase.getId()));
+        this.status.setText(String.valueOf(this.aCase.getStatus()));
+        this.severity.setText(String.valueOf(this.aCase.getSeverity()));
+        this.description.setText(this.aCase.getDescription());
+        if (this.aCase.getCriminalGroup().getId()== 0){
             this.nameofgroup.setText("No crimminal group");
         } else {
-            this.nameofgroup.setText(kejs.getCriminalGroup().getGroupName());
+            this.nameofgroup.setText(this.aCase.getCriminalGroup().getGroupName());
         }
-        Criminal c = kejs.getCriminalGroup().getLeader();
+        Criminal c = this.aCase.getCriminalGroup().getLeader();
         this.leader.setText(c.getName() + " " + c.getSurname());
     }
 
