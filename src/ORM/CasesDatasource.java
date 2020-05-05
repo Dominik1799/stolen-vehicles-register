@@ -46,12 +46,14 @@ public class CasesDatasource extends ManageDatasource{
     }
 
     public List<Case> getCases(String ... args) {
-        String hql;
+        String hql = this.buildQuery(args);
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         Query query;
-        query = session.createQuery(this.buildQuery(args));
+        query = session.createQuery(hql);
+        if(hql.length() < 70) //i know...
+            query.setMaxResults(this.defaultLimit);
         List<Case> cases = (List<Case>) query.list();
         tx.commit();
         session.close();
@@ -59,21 +61,21 @@ public class CasesDatasource extends ManageDatasource{
     }
 
     private String buildQuery(String ... args){
-        String[] conditions = {" WHERE upper(C.criminalGroup.groupName) LIKE upper('%?%')", " WHERE C.severity=?", " WHERE C.status=?", " WHERE UPPER(C.description) LIKE UPPER('%?%')"};
+        String[] conditions = {" WHERE upper(C.criminalGroup.groupName) LIKE upper('%?%')"," WHERE UPPER(C.description) LIKE UPPER('%?%')" , " WHERE C.status=?", " WHERE C.severity=?"};
         boolean isAlreadyConditioned = false;
         StringBuilder finalQuery = new StringBuilder("FROM Case C");
         for (int i=0;i<args.length;i++){
-            if (args[i] != null)
+            if (args[i] == null || args[i].isEmpty() || args[i].equals("0")) {
                 continue;
+            }
             if (isAlreadyConditioned){
                 finalQuery.append(" and");
                 conditions[i] = conditions[i].replace(" WHERE","");
             }
             isAlreadyConditioned = true;
-            System.out.println(finalQuery.toString() + " " +  i);
             finalQuery.append(conditions[i].replace("?",args[i]));
         }
-        System.out.println(finalQuery);
+        System.out.println(finalQuery.toString());
         return finalQuery.toString() + " order by id";
     }
 

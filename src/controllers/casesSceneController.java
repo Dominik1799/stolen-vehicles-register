@@ -169,7 +169,7 @@ public class casesSceneController extends userSceneController implements Initial
 
     public void onSearchClick(ActionEvent event) {
         String[] filter = new String[]{searchCriminalGroup.getText(), searchKeywords.getText(),
-                    searchStatus.getValue(), searchSeverity.getText()};
+                String.valueOf(searchStatus.getSelectionModel().getSelectedIndex()+1) , searchSeverity.getText()};
         ThreadCases threadCases = new ThreadCases(filter);
         setUpTable(threadCases);
     }
