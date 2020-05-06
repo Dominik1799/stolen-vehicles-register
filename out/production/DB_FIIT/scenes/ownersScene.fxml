@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import com.jfoenix.controls.JFXProgressBar?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.Shadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <AnchorPane prefHeight="647.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ownerSceneController">
    <children>
       <StackPane prefHeight="647.0" prefWidth="1067.0">
@@ -23,6 +14,7 @@
                   <JFXHamburger fx:id="hamburgerOpen" prefHeight="41.0" prefWidth="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <TableView fx:id="tableView" layoutX="82.0" layoutY="155.0" prefHeight="430.0" prefWidth="903.0">
                      <columns>
+                        <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
                         <TableColumn fx:id="firstname" prefWidth="120.0" text="Fistname" />
                         <TableColumn fx:id="lastname" prefWidth="120.0" text="Lastname" />
                         <TableColumn fx:id="count" prefWidth="75.0" text="Count" />
@@ -53,6 +45,8 @@
                   </JFXButton>
                   <JFXProgressBar fx:id="progressBar" layoutX="434.0" layoutY="598.0" prefWidth="197.0" />
                   <Label layoutX="80.0" layoutY="33.0" text="Top most stoled vehicles" />
+                  <JFXTextField fx:id="nameFilter" layoutX="234.0" layoutY="106.0" promptText="&lt;Name&gt;" />
+                  <JFXTextField fx:id="amountFilter" layoutX="434.0" layoutY="106.0" promptText="&lt;Amount&gt;" />
                </children>
             </AnchorPane>
          </children>

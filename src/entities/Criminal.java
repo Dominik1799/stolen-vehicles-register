@@ -1,16 +1,38 @@
 package entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
-import java.util.Date;
 
+@Entity
+@Table(name = "criminal")
 public class Criminal {
-    private String id, name, surname, sex, nationality, description, groupAmount,birthday;
-    private int caseid;
-    private String group;
-    private int age,groupID;
+    @Id
+    private String id;
 
+    @Column(name = "firstname")
+    private String name;
+    @Column(name = "lastname")
+    private String surname;
+
+    @Transient
+    private int groupID;
+    @Transient
+    private String sex;
+    @Transient
+    private String nationality;
+    @Transient
+    private String description;
+    @Transient
+    private String groupAmount;
+    @Column(name = "birthdate")
+    private String birthday;
+    @Transient
+    private int caseid;
+    @Transient
+    private String group;
+    @Transient
+    private int age;
 
     public String getId() {
         return id;
@@ -34,6 +56,9 @@ public class Criminal {
 
     public void setGroupID(int groupID) {
         this.groupID = groupID;
+    }
+
+    public Criminal() {
     }
 
     public Criminal(String id, String name, String surname, String sex, String nationality, String description, int caseid, String group, LocalDate birthdate, String groupAmount, int groupID){
@@ -62,18 +87,6 @@ public class Criminal {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getName() {
         return name;
     }
@@ -88,6 +101,18 @@ public class Criminal {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getSex() {

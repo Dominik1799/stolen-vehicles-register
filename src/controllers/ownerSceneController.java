@@ -15,17 +15,23 @@ import java.util.ResourceBundle;
 public class ownerSceneController extends vehicleSceneController{
     ObservableList<Owner> owners = FXCollections.observableArrayList();
     @FXML private TableView<Owner> tableView;
-    @FXML private TableColumn<Owner, Integer> count;
+    @FXML private TableColumn<Owner, Integer> count, id;
     @FXML private TableColumn<Owner, String> firstname, lastname;
 
     public void initialize(URL url, ResourceBundle rb) {
         prepareSlideMenuAnimation();
-
-
         firstname.setCellValueFactory(new PropertyValueFactory<Owner, String>("firstname"));
         lastname.setCellValueFactory(new PropertyValueFactory<Owner, String>("lastname"));
         count.setCellValueFactory(new PropertyValueFactory<Owner, Integer>("count"));
-        this.setUpTable(new ThreadOwners());
+        id.setCellValueFactory(new PropertyValueFactory<Owner, Integer>("id"));
+        progressBar.setVisible(false);
+    }
+
+    public void listTables() {
+        String tempName = "", tempAmount = "16";
+        if(!this.nameFilter.getText().isEmpty()) tempName = this.nameFilter.getText();
+        if (!this.amountFilter.getText().isEmpty()) tempAmount = this.amountFilter.getText();
+        this.setUpTable(new ThreadOwners(tempName, tempAmount));
     }
 
     public void setUpTable(ThreadOwners threadOwners){
@@ -40,7 +46,5 @@ public class ownerSceneController extends vehicleSceneController{
         });
         watcher.start();
     }
-
-
 
 }

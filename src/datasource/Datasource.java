@@ -4,7 +4,6 @@ import entities.Criminal;
 import entities.Team;
 import entities.User;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 
 public class Datasource {
@@ -97,7 +96,7 @@ public class Datasource {
 
     public void updateUser(User user) {
 
-        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), String.valueOf(user.getId()));
+        String query = String.format("UPDATE Users SET firstname= '%s', lastname= '%s', birthdate= '%s' WHERE id= '%s';", user.getFirstName(), user.getLastName(), user.getBirthdate(), user.getId());
         Connection connection = openConnection();
         try {
             assert connection != null;
@@ -145,7 +144,7 @@ public class Datasource {
     }
 
     public User checkLoggingData(String id) {
-        String query = "SELECT * FROM Users WHERE id='" + id + "';";
+        String query = String.format("SELECT * FROM Users WHERE id='%s';", id);
 
         Connection connection = openConnection();
         try {
@@ -178,7 +177,7 @@ public class Datasource {
     }
 
     public ResultSet getCriminalsWithOffset(int offset,String ... args) {
-        String query = buildQueryForCrimminals(args) + " ORDER BY id LIMIT 16 OFFSET " + String.valueOf(offset);
+        String query = buildQueryForCrimminals(args) + " ORDER BY id LIMIT 16 OFFSET " + offset;
         Connection connection = openConnection();
         if (connection == null) {
             System.out.println("Something went wrong");
@@ -355,8 +354,20 @@ public class Datasource {
         return "";
     }
 
-    public ResultSet getTopCars() {
-        String query = "SELECT id, count, owner, brand, model, modelyear, vin FROM (SELECT vehicleid, COUNT(*) FROM vehicle_history GROUP BY vehicleid ORDER BY COUNT DESC LIMIT 16) AS topvehicles INNER JOIN vehicles ON vehicles.id = topvehicles.vehicleid;";
+    public ResultSet getTopCars(String name, String amount) {
+
+        String query = String.format("SELECT vehicles.id, count, concat(owners.firstname, ' ', owners.lastname) AS ownername, brand, model, modelyear, vin \n" +
+                        "FROM (SELECT vehicleid, COUNT(*) " +
+                        "FROM vehicle_history " +
+                        "GROUP BY vehicleid " +
+                        "ORDER BY COUNT DESC) AS topvehicles " +
+                        "INNER JOIN vehicles ON " +
+                        "vehicles.id = topvehicles.vehicleid " +
+                        "inner join owners on " +
+                        "owner = owners.id " +
+                        "WHERE UPPER(vehicles.model) LIKE UPPER('%%%s%%') OR UPPER(vehicles.brand) LIKE UPPER('%%%s%%')" +
+                        "LIMIT %s", name, name, amount);
+
         Connection connection = openConnection();
         try {
             ResultSet result = connection.createStatement().executeQuery(query);
@@ -368,8 +379,13 @@ public class Datasource {
         }
     }
 
-    public ResultSet getTopOwners() {
-        String query = "SELECT firstname,lastname,vehicleCount FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) table2 on table2.owner=id where vehicleCount > 1 ORDER BY vehicleCount desc";
+    public ResultSet getTopOwners(String name, String amount) {
+        String query = String.format("SELECT id, firstname,lastname,vehicleCount " +
+                "FROM owners INNER JOIN (SELECT owner,count(*) AS vehicleCount FROM vehicles GROUP BY owner) " +
+                "table2 on table2.owner=id WHERE UPPER(concat(owners.firstname, ' ', owners.lastname)) LIKE UPPER('%%%s%%') " +
+                "AND vehicleCount > 1 " +
+                "ORDER BY vehicleCount desc LIMIT %s;", name, amount);
+
         Connection connection = openConnection(); // :(
         try {
             ResultSet result = connection.createStatement().executeQuery(query);

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="449.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.casesDetailController">
+   <children>
+      <Text layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Case ID:" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Severity:" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name of group:" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="caseId" layoutX="73.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="status" layoutX="73.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="severity" layoutX="92.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="nameofgroup" layoutX="125.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="15.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leader:" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="leader" layoutX="73.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="description" layoutX="137.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"  wrappingWidth="350">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

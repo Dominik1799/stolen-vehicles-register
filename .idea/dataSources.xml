@@ -13,5 +13,15 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://postgresql.websupport.sk:5432/DB_FIIT</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="4c618f4a-9c8b-4233-a5d4-2d23665093ed">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/david/IdeaProjects/project-horvath_drobny/src/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://postgresql.websupport.sk:5432/DB_FIIT</jdbc-url>
+    </data-source>
   </component>
 </project>

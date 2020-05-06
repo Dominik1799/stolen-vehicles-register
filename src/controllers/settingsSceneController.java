@@ -25,8 +25,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class settingsSceneController extends userSceneController {
-    private ObservableList<String> ranks = FXCollections.observableArrayList();
-    private ObservableList<String> sexes = FXCollections.observableArrayList();
+    private final ObservableList<String> ranks = FXCollections.observableArrayList();
+    private final ObservableList<String> sexes = FXCollections.observableArrayList();
     @FXML
     private JFXButton update;
     @FXML
@@ -91,7 +91,7 @@ public class settingsSceneController extends userSceneController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "../scenes/userScene.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         userSceneController ctrl = loader.getController();
         ctrl.setUser(user);
         ctrl.showName();

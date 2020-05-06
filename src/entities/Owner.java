@@ -2,8 +2,16 @@ package entities;
 
 public class Owner {
     private String firstname, lastname;
-    private int count;
+    private int count, id;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Owner(String firstname, String lastname, int count) {
         this.firstname = firstname;

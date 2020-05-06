@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class ThreadCriminals {
     private int offset = 0;
-    private String[] args;
+    private final String[] args;
     ObservableList<Criminal> criminals = FXCollections.observableArrayList();
     public ThreadCriminals(int offset,String ... args){
         this.offset = offset;
