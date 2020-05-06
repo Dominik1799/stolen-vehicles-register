@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.Dialog;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -150,19 +149,21 @@ public class casesSceneController extends userSceneController implements Initial
 
 
 
-    public void showDetail(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/casesDetailScene.fxml"));
-        Case aCase =  tableView.getSelectionModel().getSelectedItem();
-        Parent root = loader.load();
-        casesDetailController ctrl = loader.getController();
-        ctrl.setaCase(aCase);
-        ctrl.setDetails();
-        Scene scene2 = new Scene(root);
-        Stage window = (Stage) tableView.getScene().getWindow();
-        window.setTitle("Case of:" + aCase.getCriminalGroup().getGroupName());
-        window.setScene(scene2);
-        window.show();
+    public void showDetail() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "../scenes/casesDetailScene.fxml"));
+            Parent root = (Parent) loader.load();
+            casesDetailController ctrl = loader.getController();
+            ctrl.setaCase(tableView.getSelectionModel().getSelectedItem());
+            ctrl.setDetails();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onSearchClick(ActionEvent event) {

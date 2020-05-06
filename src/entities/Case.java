@@ -72,6 +72,7 @@ public class Case {
 
     public String getLeaderName() {
         return this.getCriminalGroup().getLeader().getName() + " " + this.criminalGroup.getLeader().getSurname();
+
     }
     public String getCriminalGroupName() {
         return this.criminalGroup.getGroupName();
