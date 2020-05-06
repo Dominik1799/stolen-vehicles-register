@@ -50,11 +50,6 @@
                      </children>
                   </StackPane>
                </content></Tab>
-            <Tab fx:id="updateCase" text="Update case">
-            <content>
-                <StackPane />
-            </content>
-            </Tab>
             <Tab fx:id="searchTab" text="Search cases">
                <content>
                     <StackPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="647.0" prefWidth="1067.0">

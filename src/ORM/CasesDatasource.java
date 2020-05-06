@@ -75,7 +75,6 @@ public class CasesDatasource extends ManageDatasource{
             isAlreadyConditioned = true;
             finalQuery.append(conditions[i].replace("?",args[i]));
         }
-        System.out.println(finalQuery.toString());
         return finalQuery.toString() + " order by id";
     }
 
