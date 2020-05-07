@@ -1,5 +1,6 @@
 package ORM;
 import entities.Case;
+import entities.Criminal;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -60,8 +61,23 @@ public class CasesDatasource extends ManageDatasource{
         return cases;
     }
 
+    public Criminal getLeader(int caseId) {
+        this.createConnection();
+        Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        String hql = "SELECT C FROM Criminal C WHERE C.caseid = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", caseId);
+        List<Criminal> leader = query.list();
+        tx.commit();
+        session.close();
+        if(leader.isEmpty()) return null;
+        return leader.get(0);
+
+    }
+
     private String buildQuery(String ... args){
-        String[] conditions = {" WHERE upper(C.criminalGroup.groupName) LIKE upper('%?%')"," WHERE UPPER(C.description) LIKE UPPER('%?%')" , " WHERE C.status=?", " WHERE C.severity=?"};
+        String[] conditions = {" WHERE UPPER(C.criminalGroup.groupName) LIKE UPPER('%?%')"," WHERE UPPER(C.description) LIKE UPPER('%?%')" , " WHERE C.status=?", " WHERE C.severity=?"};
         boolean isAlreadyConditioned = false;
         StringBuilder finalQuery = new StringBuilder("FROM Case C");
         for (int i=0;i<args.length;i++){
@@ -69,13 +85,13 @@ public class CasesDatasource extends ManageDatasource{
                 continue;
             }
             if (isAlreadyConditioned){
-                finalQuery.append(" and");
+                finalQuery.append(" AND");
                 conditions[i] = conditions[i].replace(" WHERE","");
             }
             isAlreadyConditioned = true;
             finalQuery.append(conditions[i].replace("?",args[i]));
         }
-        return finalQuery.toString() + " order by id";
+        return finalQuery.toString() + " ORDER BY id";
     }
 
 

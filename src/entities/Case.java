@@ -110,10 +110,12 @@ public class Case {
 
 
     public String getLeaderName() {
-        return this.getCriminalGroup().getLeader().getName() + " " + this.criminalGroup.getLeader().getSurname();
+        if(this.getCriminalGroup().getId() != 0)
+            return this.getCriminalGroup().getLeader().getName() + " " + this.criminalGroup.getLeader().getSurname();
+        else return null;
     }
     public String getCriminalGroupName() {
-        return this.criminalGroup.getGroupName(); //not good...
+        return this.criminalGroup.getGroupName();
     }
 
 

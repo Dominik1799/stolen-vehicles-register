@@ -1,5 +1,6 @@
 package controllers;
 
+import ORM.CasesDatasource;
 import com.jfoenix.controls.JFXProgressBar;
 import datasource.Datasource;
 import entities.Case;
@@ -58,11 +59,16 @@ public class casesDetailController implements Initializable {
         } else {
             this.nameofgroup.setText(this.aCase.getCriminalGroup().getGroupName());
         }
-        Criminal c = this.aCase.getCriminalGroup().getLeader();
-        if(c != null)
+        String leaderName = aCase.getLeaderName();
+        if(leaderName != null)
             this.leader.setText(aCase.getLeaderName());
-        else
-            this.leader.setText("Unknown");
+        else {
+            Criminal c = CasesDatasource.getInstance().getLeader(this.aCase.getId());
+            if(c != null)
+                this.leader.setText(c.getName() + " " + c.getSurname());
+            else
+                this.leader.setText("Unknown");
+        }
     }
 
 
