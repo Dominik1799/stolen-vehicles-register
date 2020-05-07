@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CasesDatasource extends ManageDatasource{
     protected static CasesDatasource instance = null;
-    protected int defaultLimit = 20;
+    protected int defaultLimit = 16;
 
     private CasesDatasource() {
     }
@@ -45,15 +45,15 @@ public class CasesDatasource extends ManageDatasource{
         return Integer.valueOf(results.get(0));
     }
 
-    public List<Case> getCases(String ... args) {
+    public List<Case> getCases(int offset, String ... args) {
         String hql = this.buildQuery(args);
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         Query query;
         query = session.createQuery(hql);
-        if(hql.length() < 70) //i know...
-            query.setMaxResults(this.defaultLimit);
+        query.setFirstResult(offset);
+        query.setMaxResults(this.defaultLimit);
         List<Case> cases = (List<Case>) query.list();
         tx.commit();
         session.close();

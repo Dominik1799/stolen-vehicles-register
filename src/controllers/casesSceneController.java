@@ -1,6 +1,7 @@
 package controllers;
 
 import ORM.CasesDatasource;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
@@ -29,6 +30,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class casesSceneController extends userSceneController implements Initializable {
+    @FXML JFXButton next,back;
     @FXML JFXHamburger hamburgerOpen1;
     @FXML TabPane tabPane;
     @FXML Tab searchTab;
@@ -42,6 +44,10 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML private TableColumn<Case, Integer> status;
     @FXML private TableColumn<Case, Integer> severity;
     ObservableList<String> statuses = FXCollections.observableArrayList();
+    int offset = 0;
+    int step = 16;
+    String[] filter;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -166,10 +172,27 @@ public class casesSceneController extends userSceneController implements Initial
         }
     }
 
+    public void onNextClick(ActionEvent event){
+        back.setDisable(false);
+        this.offset = this.offset + step;
+        ThreadCases threadCases = new ThreadCases(this.offset,this.filter);
+        setUpTable(threadCases);
+    }
+    public void onBackClick(ActionEvent event){
+        this.offset = this.offset - step;
+        if (this.offset == 0)
+            back.setDisable(true);
+        ThreadCases threadCases = new ThreadCases(this.offset,this.filter);
+        setUpTable(threadCases);
+    }
+
+
     public void onSearchClick(ActionEvent event) {
-        String[] filter = new String[]{searchCriminalGroup.getText(), searchKeywords.getText(),
+        this.offset = 0;
+        next.setDisable(false);
+        this.filter = new String[]{searchCriminalGroup.getText(), searchKeywords.getText(),
                 String.valueOf(searchStatus.getSelectionModel().getSelectedIndex()+1) , searchSeverity.getText()};
-        ThreadCases threadCases = new ThreadCases(filter);
+        ThreadCases threadCases = new ThreadCases(this.offset, this.filter);
         setUpTable(threadCases);
     }
 }
