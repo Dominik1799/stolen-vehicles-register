@@ -54,7 +54,7 @@ public class casesSceneController extends userSceneController implements Initial
 
         caseID.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
         criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroupName"));
-        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("status"));
+        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("statusName"));
         severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
         prepareStatuses();
         prepareSlideMenuAnimation();
@@ -62,16 +62,24 @@ public class casesSceneController extends userSceneController implements Initial
 
     private void prepareStatuses() {
         //creates list of statuses in the combobox
-        ResultSet casestatus = Datasource.getInstance().selectAllFrom("case_status");
-        try {
-            while (casestatus.next())
-                statuses.add(casestatus.getString("status"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        this.statuses = getStatuses();
         this.createStatus.setItems(statuses);
         this.searchStatus.setItems(statuses);
     }
+
+    private ObservableList<String> getStatuses() {
+        //creates list of statuses in the combobox
+        ObservableList<String> statusList = FXCollections.observableArrayList();
+        ResultSet casestatus = Datasource.getInstance().selectAllFrom("case_status");
+        try {
+            while (casestatus.next())
+                statusList.add(casestatus.getString("status"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return statusList;
+    }
+
 
     public void setUpTable(ThreadCases threadCases){
         Thread t = new Thread(threadCases::parseCases);
@@ -118,7 +126,7 @@ public class casesSceneController extends userSceneController implements Initial
 
     private Case createCase() {
         Case kejs = new Case();
-        kejs.setStatus(this.statuses.indexOf(this.createStatus.getValue()));
+        kejs.setStatusId(this.statuses.indexOf(this.createStatus.getValue()));
         kejs.setDescription(this.createDescription.getText());
         kejs.setSeverity(Integer.parseInt(this.createSeverity.getText()));
 

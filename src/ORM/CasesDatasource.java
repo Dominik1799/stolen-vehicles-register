@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CasesDatasource extends ManageDatasource{
     protected static CasesDatasource instance = null;
-    protected int defaultLimit = 16;
+    protected int defaultLimit = 17;
 
     private CasesDatasource() {
     }

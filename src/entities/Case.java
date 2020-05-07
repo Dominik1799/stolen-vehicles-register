@@ -2,6 +2,31 @@ package entities;
 
 import javax.persistence.*;
 
+
+@Entity(name = "case_status")
+class Status {
+    @Id
+    private int id;
+    @Column(name = "status")
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
 @Entity
 @Table(name= "cases")
 public class Case {
@@ -16,8 +41,10 @@ public class Case {
 
     @Column(name = "description")
     private String description;
-    @Column(name = "status")
-    private int status;
+
+    @OneToOne
+    @JoinColumn(name = "status")
+    private Status status;
 
     @Column(name = "severity")
     private int severity;
@@ -27,6 +54,10 @@ public class Case {
     }
     public Case(String name) {
 
+    }
+
+    public String getStatusName() {
+        return this.getStatus().getName();
     }
 
     public Integer getId() {
@@ -41,8 +72,24 @@ public class Case {
         return criminalGroup;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public void setCriminalGroup(CriminalGroup criminalGroup) {
         this.criminalGroup = criminalGroup;
+    }
+
+    public void setStatusId(int id) {
+        this.status.setId(id);
+    }
+
+    public int getStatusId() {
+        return this.status.getId();
     }
 
     public String getDescription() {
@@ -51,14 +98,6 @@ public class Case {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public int getSeverity() {

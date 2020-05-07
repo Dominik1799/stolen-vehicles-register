@@ -50,7 +50,7 @@ public class casesDetailController implements Initializable {
 
     public void setDetails(){
         this.caseId.setText(String.valueOf(this.aCase.getId()));
-        this.status.setText(getStatuses().get(this.aCase.getStatus()-1));
+        this.status.setText(getStatuses().get(this.aCase.getStatusId()-1));
         this.severity.setText(String.valueOf(this.aCase.getSeverity()));
         this.description.setText(this.aCase.getDescription());
         if (this.aCase.getCriminalGroup().getId()== 0){
