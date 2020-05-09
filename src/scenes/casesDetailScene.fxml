@@ -61,7 +61,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text fx:id="description" layoutX="137.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"  wrappingWidth="350">
+      <Text fx:id="description" layoutX="137.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"  wrappingWidth="300">
          <font>
             <Font size="16.0" />
          </font>

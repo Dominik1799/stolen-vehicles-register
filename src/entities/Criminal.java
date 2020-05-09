@@ -15,19 +15,19 @@ public class Criminal {
     @Column(name = "lastname")
     private String surname;
 
-    @Transient
+    @Column(name = "criminalgroup")
     private int groupID;
     @Transient
     private String sex;
-    @Transient
+    @Column(name = "nationality")
     private String nationality;
-    @Transient
+    @Column(name = "description")
     private String description;
     @Transient
     private String groupAmount;
-    @Column(name = "birthdate")
-    private String birthday;
     @Transient
+    private String birthday;
+    @Column(name = "case")
     private int caseid;
     @Transient
     private String group;
