@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import datasource.ThreadCriminalAge;
+import entities.Case;
 import entities.CriminalAgeGroup;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,15 +40,23 @@ public class casesCriminalAgeController extends casesSceneController{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        caseID.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
+        criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroupName"));
+        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("statusName"));
+        severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
+        prepareStatuses();
+        prepareSlideMenuAnimation();
+
         criminalGroupName.setCellValueFactory(new PropertyValueFactory<CriminalAgeGroup, String>("groupName"));
         criminalAmount.setCellValueFactory(new PropertyValueFactory<CriminalAgeGroup, Integer>("criminalAmount"));
         averageAmount.setCellValueFactory(new PropertyValueFactory<CriminalAgeGroup, Integer>("averageAge"));
         prepareSlideMenuAnimation();
+        offset = 0;
     }
 
 
 
-    public void setUpTable(ThreadCriminalAge threadCriminalAge) {
+    public void setUpTableAge(ThreadCriminalAge threadCriminalAge) {
         Thread t = new Thread(threadCriminalAge::parseCriminals);
         t.start();
         Thread watcher = new Thread(() -> {
@@ -59,22 +68,22 @@ public class casesCriminalAgeController extends casesSceneController{
         });
         watcher.start();
     }
-    public void onNextClick(ActionEvent event) {
+    public void onNextClick1(ActionEvent event) {
         back1.setDisable(false);
         this.offset = this.offset + step;
-        ThreadCriminalAge threadCriminalAge = new ThreadCriminalAge(this.name, this.offset, this.age, this.getCompareSymbol(), this.desc);
-        setUpTable(threadCriminalAge);
+        ThreadCriminalAge threadCriminalAge = new ThreadCriminalAge(this.name, this.offset, this.age, this.getCompare(), this.desc);
+        setUpTableAge(threadCriminalAge);
     }
 
-    public void onBackClick(ActionEvent event) {
+    public void onBackClick1(ActionEvent event) {
         this.offset = this.offset - step;
         if (this.offset == 0)
             back1.setDisable(true);
-        ThreadCriminalAge threadCriminalAge = new ThreadCriminalAge(this.name, this.offset, this.age, this.getCompareSymbol(), this.desc);
-        setUpTable(threadCriminalAge);
+        ThreadCriminalAge threadCriminalAge = new ThreadCriminalAge(this.name, this.offset, this.age, this.getCompare(), this.desc);
+        setUpTableAge(threadCriminalAge);
     }
 
-    private String getCompareSymbol() {
+    protected String getCompare() {
         String compare = ">";
         if(youngerThan.isSelected()) compare = "<";
         return compare;
@@ -93,8 +102,8 @@ public class casesCriminalAgeController extends casesSceneController{
         }
         if(youngest.isSelected()) this.desc = false;
 
-        ThreadCriminalAge threadCriminalAge = new ThreadCriminalAge(this.name, this.offset, this.age, this.getCompareSymbol(), this.desc);
-        setUpTable(threadCriminalAge);
+        ThreadCriminalAge threadCriminalAge = new ThreadCriminalAge(this.name, this.offset, this.age, this.getCompare(), this.desc);
+        setUpTableAge(threadCriminalAge);
         next1.setDisable(false);
     }
 }

@@ -15,16 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import utilities.Dialog;
 
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class casesSceneController extends userSceneController implements Initializable {
     @FXML
@@ -44,42 +41,31 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML
     protected JFXProgressBar progressBar;
     @FXML
-    private TableView<Case> tableView;
+     protected TableView<Case> tableView;
     @FXML
-    private TableColumn<Case, String> criminalGroup;
+     protected TableColumn<Case, String> criminalGroup;
     @FXML
-    private TableColumn<Case, Integer> caseID;
+     protected TableColumn<Case, Integer> caseID;
     @FXML
-    private TableColumn<Case, Integer> status;
+     protected TableColumn<Case, Integer> status;
     @FXML
-    private TableColumn<Case, Integer> severity;
+     protected TableColumn<Case, Integer> severity;
     @FXML
-    private JFXRadioButton greaterEqualRB, lessEqualRB;
+     protected JFXRadioButton greaterEqualRB, lessEqualRB;
     ObservableList<String> statuses = FXCollections.observableArrayList();
     int offset = 0;
     int step = 16;
     String[] filter;
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-        caseID.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
-        criminalGroup.setCellValueFactory(new PropertyValueFactory<Case, String>("criminalGroupName"));
-        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("statusName"));
-        severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
-        prepareStatuses();
-        prepareSlideMenuAnimation();
-    }
-
-    private void prepareStatuses() {
+     protected void prepareStatuses() {
         //creates list of statuses in the combobox
         this.statuses = getStatuses();
         this.createStatus.setItems(statuses);
         this.searchStatus.setItems(statuses);
     }
 
-    private ObservableList<String> getStatuses() {
+     protected ObservableList<String> getStatuses() {
         //creates list of statuses in the combobox
         ObservableList<String> statusList = FXCollections.observableArrayList();
         ResultSet casestatus = Datasource.getInstance().selectAllFrom("case_status");
@@ -110,6 +96,7 @@ public class casesSceneController extends userSceneController implements Initial
         TranslateTransition openNav = new TranslateTransition(new Duration(350), navList);
         openNav.setToX(0);
         TranslateTransition closeNav = new TranslateTransition(new Duration(350), navList);
+        //three burgers please
         hamburgerOpen.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             if (navList.getTranslateX() != 0) {
                 openNav.play();
@@ -118,7 +105,6 @@ public class casesSceneController extends userSceneController implements Initial
                 closeNav.play();
             }
         });
-        //three burgers please
         hamburgerOpen1.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             if (navList.getTranslateX() != 0) {
                 openNav.play();
@@ -144,7 +130,7 @@ public class casesSceneController extends userSceneController implements Initial
     }
 
 
-    private Case createCase() {
+     protected Case createCase() {
         Case kejs = new Case();
         kejs.setStatusId(this.statuses.indexOf(this.createStatus.getValue()));
         kejs.setDescription(this.createDescription.getText());
@@ -212,7 +198,7 @@ public class casesSceneController extends userSceneController implements Initial
         setUpTable(threadCases);
     }
 
-    private String getCompareSymbol() {
+     protected String getCompareSymbol() {
         //returns symbol for comparison (=,<,>) of Severity based on RBs
         if (greaterEqualRB.isSelected()) return ">=";
         if (lessEqualRB.isSelected()) return "<=";
