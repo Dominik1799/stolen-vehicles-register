@@ -10,6 +10,9 @@ class Status {
     @Column(name = "status")
     private String name;
 
+    public Status() {
+    }
+
     public int getId() {
         return id;
     }
@@ -44,7 +47,7 @@ public class Case {
 
     @OneToOne
     @JoinColumn(name = "status")
-    private Status status;
+    private Status status = new Status();
 
     @Column(name = "severity")
     private int severity;
