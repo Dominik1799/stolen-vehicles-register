@@ -1,10 +1,7 @@
 package controllers;
 
 import ORM.CasesDatasource;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.*;
 import datasource.Datasource;
 import datasource.ThreadCases;
 import entities.Case;
@@ -43,6 +40,7 @@ public class casesSceneController extends userSceneController implements Initial
     @FXML private TableColumn<Case, Integer> caseID;
     @FXML private TableColumn<Case, Integer> status;
     @FXML private TableColumn<Case, Integer> severity;
+    @FXML private JFXRadioButton greaterEqualRB, lessEqualRB;
     ObservableList<String> statuses = FXCollections.observableArrayList();
     int offset = 0;
     int step = 16;
@@ -183,24 +181,32 @@ public class casesSceneController extends userSceneController implements Initial
     public void onNextClick(ActionEvent event){
         back.setDisable(false);
         this.offset = this.offset + step;
-        ThreadCases threadCases = new ThreadCases(this.offset,this.filter);
+        ThreadCases threadCases = new ThreadCases(this.offset, this.getCompareSymbol(), this.filter);
         setUpTable(threadCases);
     }
     public void onBackClick(ActionEvent event){
         this.offset = this.offset - step;
         if (this.offset == 0)
             back.setDisable(true);
-        ThreadCases threadCases = new ThreadCases(this.offset,this.filter);
+        ThreadCases threadCases = new ThreadCases(this.offset,this.getCompareSymbol(), this.filter);
         setUpTable(threadCases);
+    }
+
+    private String getCompareSymbol() {
+        //returns symbol for comparison (=,<,>) of Severity based on RBs
+        if(greaterEqualRB.isSelected()) return ">=";
+        if(lessEqualRB.isSelected()) return "<=";
+        return "=";
     }
 
 
     public void onSearchClick(ActionEvent event) {
         this.offset = 0;
         next.setDisable(false);
+
         this.filter = new String[]{searchCriminalGroup.getText(), searchKeywords.getText(),
-                String.valueOf(searchStatus.getSelectionModel().getSelectedIndex()+1) , searchSeverity.getText()};
-        ThreadCases threadCases = new ThreadCases(this.offset, this.filter);
+                String.valueOf(searchStatus.getSelectionModel().getSelectedIndex()+1) ,  searchSeverity.getText()};
+        ThreadCases threadCases = new ThreadCases(this.offset, this.getCompareSymbol(), this.filter);
         setUpTable(threadCases);
     }
 }

@@ -4,14 +4,17 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
@@ -72,7 +75,7 @@
                                             </ContextMenu>
                                         </contextMenu>
                                     </TableView>
-                                    <JFXButton fx:id="search" layoutX="806.0" layoutY="98.0" mnemonicParsing="false" onAction="#onSearchClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Search" textFill="WHITE">
+                                    <JFXButton fx:id="search" layoutX="904.0" layoutY="98.0" mnemonicParsing="false" onAction="#onSearchClick" prefHeight="41.0" prefWidth="113.0" style="-fx-background-color: #4C5AA1;" text="Search" textFill="WHITE">
                                         <font>
                                             <Font size="15.0" />
                                         </font>
@@ -100,13 +103,24 @@
                                             <Font size="14.0" />
                                         </font>
                                     </Text>
-                                    <Text layoutX="618.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Severity:">
+                                    <Text layoutX="733.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Severity:">
                                         <font>
                                             <Font size="14.0" />
                                         </font>
                                     </Text>
                               <JFXComboBox fx:id="searchStatus" layoutX="434.0" layoutY="106.0" prefHeight="25.0" prefWidth="135.0" promptText="&lt;ANY&gt;" />
-                              <JFXTextField fx:id="searchSeverity" layoutX="618.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
+                              <JFXTextField fx:id="searchSeverity" layoutX="733.0" layoutY="106.0" promptText="&lt;ANY&gt;" />
+                              <Group layoutX="592.0" layoutY="60.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="greaterEqualRB" layoutX="2.0" layoutY="24.0" text="Greater or Equal">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="group1" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="equalsRB" layoutX="2.0" layoutY="-3.0" selected="true" text="Equals" toggleGroup="$group1" />
+                                    <JFXRadioButton fx:id="lessEqualRB" layoutX="2.0" layoutY="49.0" text="Less or Equal" toggleGroup="$group1" />
+                                 </children>
+                              </Group>
                                 </children>
                             </AnchorPane>
                         </children>

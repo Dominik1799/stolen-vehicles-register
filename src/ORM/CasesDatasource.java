@@ -46,8 +46,8 @@ public class CasesDatasource extends ManageDatasource{
         return Integer.valueOf(results.get(0));
     }
 
-    public List<Case> getCases(int offset, String ... args) {
-        String hql = this.buildQuery(args);
+    public List<Case> getCases(int offset, String compareSymbol, String ... args) {
+        String hql = this.buildQuery(compareSymbol, args);
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
@@ -76,8 +76,9 @@ public class CasesDatasource extends ManageDatasource{
 
     }
 
-    private String buildQuery(String ... args){
-        String[] conditions = {" WHERE UPPER(C.criminalGroup.groupName) LIKE UPPER('%?%')"," WHERE UPPER(C.description) LIKE UPPER('%?%')" , " WHERE C.status=?", " WHERE C.severity=?"};
+    private String buildQuery(String compareSymbol, String ... args){
+        String severity = String.format(" WHERE C.severity%s?", compareSymbol);
+        String[] conditions = {" WHERE UPPER(C.criminalGroup.groupName) LIKE UPPER('%?%')"," WHERE UPPER(C.description) LIKE UPPER('%?%')" , " WHERE C.status=?", severity};
         boolean isAlreadyConditioned = false;
         StringBuilder finalQuery = new StringBuilder("FROM Case C");
         for (int i=0;i<args.length;i++){
