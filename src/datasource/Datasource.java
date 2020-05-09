@@ -1,10 +1,13 @@
 package datasource;
 
 import entities.Criminal;
+import entities.CriminalAgeGroup;
 import entities.Team;
 import entities.User;
+import javafx.collections.FXCollections;
 
 import java.sql.*;
+import java.util.List;
 
 public class Datasource {
     private static Datasource instance = null;
@@ -217,6 +220,7 @@ public class Datasource {
     }
 
 
+
     public String translateSex(int id,String sex) {
         String query = "SELECT sex FROM sex WHERE id=" + id;
         if (!sex.equals(""))
@@ -397,6 +401,53 @@ public class Datasource {
         }
     }
 
+    public List<CriminalAgeGroup> findAgeCriminals(String criminalName, int offset, Integer age, String compare, boolean desc) {
+
+        String clause = "";
+        if(age != null)
+            clause = String.format(" AND demand.averageage %s %s ",compare, age);
+
+        String query = String.format(
+                "SELECT * " +
+                "FROM (SELECT DISTINCT " +
+                "criminal.criminalgroup, " +
+                "groupname , " +
+                "COUNT(*) OVER (PARTITION BY criminal.criminalgroup) AS CriminalAmount, " +
+                "EXTRACT(YEAR FROM (AVG(AGE(now(),birthdate)) over (PARTITION BY criminal.criminalgroup))) AS averageAge " +
+                "FROM criminal " +
+                "INNER JOIN criminalgroup " +
+                "ON criminal.criminalgroup = criminalgroup.id) AS  demand " +
+                "WHERE  demand.criminalgroup > 0 AND " +
+                "UPPER(groupname) LIKE UPPER('%%%s%%') %s" +
+                "ORDER BY averageage ", criminalName, clause);
+
+        if(desc) query += "DESC ";
+        query += "OFFSET " + offset + " LIMIT 16;";
+
+        Connection connection = openConnection(); // :(
+        try {
+            ResultSet result = connection.createStatement().executeQuery(query);
+            closeConnection(connection);
+            List<CriminalAgeGroup> list = FXCollections.observableArrayList();
+
+            while (result.next()) {
+                String name = null;
+                try {
+                    name = result.getString("groupname");
+                    Integer criminalAmount = result.getInt("criminalamount");
+                    Integer averageAge = result.getInt("averageage");
+                    list.add(new CriminalAgeGroup(name, criminalAmount, averageAge));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            return list;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 

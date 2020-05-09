@@ -94,6 +94,4 @@ public class CasesDatasource extends ManageDatasource{
         }
         return finalQuery.toString() + " ORDER BY id";
     }
-
-
 }
