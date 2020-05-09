@@ -33,13 +33,13 @@ group that they belong to.
 ## TODO
 ### Assignment
 
- - [ ] View all entries
- - [ ] View details of specific entry
- - [ ] Creating new entry
- - [ ]  Updating existing entry
- - [ ] Deleting existing entry
- - [ ] Transactions
- - [ ] GUI
+ - [x] View all entries
+ - [x] View details of specific entry
+ - [x] Creating new entry
+ - [x]  Updating existing entry
+ - [x] Deleting existing entry
+ - [x] Transactions
+ - [x] GUI
 
 ## Authors
 Dominik Horváth
