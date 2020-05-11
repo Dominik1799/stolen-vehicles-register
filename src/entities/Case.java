@@ -111,6 +111,10 @@ public class Case {
         this.severity = severity;
     }
 
+    public String getStatusString(){
+        return this.status.getName();
+    }
+
 
     public String getLeaderName() {
         if(this.getCriminalGroup().getId() != 0)

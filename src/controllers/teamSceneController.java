@@ -27,7 +27,7 @@ public class teamSceneController extends userSceneController {
     @FXML private TableColumn<User, String> firstName;
     @FXML private TableColumn<User,String> lastName;
     @FXML private TableColumn<Case, Integer> caseid;
-    @FXML private TableColumn<Case, Integer> status;
+    @FXML private TableColumn<Case, String> status;
     @FXML private TableColumn<Case, Integer> severity;
     @FXML
     JFXProgressBar progressBarTeams;
@@ -40,7 +40,7 @@ public class teamSceneController extends userSceneController {
         firstName.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
         lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
         caseid.setCellValueFactory(new PropertyValueFactory<Case, Integer>("id"));
-        status.setCellValueFactory(new PropertyValueFactory<Case, Integer>("status"));
+        status.setCellValueFactory(new PropertyValueFactory<Case, String>("statusString"));
         severity.setCellValueFactory(new PropertyValueFactory<Case, Integer>("severity"));
     }
 
