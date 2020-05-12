@@ -54,7 +54,7 @@ public class casesDetailController implements Initializable {
         this.status.setText(getStatuses().get(this.aCase.getStatusId()-1));
         this.severity.setText(String.valueOf(this.aCase.getSeverity()));
         this.description.setText(this.aCase.getDescription());
-        if (this.aCase.getCriminalGroup().getId()== 0){
+        if (this.aCase.getCriminalGroup() == null || this.aCase.getCriminalGroup().getId()== 0){
             this.nameofgroup.setText("No crimminal group");
         } else {
             this.nameofgroup.setText(this.aCase.getCriminalGroup().getGroupName());
