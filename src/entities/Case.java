@@ -117,12 +117,14 @@ public class Case {
 
 
     public String getLeaderName() {
-        if(this.getCriminalGroup().getId() != 0)
+        if(this.getCriminalGroup() != null && this.getCriminalGroup().getId() != 0)
             return this.getCriminalGroup().getLeader().getName() + " " + this.criminalGroup.getLeader().getSurname();
         else return null;
     }
     public String getCriminalGroupName() {
-        return this.criminalGroup.getGroupName();
+        if(this.criminalGroup != null)
+            return this.criminalGroup.getGroupName();
+        return "Unknown";
     }
 
 
