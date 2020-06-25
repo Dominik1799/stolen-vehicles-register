@@ -16,13 +16,11 @@ import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class settingsSceneController extends userSceneController {
     private final ObservableList<String> ranks = FXCollections.observableArrayList();
@@ -90,7 +88,7 @@ public class settingsSceneController extends userSceneController {
         Datasource.getInstance().updateUser(user);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/userScene.fxml"));
+                "/scenes/userScene.fxml"));
         Parent root = loader.load();
         userSceneController ctrl = loader.getController();
         ctrl.setUser(user);

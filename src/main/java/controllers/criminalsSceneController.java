@@ -2,28 +2,21 @@ package controllers;
 
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXProgressBar;
 import datasource.Datasource;
 import datasource.ThreadCriminals;
 import entities.Criminal;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -141,7 +134,7 @@ public class criminalsSceneController extends userSceneController implements Ini
     public void showDetail(ActionEvent event) throws IOException {
         Criminal criminal =  tableView.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/criminalDetailScene.fxml"));
+                "/scenes/criminalDetailScene.fxml"));
         Parent root = loader.load();
         criminalDetailController ctrl = loader.getController();
         ctrl.setCriminal(criminal);

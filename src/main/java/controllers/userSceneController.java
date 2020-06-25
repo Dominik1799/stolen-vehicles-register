@@ -72,7 +72,7 @@ public class userSceneController implements Initializable {
 
     public void onTeamClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/teamScene.fxml"));
+                "/scenes/teamScene.fxml"));
         Parent root = loader.load();
         teamSceneController ctrl = loader.getController();
         ctrl.setUser(user);
@@ -86,7 +86,7 @@ public class userSceneController implements Initializable {
 
     public void onCriminalsClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/criminalsScene.fxml"));
+                "/scenes/criminalsScene.fxml"));
         Parent root = loader.load();
         criminalsSceneController ctrl = loader.getController();
         ctrl.setUser(user);
@@ -99,7 +99,7 @@ public class userSceneController implements Initializable {
 
     public void onLogOutClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        Parent view2 = FXMLLoader.load(getClass().getResource("../scenes/loginScene.fxml"));
+        Parent view2 = FXMLLoader.load(getClass().getResource("/scenes/loginScene.fxml"));
         Scene scene2 = new Scene(view2);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);
@@ -108,7 +108,7 @@ public class userSceneController implements Initializable {
 
     public void onHomeClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/userScene.fxml"));
+                "/scenes/userScene.fxml"));
         Parent root = loader.load();
         userSceneController ctrl = loader.getController();
         ctrl.setUser(user);
@@ -122,7 +122,7 @@ public class userSceneController implements Initializable {
 
     public void onVehicleClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/vehiclesScene.fxml"));
+                "/scenes/vehiclesScene.fxml"));
         Parent root = loader.load();
         vehicleSceneController ctrl = loader.getController();
         ctrl.setUser(user);
@@ -135,7 +135,7 @@ public class userSceneController implements Initializable {
 
     public void onCasesClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/casesScene.fxml"));
+                "/scenes/casesScene.fxml"));
         Parent root = loader.load();
         casesSceneController ctrl = loader.getController();
         ctrl.setUser(user);
@@ -149,7 +149,7 @@ public class userSceneController implements Initializable {
 
     public void onActionSettings(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/settingsScene.fxml"));
+                "/scenes/settingsScene.fxml"));
         Parent root = loader.load();
         settingsSceneController ctrl = loader.getController();
         ctrl.setUser(user);

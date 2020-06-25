@@ -93,7 +93,7 @@ public class teamSceneController extends userSceneController {
     }
     public void onJoinTeamClick() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/teamChangeScene.fxml"));
+                "/scenes/teamChangeScene.fxml"));
         Parent root = loader.load();
         teamChangeController ctrl = loader.getController();
         ctrl.setUser(this.user);
@@ -105,10 +105,6 @@ public class teamSceneController extends userSceneController {
     }
 
     public void onLeaveTeamClick(){
-        if (this.team.getLeader().getId() == this.user.getId()){
-            System.out.println("pindur");
-            return;
-        }
         ThreadTeams threadTeams = new ThreadTeams();
         threadTeams.userToTeam = this.user;
         threadTeams.teamToUser = this.team;

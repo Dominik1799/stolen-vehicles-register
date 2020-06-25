@@ -70,7 +70,7 @@ public class vehicleSceneController extends userSceneController {
 
     public void onVehiclesClick(javafx.event.ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/vehiclesScene.fxml"));
+                "/scenes/vehiclesScene.fxml"));
         Parent root = loader.load();
         vehicleSceneController ctrl = loader.getController();
         ctrl.setUser(user);
@@ -85,7 +85,7 @@ public class vehicleSceneController extends userSceneController {
 
     public void onOwnersClick(javafx.event.ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/ownersScene.fxml"));
+                "/scenes/ownersScene.fxml"));
         Parent root = loader.load();
         ownerSceneController ctrl = loader.getController();
         ctrl.setUser(user);

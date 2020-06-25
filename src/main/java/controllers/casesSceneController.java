@@ -169,7 +169,7 @@ public class casesSceneController extends userSceneController implements Initial
     public void showDetail() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "../scenes/casesDetailScene.fxml"));
+                    "/scenes/casesDetailScene.fxml"));
             Parent root = (Parent) loader.load();
             casesDetailController ctrl = loader.getController();
             ctrl.setaCase(tableView.getSelectionModel().getSelectedItem());

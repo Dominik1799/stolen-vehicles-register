@@ -37,7 +37,7 @@ public class CasesDatasource extends ManageDatasource{
 
         String hql = String.format("SELECT C.id FROM Criminal C WHERE UPPER(CONCAT(C.name, ' ' , C.surname)) LIKE UPPER('%%%s%%')", criminalName);
         //should have more restrictions to avoid collisions of names but whatever
-        Query query = session.createQuery(hql);
+        Query<String> query = session.createQuery(hql);
         List<String> results = query.list();
         if(results.isEmpty()) {
             Dialog.getInstance().errorDialog("No criminal with that name was found");
@@ -51,11 +51,11 @@ public class CasesDatasource extends ManageDatasource{
         this.createConnection();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query;
+        Query<Case> query;
         query = session.createQuery(hql);
         query.setFirstResult(offset);
         query.setMaxResults(this.defaultLimit);
-        List<Case> cases = (List<Case>) query.list();
+        List<Case> cases = query.list();
         tx.commit();
         session.close();
         return cases;
@@ -66,7 +66,7 @@ public class CasesDatasource extends ManageDatasource{
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         String hql = "SELECT C FROM Criminal C WHERE C.caseid = :id";
-        Query query = session.createQuery(hql);
+        Query<Criminal> query = session.createQuery(hql);
         query.setParameter("id", caseId);
         List<Criminal> leader = query.list();
         tx.commit();

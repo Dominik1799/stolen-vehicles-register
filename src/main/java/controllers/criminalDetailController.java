@@ -1,14 +1,12 @@
 package controllers;
 
 import com.jfoenix.controls.JFXProgressBar;
-import datasource.Datasource;
 import datasource.ThreadCriminals;
 import entities.Criminal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -118,7 +116,7 @@ public class criminalDetailController implements Initializable {
     }
     public void showDetail(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "../scenes/criminalDetailScene.fxml"));
+                "/scenes/criminalDetailScene.fxml"));
         Criminal criminal =  tablePartners.getSelectionModel().getSelectedItem();
         Parent root = loader.load();
         criminalDetailController ctrl = loader.getController();

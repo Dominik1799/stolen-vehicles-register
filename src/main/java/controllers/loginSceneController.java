@@ -1,6 +1,5 @@
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import datasource.Datasource;
 import entities.User;
@@ -16,11 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import utilities.Dialog;
 
-import javax.swing.tree.ExpandVetoException;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -86,7 +82,7 @@ public class loginSceneController implements Initializable {
         User user = Datasource.getInstance().checkLoggingData(id);
         if (user != null) {
             //There is someone with credentials in database
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../scenes/userScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/userScene.fxml"));
             Parent root = loader.load();
             userSceneController ctrl = loader.getController();
             ctrl.setUser(user);
