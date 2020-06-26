@@ -14,7 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import utilities.Dialog;
 
 import java.io.IOException;
@@ -53,6 +55,7 @@ public class loginSceneController implements Initializable {
         this.rankCB.setItems(this.ranks);
         this.sexCB.setItems(this.sexes);
     }
+
 
     public void onRegisterClick(ActionEvent event) {
         String birthDate = this.DateOfBirth.getValue().toString();

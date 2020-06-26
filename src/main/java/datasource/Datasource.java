@@ -1,11 +1,14 @@
 package datasource;
 
-import entities.Criminal;
-import entities.CriminalAgeGroup;
-import entities.Team;
-import entities.User;
+import entities.*;
 import javafx.collections.FXCollections;
 
+import javax.xml.crypto.Data;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.List;
 
@@ -22,15 +25,42 @@ public class Datasource {
         return instance;
     }
 
+
+    private DatabaseAccount getAccountData() {
+        // loads serialized object of account information from file account_credentials.ser
+        DatabaseAccount databaseAccount;
+        try {
+            FileInputStream fileIn = new FileInputStream("account_credentials.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            databaseAccount = (DatabaseAccount) in.readObject();
+            in.close();
+            fileIn.close();
+            return databaseAccount;
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private Connection openConnection() {
         try {
-            String PASSWORD = "Welcome1";
-            String USER_NAME = "DB_FIIT";
-            String URL = "jdbc:postgresql://postgresql.websupport.sk:5432/DB_FIIT";
-            return DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+            DatabaseAccount account = this.getAccountData();
+            return DriverManager.getConnection(account.getURL(), account.getUsername(), account.getPassword());
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public boolean checkConnection(DatabaseAccount account) {
+        // Checks if there could be a connection with the server
+        try {
+            Connection connection = DriverManager.getConnection(account.getURL(), account.getUsername(), account.getPassword());
+            connection.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
