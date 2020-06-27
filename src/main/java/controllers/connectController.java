@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import utilities.Dialog;
 
@@ -43,7 +44,7 @@ public class connectController implements Initializable {
         );
     }
 
-    private void writeToFile(DatabaseAccount databaseAccount) throws IOException {
+    private void writeToFile(DatabaseAccount databaseAccount) {
         try {
             FileOutputStream fileOut = new FileOutputStream("account_credentials.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -60,6 +61,7 @@ public class connectController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Welcome");
         stage.setScene(new Scene(root, 1067.0, 647.0));
+        stage.getIcons().add(new Image("/scenes/images/badge.png"));
         stage.show();
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
