@@ -1,6 +1,7 @@
 # Registry of stolen vehicles
 ## 3. kontrolný bod
-Link na sql dump: https://drive.google.com/open?id=11kFTviK0Qr8h4oVN-4gl88G2Mv7maJYY
+Link na sql dump: https://drive.google.com/file/d/1_joBjXo0lg-CAMw6qk2XQUH7L2J1EkHg/view?usp=sharing
+Link na JAR subor: https://drive.google.com/file/d/1LgSwRxbdbICvrWATZQNOwN5M2OFpbISF/view?usp=sharing
 
 ## About
 This application will allow working on a vehicle theft criminal cases.
