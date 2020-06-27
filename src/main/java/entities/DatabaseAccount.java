@@ -33,7 +33,7 @@ public class DatabaseAccount implements Serializable {
         if (this.dbRestriction.isEmpty()) {
             return wholeAddress;
         } else {
-            return wholeAddress + "/" + this.username;
+            return wholeAddress + "/" + this.dbRestriction;
         }
     }
 
