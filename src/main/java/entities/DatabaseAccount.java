@@ -28,7 +28,13 @@ public class DatabaseAccount implements Serializable {
 
 
     public String getURL() {
-        return "jdbc:postgresql://" + this.serverAddress + ":" + this.portNumber + "/" + this.username;
+
+        String wholeAddress =  "jdbc:postgresql://" + this.serverAddress + ":" + this.portNumber;
+        if (this.dbRestriction.isEmpty()) {
+            return wholeAddress;
+        } else {
+            return wholeAddress + "/" + this.username;
+        }
     }
 
     public void setUsername(String username) {
