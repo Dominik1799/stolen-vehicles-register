@@ -2,13 +2,11 @@ package datasource;
 
 import ORM.TeamsDatasource;
 import entities.Case;
-import entities.Criminal;
 import entities.Team;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 public class ThreadTeams {

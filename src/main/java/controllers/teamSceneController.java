@@ -2,7 +2,9 @@ package controllers;
 
 import com.jfoenix.controls.JFXProgressBar;
 import datasource.ThreadTeams;
-import entities.*;
+import entities.Case;
+import entities.Team;
+import entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

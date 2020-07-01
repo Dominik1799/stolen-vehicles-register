@@ -1,6 +1,5 @@
 package ORM;
 
-import datasource.Datasource;
 import entities.DatabaseAccount;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

@@ -17,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import utilities.Dialog;
 
-import javax.xml.crypto.Data;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
